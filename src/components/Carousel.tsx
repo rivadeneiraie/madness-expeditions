@@ -15,19 +15,26 @@ const ImageCarousel = () => {
   return (
     <div className={styles.carouselContainer}>
       <Carousel
-        showArrows={true}
+        showArrows={false}
         showThumbs={false}
         infiniteLoop={true}
         autoPlay={true}
         interval={5000}
         showStatus={false}
+        showIndicators={false}
       >
         {images.map((src, index) => (
           <div key={index} className={styles.imageContainer}>
-            <Image src={src} alt={`Slide ${index + 1}`} layout="fill" objectFit="cover" />
+            <Image src={src} alt={`Slide ${index + 1}`} fill style={{ objectFit: 'cover' }} priority={index === 0} />
           </div>
         ))}
       </Carousel>
+      <div className={styles.textOverlay}>
+        <h1 className={styles.title}>Madness Expeditions</h1>
+        <p className={styles.subtitle}>
+          Vive la aventura de tu vida con nuestras expediciones de montaña guiadas por expertos. Descubre destinos icónicos como el Aconcagua, Mont Blanc y el Himalaya. Seguridad, profesionalismo y pasión por la montaña.
+        </p>
+      </div>
     </div>
   );
 };
