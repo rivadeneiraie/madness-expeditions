@@ -1,0 +1,45 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+}
+
+.header.scrolled {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.header.scrolled .navLink {
+  color: #333;
+  text-shadow: none;
+}
+
+.navLink:hover {
+  color: #0070f3;
+}

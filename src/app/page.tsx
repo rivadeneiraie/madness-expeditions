@@ -1,7 +1,12 @@
+import ImageCarousel from '@/components/Carousel';
+
 export default function Home() {
   return (
     <main>
-      <div>Hello world!</div>
+      <ImageCarousel />
+      <div style={{ height: '100vh' }}>
+        {/* Rest of the page content */}
+      </div>
     </main>
   );
 }
