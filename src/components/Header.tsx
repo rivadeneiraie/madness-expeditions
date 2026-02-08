@@ -32,7 +32,14 @@ const Header = () => {
       </div>
       <nav className={styles.nav}>
         <Link href="/expediciones" className={styles.navLink}>Expediciones</Link>
-        <Link href="/internacional" className={styles.navLink}>Internacional</Link>
+        <div className={styles.navItem}>
+          <span className={styles.navLink}>Internacional</span>
+          <div className={styles.dropdownMenu}>
+            <Link href="/internacional/nepal" className={styles.dropdownLink}>Nepal</Link>
+            <Link href="/internacional/rusia" className={styles.dropdownLink}>Rusia</Link>
+            <Link href="/internacional/tanzania" className={styles.dropdownLink}>Tanzania</Link>
+          </div>
+        </div>
         <Link href="/contacto" className={styles.navLink}>Contacto</Link>
       </nav>
     </header>
