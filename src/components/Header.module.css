@@ -82,3 +82,61 @@
   background-color: rgba(0, 0, 0, 0.1);
   color: #fff;
 }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.header.scrolled .hamburger {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(20, 20, 20, 0.8);
+    padding: 1rem 0;
+  }
+
+  .navOpen {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navLink {
+    padding: 1rem 2rem;
+    text-align: center;
+  }
+
+  .dropdownMenu {
+    position: static;
+    transform: none;
+    background-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    padding: 0;
+    min-width: auto;
+  }
+
+  .navItem {
+    text-align: center;
+  }
+
+  .navItem:hover .dropdownMenu {
+    display: contents;
+  }
+}

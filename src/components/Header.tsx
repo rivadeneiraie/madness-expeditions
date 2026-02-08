@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,10 @@ const Header = () => {
     };
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.logoContainer}>
@@ -30,7 +36,10 @@ const Header = () => {
           <Image src="/logo/logo2.png" alt="Madness Expeditions Logo" width={isScrolled ? 80 : 150} height={isScrolled ? 40 : 50} style={{ transition: 'width 0.3s ease, height 0.3s ease' }} />
         </Link>
       </div>
-      <nav className={styles.nav}>
+      <button className={styles.hamburger} onClick={toggleMenu}>
+        {isMenuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+      <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>
         <Link href="/expediciones" className={styles.navLink}>Expediciones</Link>
         <div className={styles.navItem}>
           <span className={styles.navLink}>Internacional</span>
