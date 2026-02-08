@@ -12,7 +12,8 @@
   background-color: transparent;
 }
 
-.header.scrolled {
+.header.scrolled,
+.header.menuOpen {
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -35,7 +36,8 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.header.scrolled .navLink {
+.header.scrolled .navLink,
+.header.menuOpen .navLink {
   color: #333;
   text-shadow: none;
 }
@@ -93,7 +95,8 @@
   color: #fff;
 }
 
-.header.scrolled .hamburger {
+.header.scrolled .hamburger,
+.header.menuOpen .hamburger {
   color: #333;
 }
 
@@ -105,8 +108,9 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: rgba(20, 20, 20, 0.8);
+    background-color: #ffffff;
     padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .navOpen {
@@ -130,6 +134,10 @@
     backdrop-filter: none;
     padding: 0;
     min-width: auto;
+  }
+
+  .dropdownLink {
+    color: #333;
   }
 
   .navItem {

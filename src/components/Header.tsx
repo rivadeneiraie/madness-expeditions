@@ -30,7 +30,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
+    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''} ${isMenuOpen ? styles.menuOpen : ''}`}>
       <div className={styles.logoContainer}>
         <Link href="/">
           <Image src="/logo/logo2.png" alt="Madness Expeditions Logo" width={isScrolled ? 80 : 150} height={isScrolled ? 40 : 50} style={{ transition: 'width 0.3s ease, height 0.3s ease' }} />
