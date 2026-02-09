@@ -1,0 +1,103 @@
+.buggySection {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: var(--surface);
+}
+
+.titleContainer {
+  margin-bottom: 3rem;
+}
+
+.mainTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.subtitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.line {
+  width: 50px;
+  height: 2px;
+  background-color: var(--primary);
+  border: none;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.leftColumn,
+.rightColumn {
+  flex: 1;
+  max-width: 500px;
+}
+
+.leftColumn p,
+.rightColumn p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.leftColumn strong {
+  display: block;
+  font-weight: bold;
+  color: var(--text-main);
+}
+
+.contactButtonContainer {
+  margin-top: 2rem;
+}
+
+.contactButton {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contactButton:hover {
+  background-color: var(--primary);
+  color: var(--background);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .contentContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mainTitle {
+    font-size: 2rem;
+  }
+
+  .leftColumn,
+  .rightColumn {
+    text-align: center;
+    max-width: 100%;
+  }
+}
