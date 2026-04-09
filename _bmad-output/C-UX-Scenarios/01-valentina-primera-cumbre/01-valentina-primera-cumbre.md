@@ -3,6 +3,8 @@
 **Proyecto:** Madness Expeditions
 **Creado:** 2026-04-07
 **Método:** Whiteport Design Studio (WDS)
+**Design Intent:** S — Suggest
+**Design Status:** not-started
 
 ---
 
