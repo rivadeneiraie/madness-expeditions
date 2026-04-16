@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madness Expeditions — Cómo Trabajamos [Prototipo WDS 02.3]</title>
+
+    <!-- PROTOTIPO DE DISEÑO — NO ES CÓDIGO DE PRODUCCIÓN -->
+    <!-- Escenario: 02 — La Validación Técnica de Martín -->
+    <!-- Página: 02.3 — Cómo Trabajamos -->
+    <!-- Dispositivo: Desktop -->
+    <!-- Fecha: 2026-04-16 -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mx-dark': '#0D1B2A',
+                        'mx-blue': '#1a3a5c',
+                        'mx-red': '#E63030',
+                        'mx-gray': '#1C1C1E',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .hero-bg {
+            background-image:
+                linear-gradient(to right, rgba(13, 27, 42, 0.97) 50%, rgba(13, 27, 42, 0.45) 100%),
+                url('https://picsum.photos/seed/pablo-briefing/1400/600');
+            background-size: cover;
+            background-position: center 40%;
+        }
+
+        /* Paso numerado */
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #E63030;
+            font-size: 1.25rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Línea vertical entre pasos */
+        .step-line {
+            width: 2px;
+            background: rgba(230, 48, 48, 0.2);
+            margin: 4px 23px;
+            flex-shrink: 0;
+        }
+
+        /* Pillar card */
+        .pillar-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .pillar-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Formulario */
+        input,
+        textarea,
+        select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: white;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 0.875rem;
+            width: 100%;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: rgba(230, 48, 48, 0.6);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        select option {
+            background: #0D1B2A;
+        }
+    </style>
+</head>
+
+<body class="bg-mx-dark text-white min-h-screen">
+
+    <!-- NAV -->
+    <nav class="sticky top-0 z-50 border-b"
+        style="background:rgba(13,27,42,0.97); backdrop-filter:blur(8px); border-color:rgba(255,255,255,0.07);">
+        <div class="max-w-6xl mx-auto px-8 flex items-center justify-between h-16">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 40 40" width="32" height="32">
+                        <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
+                        <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
+                        <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
+                        <path d="M13 28 L10 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M27 28 L30 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M13 22 L9 20 M27 22 L31 20" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="leading-tight">
+                    <div class="font-black text-sm uppercase tracking-wider">The Madness Expeditions</div>
+                    <div class="text-xs uppercase tracking-widest opacity-50">Argentina</div>
+                </div>
+            </a>
+            <div class="hidden md:flex items-center gap-7">
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Viajes</a>
+                <a href="../02.1-proximas-salidas/prototypes/proximas-salidas-prototype.html"
+                    class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Próximas salidas</a>
+                <a href="../02.2-sobre-nosotros/prototypes/sobre-nosotros-prototype.html"
+                    class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">El equipo</a>
+                <a href="./como-trabajamos-prototype.html"
+                    class="text-sm font-bold text-white border-b-2 border-mx-red pb-0.5">Cómo trabajamos</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Grandes Expediciones</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Contacto</a>
+            </div>
+            <a href="https://wa.me/54XXXXXXXXXX"
+                class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                </svg>
+                Consultar por WhatsApp
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <header class="hero-bg py-20">
+        <div class="max-w-6xl mx-auto px-8">
+            <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-3">Metodología</p>
+            <h1 class="text-5xl font-black leading-none mb-4">Cómo trabajamos</h1>
+            <p class="text-lg max-w-xl leading-relaxed" style="color:rgba(255,255,255,0.7);">
+                Cada expedición empieza mucho antes del primer paso en la montaña. Así es cómo Pablo trabaja con cada
+                persona.
+            </p>
+        </div>
+    </header>
+
+
+    <main class="max-w-6xl mx-auto px-8 py-16">
+
+        <!-- ════════════════════════════════════════
+         MODELO DE PROGRESIÓN — PROCESO PASO A PASO
+         Martín entiende que el nivel se gestiona, no se ignora
+    ═══════════════════════════════════════════ -->
+        <div class="grid md:grid-cols-2 gap-16 mb-20">
+
+            <!-- Columna izquierda: intro -->
+            <div>
+                <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-3">El proceso</p>
+                <h2 class="text-3xl font-black leading-tight mb-5">Un plan personalizado<br>antes de salir</h2>
+                <p class="text-base leading-relaxed mb-5" style="color:rgba(255,255,255,0.75);">
+                    Pablo no arma grupos al azar. Cada persona tiene una evaluación inicial, un plan de preparación
+                    acorde a su nivel, y un seguimiento real antes de la expedición.
+                </p>
+                <p class="text-base leading-relaxed" style="color:rgba(255,255,255,0.75);">
+                    Esto es lo que garantiza que los grupos sean homogéneos en nivel — y que nadie llegue a la montaña
+                    sin estar listo.
+                </p>
+            </div>
+
+            <!-- Columna derecha: pasos del proceso -->
+            <div class="flex flex-col">
+
+                <!-- Paso 1 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">1</div>
+                        <div class="step-line h-12"></div>
+                    </div>
+                    <div class="pb-8">
+                        <h3 class="font-black text-lg mb-1">Consulta inicial</h3>
+                        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                            Hablás directamente con Pablo por WhatsApp o formulario. Te hace las preguntas que necesita
+                            para entender tu nivel real, tu experiencia previa y qué objetivos tenés.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">2</div>
+                        <div class="step-line h-12"></div>
+                    </div>
+                    <div class="pb-8">
+                        <h3 class="font-black text-lg mb-1">Evaluación y recomendación</h3>
+                        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                            Con base en tu perfil, Pablo te dice cuál expedición es la correcta para donde estás hoy — y
+                            cuáles son los pasos para llegar a donde querés estar. No hay venta de lo que no te
+                            corresponde.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">3</div>
+                        <div class="step-line h-12"></div>
+                    </div>
+                    <div class="pb-8">
+                        <h3 class="font-black text-lg mb-1">Plan de preparación</h3>
+                        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                            Recibís un plan de entrenamiento y preparación específico para la expedición elegida. Pablo
+                            sigue tu progreso y responde todas tus preguntas en el camino.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">4</div>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-lg mb-1">La expedición</h3>
+                        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                            Grupo reducido (máx. 6 personas) en el mismo nivel. Seguro incluido. Equipamiento técnico
+                            verificado. Pablo guía cada paso.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ════════════════════════════════════════
+         PILARES DEL SERVICIO
+         Lo que diferencia a Madness — nivel técnico explícito
+    ═══════════════════════════════════════════ -->
+        <div class="border-t pt-16 mb-20" style="border-color:rgba(255,255,255,0.07);">
+            <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-2">Cómo operamos</p>
+            <h2 class="text-3xl font-black mb-10">Lo que incluye cada expedición</h2>
+
+            <div class="grid md:grid-cols-3 gap-5">
+
+                <div class="pillar-card rounded-2xl p-6 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-mx-blue flex items-center justify-center mb-4">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-base mb-2">Grupos por nivel</h3>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">Máximo 6 personas con
+                        experiencia similar. Nunca se mezclan niveles. El ritmo es el del grupo — sin que nadie tenga
+                        que esperar ni apurarse.</p>
+                </div>
+
+                <div class="pillar-card rounded-2xl p-6 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-mx-blue flex items-center justify-center mb-4">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round">
+                            <path d="M12 2l3 9H21l-7 5 3 9-5-4-5 4 3-9-7-5h6z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-base mb-2">Guía EPGAMT certificado</h3>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">Pablo o uno de sus guías
+                        certificados acompaña cada expedición. Formación en primeros auxilios, rescate en montaña y
+                        meteorología de alta montaña.</p>
+                </div>
+
+                <div class="pillar-card rounded-2xl p-6 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-mx-blue flex items-center justify-center mb-4">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round">
+                            <path d="M12 2l3 9H21l-7 5 3 9-5-4-5 4 3-9-7-5h6z" />
+                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-base mb-2">Seguro PAX incluido</h3>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">Seguro de accidentes y
+                        evacuación en montaña incluido en el precio. PAX Assistance cubre rescate, traslado y
+                        hospitalización.</p>
+                </div>
+
+                <div class="pillar-card rounded-2xl p-6 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-mx-blue flex items-center justify-center mb-4">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-base mb-2">Logística completa</h3>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">Campamento base equipado,
+                        alimentación en la montaña, traslados desde el punto de encuentro. Te concentrás en subir — el
+                        resto lo resolvemos nosotros.</p>
+                </div>
+
+                <div class="pillar-card rounded-2xl p-6 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-mx-blue flex items-center justify-center mb-4">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" />
+                            <path d="M8 21h8M12 17v4" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-base mb-2">Equipamiento técnico</h3>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">Bastones, crampones, piolet
+                        y material técnico disponible en préstamo. Todo verificado antes de cada expedición. Guía de
+                        equipamiento propio disponible.</p>
+                </div>
+
+                <div class="pillar-card rounded-2xl p-6 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-mx-blue flex items-center justify-center mb-4">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 10.1 19.79 19.79 0 01.43 1.4 2 2 0 012.42 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-base mb-2">Contacto directo con Pablo</h3>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">No hay intermediarios.
+                        Consultás y te responde Pablo. Antes, durante y después de la expedición. El mismo número, la
+                        misma persona.</p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ════════════════════════════════════════
+         CTA FINAL — CONTACTO
+         Martín ya tiene toda la info — hora de consultar
+         WhatsApp como principal · Formulario como alternativa
+    ═══════════════════════════════════════════ -->
+        <div id="contacto" class="border-t pt-16" style="border-color:rgba(255,255,255,0.07);">
+
+            <div class="grid md:grid-cols-2 gap-16">
+
+                <!-- Left: invitación a contactar -->
+                <div>
+                    <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-3">¿Listo para consultar?</p>
+                    <h2 class="text-3xl font-black leading-tight mb-5">
+                        Escribile a Pablo.<br>Él te responde.
+                    </h2>
+                    <p class="text-base leading-relaxed mb-8" style="color:rgba(255,255,255,0.7);">
+                        Con toda la información que tenés, Pablo puede orientarte en minutos. Sin formularios genéricos,
+                        sin esperar respuesta de un equipo de ventas. Una conversación directa.
+                    </p>
+
+                    <!-- WhatsApp CTA principal -->
+                    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20vi%20cómo%20trabajás%20y%20quiero%20consultar%20sobre%20una%20expedición%20técnica"
+                        class="flex items-center gap-3 w-full bg-green-500 hover:bg-green-600 text-white font-bold text-base py-4 px-6 rounded-xl transition-colors mb-3">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                        </svg>
+                        Escribirle a Pablo por WhatsApp
+                    </a>
+
+                    <p class="text-sm text-center" style="color:rgba(255,255,255,0.35);">Responde el mismo día, en
+                        horario de Argentina</p>
+                </div>
+
+                <!-- Right: formulario — alternativa para Martín que prefiere escribir -->
+                <div>
+                    <h3 class="text-base font-black mb-5" style="color:rgba(255,255,255,0.7);">O completá el formulario
+                    </h3>
+                    <div class="flex flex-col gap-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs font-semibold uppercase tracking-wide mb-1.5 block"
+                                    style="color:rgba(255,255,255,0.5);">Nombre</label>
+                                <input type="text" placeholder="Tu nombre">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold uppercase tracking-wide mb-1.5 block"
+                                    style="color:rgba(255,255,255,0.5);">Email</label>
+                                <input type="email" placeholder="tu@email.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold uppercase tracking-wide mb-1.5 block"
+                                style="color:rgba(255,255,255,0.5);">Viaje de interés</label>
+                            <select>
+                                <option value="" disabled selected>Seleccioná una expedición…</option>
+                                <option>Cerro Catedral (Principiante)</option>
+                                <option>Volcán Lanín (Intermedio)</option>
+                                <option>Cordón del Plata (Avanzado)</option>
+                                <option>Volcán Domuyo (Avanzado)</option>
+                                <option>Aconcagua (Élite)</option>
+                                <option>Mercedario (Élite)</option>
+                                <option>Kilimanjaro</option>
+                                <option>Everest Base Camp</option>
+                                <option>No sé todavía — quiero orientación</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold uppercase tracking-wide mb-1.5 block"
+                                style="color:rgba(255,255,255,0.5);">Tu experiencia y consulta</label>
+                            <textarea rows="4"
+                                placeholder="Contale a Pablo tu experiencia previa y lo que querés consultar…"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-mx-red hover:opacity-90 text-white font-bold text-sm py-4 rounded-xl transition-opacity">
+                            Enviar consulta
+                        </button>
+                        <p class="text-xs text-center" style="color:rgba(255,255,255,0.3);">Pablo responde en menos de
+                            24 hs</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20vi%20cómo%20trabajás%20y%20quiero%20consultar"
+        class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform"
+        aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+        </svg>
+        <span
+            class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-green-300 rounded-full border-2 border-white animate-ping"></span>
+        <span class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-white"></span>
+    </a>
+
+</body>
+
+</html>

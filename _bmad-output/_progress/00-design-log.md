@@ -2,7 +2,7 @@
 
 **Proyecto:** Madness Expeditions
 **Iniciado:** 2026-04-06
-**Última actualización:** 2026-04-09
+**Última actualización:** 2026-04-16
 
 ---
 
@@ -10,7 +10,7 @@
 
 **Fase:** 4 — UX Design
 **Bloques completados:** 1A ✅ 1B ✅ 1C ✅ | Fase 2 ✅ | Fase 3 ✅
-**Próximo paso:** Fase 4 — UX Design · Escenario 02 — La Validación Técnica de Martín · paso 02.1 — Próximas Salidas (desktop)
+**Próximo paso:** Fase 5 — Agentic Development · Next.js implementation
 
 ---
 
@@ -154,6 +154,10 @@ Ruta: Documentación existente (desde Product Brief + Market Research)
 | 01-valentina-primera-cumbre | 01.1 | Home | prototyped | 2026-04-09 |
 | 01-valentina-primera-cumbre | 01.2 | Catálogo de Viajes | prototyped | 2026-04-10 |
 | 01-valentina-primera-cumbre | 01.3 | Ficha de Viaje | prototyped | 2026-04-10 |
+| 02-martin-validacion-tecnica | 02.1 | Próximas Salidas | prototyped | 2026-04-16 |
+| 02-martin-validacion-tecnica | 02.2 | Sobre Nosotros / El Equipo | prototyped | 2026-04-16 |
+| 02-martin-validacion-tecnica | 02.3 | Cómo Trabajamos | prototyped | 2026-04-16 |
+| 03-diego-grandes-expediciones | 03.1 | Grandes Expediciones | prototyped | 2026-04-16 |
 
 ### Log
 
@@ -163,6 +167,12 @@ Ruta: Documentación existente (desde Product Brief + Market Research)
 | 2026-04-10 | Prototipo HTML aprobado — Catálogo de Viajes (mobile) · Escenario 01 | `C-UX-Scenarios/01-valentina-primera-cumbre/01.2-catalogo-de-viajes/prototypes/catalogo-prototype.html` |
 | 2026-04-10 | Prototipo HTML generado — Ficha de Viaje (mobile) · Escenario 01 | `C-UX-Scenarios/01-valentina-primera-cumbre/01.3-ficha-de-viaje/prototypes/ficha-prototype.html` |
 | 2026-04-10 | Escenario 01 completo — 3/3 páginas aprobadas | Home · Catálogo · Ficha de Viaje |
+| 2026-04-16 | Prototipo HTML — Próximas Salidas (desktop) · Escenario 02 | `C-UX-Scenarios/02-martin-validacion-tecnica/02.1-proximas-salidas/prototypes/proximas-salidas-prototype.html` |
+| 2026-04-16 | Prototipo HTML — Sobre Nosotros / El Equipo (desktop) · Escenario 02 | `C-UX-Scenarios/02-martin-validacion-tecnica/02.2-sobre-nosotros/prototypes/sobre-nosotros-prototype.html` |
+| 2026-04-16 | Prototipo HTML — Cómo Trabajamos (desktop) · Escenario 02 | `C-UX-Scenarios/02-martin-validacion-tecnica/02.3-como-trabajamos/prototypes/como-trabajamos-prototype.html` |
+| 2026-04-16 | Escenario 02 completo — 3/3 páginas aprobadas | Próximas Salidas · Sobre Nosotros · Cómo Trabajamos |
+| 2026-04-16 | Prototipo HTML — Grandes Expediciones (desktop) · Escenario 03 | `C-UX-Scenarios/03-diego-grandes-expediciones/03.1-grandes-expediciones/prototypes/grandes-expediciones-prototype.html` |
+| 2026-04-16 | **Fase 4 completa — 7/7 páginas prototipadas y aprobadas** | Escenarios 01 · 02 · 03 |
 
 ---
 

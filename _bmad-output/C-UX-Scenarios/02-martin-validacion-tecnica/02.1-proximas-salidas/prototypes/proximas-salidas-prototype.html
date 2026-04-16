@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madness Expeditions — Próximas Salidas [Prototipo WDS 02.1]</title>
+
+    <!-- PROTOTIPO DE DISEÑO — NO ES CÓDIGO DE PRODUCCIÓN -->
+    <!-- Escenario: 02 — La Validación Técnica de Martín -->
+    <!-- Página: 02.1 — Próximas Salidas -->
+    <!-- Dispositivo: Desktop -->
+    <!-- Fecha: 2026-04-16 -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mx-dark': '#0D1B2A',
+                        'mx-blue': '#1a3a5c',
+                        'mx-red': '#E63030',
+                        'mx-gray': '#1C1C1E',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .hero-bg {
+            background-image:
+                linear-gradient(to right, rgba(13, 27, 42, 0.97) 40%, rgba(13, 27, 42, 0.5) 100%),
+                url('https://picsum.photos/seed/andes-calendar/1400/600');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Difficulty dots */
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-on {
+            background: #E63030;
+        }
+
+        .dot-off {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(230, 48, 48, 0.35);
+        }
+
+        /* Filter chip */
+        .chip-active {
+            background: #E63030;
+            color: white;
+        }
+
+        .chip-inactive {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chip-inactive:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Table row hover */
+        .trip-row:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* Level badge colors */
+        .badge-principiante {
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .badge-intermedio {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .badge-avanzado {
+            background: rgba(230, 48, 48, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(230, 48, 48, 0.3);
+        }
+
+        .badge-elite {
+            background: rgba(167, 139, 250, 0.15);
+            color: #c4b5fd;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-mx-dark text-white min-h-screen">
+
+    <!-- ════════════════════════════════════════
+       NAV — DESKTOP
+  ═══════════════════════════════════════════ -->
+    <nav class="sticky top-0 z-50 border-b"
+        style="background:rgba(13,27,42,0.97); backdrop-filter:blur(8px); border-color:rgba(255,255,255,0.07);">
+        <div class="max-w-6xl mx-auto px-8 flex items-center justify-between h-16">
+
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 40 40" width="32" height="32">
+                        <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
+                        <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
+                        <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
+                        <path d="M13 28 L10 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M27 28 L30 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M13 22 L9 20 M27 22 L31 20" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="leading-tight">
+                    <div class="font-black text-sm uppercase tracking-wider">The Madness Expeditions</div>
+                    <div class="text-xs uppercase tracking-widest opacity-50">Argentina</div>
+                </div>
+            </a>
+
+            <!-- Nav links -->
+            <div class="hidden md:flex items-center gap-7">
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Viajes</a>
+                <a href="./proximas-salidas-prototype.html"
+                    class="text-sm font-bold text-white border-b-2 border-mx-red pb-0.5">Próximas salidas</a>
+                <a href="../02.2-sobre-nosotros/prototypes/sobre-nosotros-prototype.html"
+                    class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">El equipo</a>
+                <a href="../02.3-como-trabajamos/prototypes/como-trabajamos-prototype.html"
+                    class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Cómo trabajamos</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Grandes Expediciones</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Contacto</a>
+            </div>
+
+            <!-- CTA nav -->
+            <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20quiero%20consultar%20sobre%20pr%C3%B3ximas%20salidas"
+                class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                </svg>
+                Consultar por WhatsApp
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ════════════════════════════════════════
+       HERO — HEADER DE PÁGINA
+       Martín llega con criterio técnico — el hero lo confirma
+  ═══════════════════════════════════════════ -->
+    <header class="hero-bg py-16">
+        <div class="max-w-6xl mx-auto px-8">
+            <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-3">Calendario de expediciones</p>
+            <h1 class="text-5xl font-black leading-none mb-4">Próximas salidas</h1>
+            <p class="text-lg max-w-xl leading-relaxed" style="color:rgba(255,255,255,0.7);">
+                Expediciones confirmadas con fechas y cupos reales. Grupos por nivel — no mezclamos principiantes con
+                montañistas con experiencia.
+            </p>
+        </div>
+    </header>
+
+
+    <!-- ════════════════════════════════════════
+       FILTROS + TABLA
+  ═══════════════════════════════════════════ -->
+    <main class="max-w-6xl mx-auto px-8 py-10">
+
+        <!-- Filtros por nivel — lo más importante para Martín -->
+        <div class="flex items-center gap-3 mb-8 flex-wrap">
+            <span class="text-xs font-bold uppercase tracking-widest mr-2" style="color:rgba(255,255,255,0.4);">Filtrar
+                por nivel:</span>
+            <button class="chip-active text-xs font-bold px-4 py-2 rounded-full">Todos</button>
+            <button class="chip-inactive text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-2">
+                <span class="dot dot-on"></span><span class="dot dot-off"></span><span class="dot dot-off"></span><span
+                    class="dot dot-off"></span><span class="dot dot-off"></span>
+                Principiante
+            </button>
+            <button class="chip-inactive text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-2">
+                <span class="dot dot-on"></span><span class="dot dot-on"></span><span class="dot dot-on"></span><span
+                    class="dot dot-off"></span><span class="dot dot-off"></span>
+                Intermedio
+            </button>
+            <button class="chip-inactive text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-2">
+                <span class="dot dot-on"></span><span class="dot dot-on"></span><span class="dot dot-on"></span><span
+                    class="dot dot-on"></span><span class="dot dot-off"></span>
+                Avanzado
+            </button>
+            <button class="chip-inactive text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-2">
+                <span class="dot dot-on"></span><span class="dot dot-on"></span><span class="dot dot-on"></span><span
+                    class="dot dot-on"></span><span class="dot dot-on"></span>
+                Élite / 6000m+
+            </button>
+        </div>
+
+        <!-- Tabla de expediciones -->
+        <div class="rounded-2xl overflow-hidden border" style="border-color:rgba(255,255,255,0.08);">
+
+            <!-- Header tabla -->
+            <div class="grid grid-cols-12 gap-4 px-6 py-3 text-xs font-bold uppercase tracking-widest"
+                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.4);">
+                <div class="col-span-5">Expedición</div>
+                <div class="col-span-2">Fecha</div>
+                <div class="col-span-2 text-center">Altitud</div>
+                <div class="col-span-2 text-center">Nivel</div>
+                <div class="col-span-1 text-right">Acción</div>
+            </div>
+
+            <!-- ── TEMPORADA INVIERNO 2026 ── -->
+            <div class="px-6 py-2 text-xs font-bold uppercase tracking-widest"
+                style="background:rgba(26,58,92,0.3); color:rgba(255,255,255,0.4);">
+                Invierno 2026
+            </div>
+
+            <!-- Fila 1 — Cerro Catedral · Principiante -->
+            <div class="trip-row grid grid-cols-12 gap-4 px-6 py-5 border-t items-center transition-colors"
+                style="border-color:rgba(255,255,255,0.05);">
+                <div class="col-span-5 flex items-center gap-4">
+                    <img src="https://picsum.photos/seed/cerro-catedral/192/128" alt="Cerro Catedral"
+                        class="w-24 h-16 rounded-xl object-cover flex-shrink-0"
+                        style="border:1px solid rgba(255,255,255,0.08);">
+                    <div>
+                        <div class="font-bold text-sm">Cerro Catedral</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Bariloche, Río Negro</div>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="text-sm">14–15 jun</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">2026</div>
+                </div>
+                <div class="col-span-2 text-center">
+                    <span class="text-sm font-bold text-mx-red">2.405</span>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.4);">msnm</div>
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <span class="badge-principiante text-xs font-bold px-3 py-1 rounded-full">Principiante</span>
+                </div>
+                <div class="col-span-1 flex justify-end">
+                    <a href="#" class="text-xs font-bold text-mx-red hover:underline">Ver detalles →</a>
+                </div>
+            </div>
+
+            <!-- Fila 2 — Volcán Lanín · Intermedio -->
+            <div class="trip-row grid grid-cols-12 gap-4 px-6 py-5 border-t items-center transition-colors"
+                style="border-color:rgba(255,255,255,0.05);">
+                <div class="col-span-5 flex items-center gap-4">
+                    <img src="https://picsum.photos/seed/volcan-lanin/192/128" alt="Volcán Lanín"
+                        class="w-24 h-16 rounded-xl object-cover flex-shrink-0"
+                        style="border:1px solid rgba(255,255,255,0.08);">
+                    <div>
+                        <div class="font-bold text-sm">Volcán Lanín</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Neuquén</div>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="text-sm">5–7 jul</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">2026</div>
+                </div>
+                <div class="col-span-2 text-center">
+                    <span class="text-sm font-bold text-mx-red">3.776</span>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.4);">msnm</div>
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <span class="badge-intermedio text-xs font-bold px-3 py-1 rounded-full">Intermedio</span>
+                </div>
+                <div class="col-span-1 flex justify-end">
+                    <a href="#" class="text-xs font-bold text-mx-red hover:underline">Ver detalles →</a>
+                </div>
+            </div>
+
+            <!-- Fila 3 — Cordón del Plata · Avanzado → lo que Martín busca -->
+            <div class="trip-row grid grid-cols-12 gap-4 px-6 py-5 border-t items-center transition-colors"
+                style="border-color:rgba(255,255,255,0.05); background:rgba(230,48,48,0.04);">
+                <div class="col-span-5 flex items-center gap-4">
+                    <img src="https://picsum.photos/seed/cordon-plata-andes/192/128" alt="Cordón del Plata"
+                        class="w-24 h-16 rounded-xl object-cover flex-shrink-0"
+                        style="border:1px solid rgba(230,48,48,0.2);">
+                    <div>
+                        <div class="font-bold text-sm flex items-center gap-2">
+                            Cordón del Plata
+                            <span class="text-xs px-2 py-0.5 rounded-full font-bold"
+                                style="background:rgba(230,48,48,0.2); color:#f87171;">Popular</span>
+                        </div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Mendoza — aclimatación de
+                            altura</div>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="text-sm">18–22 jul</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">2026</div>
+                </div>
+                <div class="col-span-2 text-center">
+                    <span class="text-sm font-bold text-mx-red">5.000</span>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.4);">msnm</div>
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <span class="badge-avanzado text-xs font-bold px-3 py-1 rounded-full">Avanzado</span>
+                </div>
+                <div class="col-span-1 flex justify-end">
+                    <a href="#" class="text-xs font-bold text-mx-red hover:underline">Ver detalles →</a>
+                </div>
+            </div>
+
+            <!-- Fila 4 — Volcán Domuyo · Avanzado -->
+            <div class="trip-row grid grid-cols-12 gap-4 px-6 py-5 border-t items-center transition-colors"
+                style="border-color:rgba(255,255,255,0.05);">
+                <div class="col-span-5 flex items-center gap-4">
+                    <img src="https://picsum.photos/seed/volcan-domuyo/192/128" alt="Volcán Domuyo"
+                        class="w-24 h-16 rounded-xl object-cover flex-shrink-0"
+                        style="border:1px solid rgba(255,255,255,0.08);">
+                    <div>
+                        <div class="font-bold text-sm">Volcán Domuyo</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Neuquén — techo de la Patagonia
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="text-sm">1–4 ago</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">2026</div>
+                </div>
+                <div class="col-span-2 text-center">
+                    <span class="text-sm font-bold text-mx-red">4.709</span>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.4);">msnm</div>
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <span class="badge-avanzado text-xs font-bold px-3 py-1 rounded-full">Avanzado</span>
+                </div>
+                <div class="col-span-1 flex justify-end">
+                    <a href="#" class="text-xs font-bold text-mx-red hover:underline">Ver detalles →</a>
+                </div>
+            </div>
+
+            <!-- ── TEMPORADA VERANO 2026/27 ── -->
+            <div class="px-6 py-2 text-xs font-bold uppercase tracking-widest"
+                style="background:rgba(26,58,92,0.3); color:rgba(255,255,255,0.4);">
+                Temporada alta 2026 / 2027
+            </div>
+
+            <!-- Fila 5 — Aconcagua · Élite -->
+            <div class="trip-row grid grid-cols-12 gap-4 px-6 py-5 border-t items-center transition-colors"
+                style="border-color:rgba(255,255,255,0.05);">
+                <div class="col-span-5 flex items-center gap-4">
+                    <img src="https://picsum.photos/seed/aconcagua-summit/192/128" alt="Aconcagua"
+                        class="w-24 h-16 rounded-xl object-cover flex-shrink-0"
+                        style="border:1px solid rgba(255,255,255,0.08);">
+                    <div>
+                        <div class="font-bold text-sm">Aconcagua — Ruta Normal</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Mendoza — techo de América ·
+                            6.962 msnm</div>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="text-sm">15 ene – 4 feb</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">2027</div>
+                </div>
+                <div class="col-span-2 text-center">
+                    <span class="text-sm font-bold text-mx-red">6.962</span>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.4);">msnm</div>
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <span class="badge-elite text-xs font-bold px-3 py-1 rounded-full">Élite / 6000m+</span>
+                </div>
+                <div class="col-span-1 flex justify-end">
+                    <a href="#" class="text-xs font-bold text-mx-red hover:underline">Ver detalles →</a>
+                </div>
+            </div>
+
+            <!-- Fila 6 — Mercedario · Élite -->
+            <div class="trip-row grid grid-cols-12 gap-4 px-6 py-5 border-t items-center transition-colors"
+                style="border-color:rgba(255,255,255,0.05);">
+                <div class="col-span-5 flex items-center gap-4">
+                    <img src="https://picsum.photos/seed/mercedario-sanjuan/192/128" alt="Mercedario"
+                        class="w-24 h-16 rounded-xl object-cover flex-shrink-0"
+                        style="border:1px solid rgba(255,255,255,0.08);">
+                    <div>
+                        <div class="font-bold text-sm">Mercedario</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">San Juan — expedición técnica
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="text-sm">20 feb – 10 mar</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">2027</div>
+                </div>
+                <div class="col-span-2 text-center">
+                    <span class="text-sm font-bold text-mx-red">6.770</span>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.4);">msnm</div>
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <span class="badge-elite text-xs font-bold px-3 py-1 rounded-full">Élite / 6000m+</span>
+                </div>
+                <div class="col-span-1 flex justify-end">
+                    <a href="#" class="text-xs font-bold text-mx-red hover:underline">Ver detalles →</a>
+                </div>
+            </div>
+
+        </div><!-- /tabla -->
+
+
+        <!-- ── NOTA SOBRE GRUPOS ─────────────────────
+         Responde directamente el miedo de Martín
+         "no voy a terminar con principiantes"
+    ──────────────────────────────────────────── -->
+        <div class="mt-6 flex items-start gap-4 px-5 py-4 rounded-xl border"
+            style="background:rgba(26,58,92,0.2); border-color:rgba(26,58,92,0.5);">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#60a5fa" stroke-width="1.8"
+                stroke-linecap="round" class="flex-shrink-0 mt-0.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.75);">
+                <strong class="text-white">Los grupos son siempre por nivel.</strong> No mezclamos personas con
+                distintas capacidades en la misma expedición. Si tenés dudas sobre cuál nivel te corresponde, Pablo te
+                evalúa personalmente antes de confirmar tu lugar.
+            </p>
+        </div>
+
+
+        <!-- ── GRANDES EXPEDICIONES — PROMO CARD ──
+         Martín puede estar mirando Kili/Everest
+    ──────────────────────────────────────────── -->
+        <div class="mt-8 rounded-2xl overflow-hidden grid md:grid-cols-2 border"
+            style="border-color:rgba(255,255,255,0.08);">
+            <div class="p-8" style="background:rgba(26,58,92,0.3);">
+                <p class="text-xs font-bold uppercase tracking-widest text-mx-red mb-3">Internacionales</p>
+                <h2 class="text-2xl font-black leading-tight mb-3">Grandes Expediciones</h2>
+                <p class="text-sm leading-relaxed mb-5" style="color:rgba(255,255,255,0.7);">
+                    Kilimanjaro (5.895 m) y Everest Base Camp (5.364 m). Expediciones con planificación de 6 a 12 meses,
+                    preparación técnica incluida y grupos de máximo 4 personas.
+                </p>
+                <a href="#"
+                    class="inline-flex items-center gap-2 text-sm font-bold text-white bg-mx-red hover:opacity-90 px-5 py-2.5 rounded-xl transition-opacity">
+                    Ver Grandes Expediciones →
+                </a>
+            </div>
+            <div
+                style="background:url('https://picsum.photos/seed/kilimanjaro-peak/600/400') center/cover; min-height:200px;">
+            </div>
+        </div>
+
+
+        <!-- ── CTA BOTTOM — SIGUIENTE PASO PARA MARTÍN ──
+         Lo invita a validar al equipo — siguiente página del escenario
+    ──────────────────────────────────────────── -->
+        <div class="mt-12 flex items-center justify-between py-8 border-t" style="border-color:rgba(255,255,255,0.08);">
+            <div>
+                <p class="text-sm font-bold mb-1">¿Querés saber quiénes guían estas expediciones?</p>
+                <p class="text-sm" style="color:rgba(255,255,255,0.5);">Credenciales, formación y historial de Pablo y
+                    el equipo.</p>
+            </div>
+            <a href="../02.2-sobre-nosotros/prototypes/sobre-nosotros-prototype.html"
+                class="flex-shrink-0 flex items-center gap-2 text-sm font-bold bg-mx-blue hover:opacity-90 text-white px-6 py-3 rounded-xl transition-opacity ml-6">
+                Conocer al equipo →
+            </a>
+        </div>
+
+    </main>
+
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20vi%20las%20próximas%20salidas%20y%20quiero%20consultar"
+        class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-xl shadow-green-900/50 hover:scale-105 transition-transform"
+        aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+        </svg>
+        <span
+            class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-green-300 rounded-full border-2 border-white animate-ping"></span>
+        <span class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-white"></span>
+    </a>
+
+</body>
+
+</html>

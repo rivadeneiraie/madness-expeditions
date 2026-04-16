@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madness Expeditions — Grandes Expediciones [Prototipo WDS 03.1]</title>
+
+    <!-- PROTOTIPO DE DISEÑO — NO ES CÓDIGO DE PRODUCCIÓN -->
+    <!-- Escenario: 03 — La Gran Decisión de Diego -->
+    <!-- Página: 03.1 — Grandes Expediciones -->
+    <!-- Dispositivo: Desktop -->
+    <!-- Fecha: 2026-04-16 -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mx-dark': '#0D1B2A',
+                        'mx-blue': '#1a3a5c',
+                        'mx-red': '#E63030',
+                        'mx-gray': '#1C1C1E',
+                        'mx-gold': '#c9a84c',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* Hero de élite — imagen oscura con gradiente izquierda */
+        .hero-grandes {
+            background-image:
+                linear-gradient(to right, rgba(13, 27, 42, 1) 35%, rgba(13, 27, 42, 0.6) 65%, rgba(13, 27, 42, 0.2) 100%),
+                url('https://picsum.photos/seed/kilimanjaro-africa-peak/1400/700');
+            background-size: cover;
+            background-position: center 40%;
+            min-height: 560px;
+        }
+
+        /* Expedición card hover */
+        .exp-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .exp-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Stat pill */
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+
+        /* Timeline dot */
+        .tl-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #E63030;
+            border: 2px solid #0D1B2A;
+            outline: 2px solid rgba(230, 48, 48, 0.35);
+            flex-shrink: 0;
+        }
+
+        /* Gold accent — exclusividad */
+        .gold {
+            color: #c9a84c;
+        }
+
+        .border-gold {
+            border-color: rgba(201, 168, 76, 0.35);
+        }
+
+        .bg-gold-subtle {
+            background: rgba(201, 168, 76, 0.08);
+        }
+
+        /* Accordion */
+        details>summary {
+            list-style: none;
+            cursor: pointer;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details[open] .chevron {
+            transform: rotate(180deg);
+        }
+
+        .chevron {
+            transition: transform 0.2s;
+        }
+    </style>
+</head>
+
+<body class="bg-mx-dark text-white min-h-screen">
+
+    <!-- ════════════════════════════════════════
+       NAV — DESKTOP
+       Idéntico al Escenario 02 — consistencia
+  ═══════════════════════════════════════════ -->
+    <nav class="sticky top-0 z-50 border-b"
+        style="background:rgba(13,27,42,0.97); backdrop-filter:blur(8px); border-color:rgba(255,255,255,0.07);">
+        <div class="max-w-6xl mx-auto px-8 flex items-center justify-between h-16">
+
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 40 40" width="32" height="32">
+                        <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
+                        <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
+                        <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
+                        <path d="M13 28 L10 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M27 28 L30 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M13 22 L9 20 M27 22 L31 20" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="leading-tight">
+                    <div class="font-black text-sm uppercase tracking-wider">The Madness Expeditions</div>
+                    <div class="text-xs uppercase tracking-widest opacity-50">Argentina</div>
+                </div>
+            </a>
+
+            <!-- Nav links -->
+            <div class="hidden md:flex items-center gap-7">
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Viajes</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Próximas salidas</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">El equipo</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Cómo trabajamos</a>
+                <a href="./grandes-expediciones-prototype.html"
+                    class="text-sm font-bold text-white border-b-2 border-mx-red pb-0.5">Grandes Expediciones</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Contacto</a>
+            </div>
+
+            <!-- CTA nav -->
+            <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20quiero%20consultar%20sobre%20una%20gran%20expedici%C3%B3n"
+                class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                </svg>
+                Consultar por WhatsApp
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ════════════════════════════════════════
+       HERO — TONO ÉLITE
+       Diego llega buscando credibilidad técnica
+       El hero tiene que decir "esto no es turismo"
+  ═══════════════════════════════════════════ -->
+    <header class="hero-grandes flex items-center">
+        <div class="max-w-6xl mx-auto px-8 py-20 w-full">
+
+            <!-- Badge élite — diferencia inmediata del catálogo estándar -->
+            <div class="inline-flex items-center gap-2 border border-gold px-3 py-1.5 rounded-full mb-6">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="#c9a84c">
+                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                </svg>
+                <span class="text-xs font-bold uppercase tracking-widest gold">Expediciones de alto rendimiento</span>
+            </div>
+
+            <h1 class="text-6xl font-black leading-none mb-5 max-w-2xl">
+                Grandes<br>Expediciones
+            </h1>
+            <p class="text-xl leading-relaxed max-w-xl mb-8" style="color:rgba(255,255,255,0.75);">
+                Kilimanjaro · Everest Base Camp · 6000m Andes. Planificación de 6 a 12 meses, grupos de máximo 4
+                personas, guía EPGAMT en terreno.
+            </p>
+
+            <!-- Stats de credibilidad — lo primero que Diego evalúa -->
+            <div class="flex items-center gap-4 flex-wrap">
+                <div class="stat-pill">
+                    <div class="text-xl font-black">40+</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Aconcaguas</div>
+                </div>
+                <div class="stat-pill">
+                    <div class="text-xl font-black">6.962 m</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Altura máx.</div>
+                </div>
+                <div class="stat-pill">
+                    <div class="text-xl font-black">15+ años</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Experiencia</div>
+                </div>
+                <div class="stat-pill">
+                    <div class="text-xl font-black">Máx. 4</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Pers. por grupo</div>
+                </div>
+                <div class="stat-pill border-gold bg-gold-subtle">
+                    <div class="text-xl font-black gold">EPGAMT</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(201,168,76,0.65);">Guía certificado</div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ════════════════════════════════════════
+       LAS EXPEDICIONES — 3 CARDS PRINCIPALES
+       Kilimanjaro / Everest BC / 6000m Andes
+       Cada card: imagen prominente + specs técnicas
+  ═══════════════════════════════════════════ -->
+    <section class="max-w-6xl mx-auto px-8 py-16">
+
+        <div class="flex items-center justify-between mb-10">
+            <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-mx-red mb-2">Las expediciones</p>
+                <h2 class="text-3xl font-black">Elige tu próxima cumbre</h2>
+            </div>
+            <p class="text-sm max-w-xs text-right" style="color:rgba(255,255,255,0.5);">
+                Cada expedición incluye preparación técnica personalizada de 3 a 6 meses antes de la partida.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+
+            <!-- ── CARD 1: KILIMANJARO ── -->
+            <div class="exp-card rounded-2xl overflow-hidden border"
+                style="background:#111d2b; border-color:rgba(255,255,255,0.08);">
+                <div class="relative">
+                    <img src="https://picsum.photos/seed/kilimanjaro-sunrise/600/360" alt="Kilimanjaro"
+                        class="w-full h-52 object-cover">
+                    <div class="absolute inset-0"
+                        style="background:linear-gradient(to top, rgba(17,29,43,0.95) 0%, transparent 60%);"></div>
+                    <div class="absolute bottom-4 left-5 right-5">
+                        <div class="text-2xl font-black leading-tight">Kilimanjaro</div>
+                        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.6);">Tanzania · África</div>
+                    </div>
+                    <div class="absolute top-4 right-4">
+                        <span class="text-xs font-bold px-3 py-1.5 rounded-full"
+                            style="background:rgba(201,168,76,0.2); color:#c9a84c; border:1px solid rgba(201,168,76,0.4);">África
+                            · 7 Cumbres</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <!-- Specs técnicas en grid -->
+                    <div class="grid grid-cols-3 gap-3 mb-5">
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black text-mx-red">5.895</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">msnm</div>
+                        </div>
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black">10 días</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">duración</div>
+                        </div>
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black">Avanzado</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">nivel</div>
+                        </div>
+                    </div>
+
+                    <!-- Ruta y prerrequisitos -->
+                    <div class="mb-4 space-y-2">
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="1.5" class="mt-0.5 flex-shrink-0">
+                                <path d="M8 1L10 6h5L11 9.5l2 5L8 12l-5 2.5 2-5L1 6h5z" />
+                            </svg>
+                            <span><strong class="text-white">Ruta Machame</strong> — 7 días en montaña, máxima tasa de
+                                éxito de cumbre</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="1.5" class="mt-0.5 flex-shrink-0">
+                                <circle cx="8" cy="8" r="7" />
+                                <path d="M8 5v3l2 2" />
+                            </svg>
+                            <span><strong class="text-white">Prerrequisito:</strong> Experiencia en alta montaña (3.000+
+                                m) · Buen estado físico</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="1.5" class="mt-0.5 flex-shrink-0">
+                                <path d="M8 2a3 3 0 100 6 3 3 0 000-6zM3 14c0-3 2-5 5-5s5 2 5 5" />
+                            </svg>
+                            <span><strong class="text-white">Grupo máximo:</strong> 4 personas · guía EPGAMT + equipo
+                                local</span>
+                        </div>
+                    </div>
+
+                    <!-- Incluye destacado -->
+                    <div class="border-t pt-4 mb-5" style="border-color:rgba(255,255,255,0.07);">
+                        <p class="text-xs font-bold uppercase tracking-widest mb-2"
+                            style="color:rgba(255,255,255,0.35);">Incluye</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓ Visa
+                                montaña</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓
+                                Porteadores</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓
+                                Campamentos</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓ PAX
+                                Assistance</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓ Prep. 3
+                                meses</span>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20me%20interesa%20la%20expedici%C3%B3n%20al%20Kilimanjaro"
+                        class="block text-center text-sm font-bold bg-mx-red hover:opacity-90 text-white py-3 rounded-xl transition-opacity">
+                        Consultar esta expedición
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- ── CARD 2: EVEREST BASE CAMP ── -->
+            <div class="exp-card rounded-2xl overflow-hidden border"
+                style="background:#111d2b; border-color:rgba(255,255,255,0.08);">
+                <div class="relative">
+                    <img src="https://picsum.photos/seed/everest-basecamp-nepal/600/360" alt="Everest Base Camp"
+                        class="w-full h-52 object-cover">
+                    <div class="absolute inset-0"
+                        style="background:linear-gradient(to top, rgba(17,29,43,0.95) 0%, transparent 60%);"></div>
+                    <div class="absolute bottom-4 left-5 right-5">
+                        <div class="text-2xl font-black leading-tight">Everest Base Camp</div>
+                        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.6);">Nepal · Himalaya</div>
+                    </div>
+                    <div class="absolute top-4 right-4">
+                        <span class="text-xs font-bold px-3 py-1.5 rounded-full"
+                            style="background:rgba(201,168,76,0.2); color:#c9a84c; border:1px solid rgba(201,168,76,0.4);">Himalaya
+                            · Leyenda</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="grid grid-cols-3 gap-3 mb-5">
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black text-mx-red">5.364</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">msnm</div>
+                        </div>
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black">14 días</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">duración</div>
+                        </div>
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black">Avanzado</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">nivel</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 space-y-2">
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="1.5" class="mt-0.5 flex-shrink-0">
+                                <path d="M8 1L10 6h5L11 9.5l2 5L8 12l-5 2.5 2-5L1 6h5z" />
+                            </svg>
+                            <span><strong class="text-white">Ruta clásica Lukla–Khumbu</strong> — Namche Bazaar,
+                                Tengboche, Gorak Shep</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="1.5" class="mt-0.5 flex-shrink-0">
+                                <circle cx="8" cy="8" r="7" />
+                                <path d="M8 5v3l2 2" />
+                            </svg>
+                            <span><strong class="text-white">Prerrequisito:</strong> Expedición previa en 4.000+ m ·
+                                Trekking técnico</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="1.5" class="mt-0.5 flex-shrink-0">
+                                <path d="M8 2a3 3 0 100 6 3 3 0 000-6zM3 14c0-3 2-5 5-5s5 2 5 5" />
+                            </svg>
+                            <span><strong class="text-white">Grupo máximo:</strong> 4 personas · guía EPGAMT + sherpa
+                                local</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-4 mb-5" style="border-color:rgba(255,255,255,0.07);">
+                        <p class="text-xs font-bold uppercase tracking-widest mb-2"
+                            style="color:rgba(255,255,255,0.35);">Incluye</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓ Permisos
+                                Nepal</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓ Sherpa
+                                personal</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓ Tea
+                                houses</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓ PAX
+                                Assistance</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.7);">✓ Prep. 6
+                                meses</span>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20me%20interesa%20el%20Everest%20Base%20Camp"
+                        class="block text-center text-sm font-bold bg-mx-red hover:opacity-90 text-white py-3 rounded-xl transition-opacity">
+                        Consultar esta expedición
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- ── CARD 3: 6000m ANDES — EL DIFERENCIADOR ── -->
+            <div class="exp-card rounded-2xl overflow-hidden border-2 border-gold relative" style="background:#111d2b;">
+                <!-- Badge exclusivo -->
+                <div class="absolute top-0 left-0 right-0 z-10 flex justify-center">
+                    <div class="bg-gold-subtle border-b border-gold px-6 py-1.5">
+                        <span class="text-xs font-black uppercase tracking-widest gold">Exclusivo Madness — Norte de San
+                            Juan</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://picsum.photos/seed/pissis-andes-argentina/600/360" alt="6000m Andes"
+                        class="w-full h-52 object-cover mt-8">
+                    <div class="absolute inset-0 mt-8"
+                        style="background:linear-gradient(to top, rgba(17,29,43,0.95) 0%, transparent 60%);"></div>
+                    <div class="absolute bottom-4 left-5 right-5">
+                        <div class="text-2xl font-black leading-tight">6000m — Andes Argentinos</div>
+                        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.6);">Cordillera · Norte de San Juan
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="grid grid-cols-3 gap-3 mb-5">
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black text-mx-red">6.882</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">msnm</div>
+                        </div>
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black">12 días</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">duración</div>
+                        </div>
+                        <div class="text-center p-2 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                            <div class="text-lg font-black gold">Élite</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">nivel</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 space-y-2">
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#c9a84c"
+                                stroke-width="1.5" class="mt-0.5 flex-shrink-0">
+                                <path d="M8 1L10 6h5L11 9.5l2 5L8 12l-5 2.5 2-5L1 6h5z" />
+                            </svg>
+                            <span><strong class="text-white">Cerro Pissis (6.882 m) o Mercedario (6.770 m)</strong> —
+                                cumbres vírgenes de tráfico masivo</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="#c9a84c" class="mt-0.5 flex-shrink-0">
+                                <path d="M8 1L10 6h5L11 9.5l2 5L8 12l-5 2.5 2-5L1 6h5z" />
+                            </svg>
+                            <span class="gold font-bold">Pablo conoce el norte de San Juan como nadie — rutas no
+                                publicadas, logística propia, acceso exclusivo</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-xs" style="color:rgba(255,255,255,0.7);">
+                            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="1.5" class="mt-0.5 flex-shrink-0">
+                                <circle cx="8" cy="8" r="7" />
+                                <path d="M8 5v3l2 2" />
+                            </svg>
+                            <span><strong class="text-white">Prerrequisito:</strong> Aconcagua o equivalente ·
+                                Evaluación técnica previa</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-4 mb-5" style="border-color:rgba(201,168,76,0.2);">
+                        <p class="text-xs font-bold uppercase tracking-widest mb-2 gold">Incluye</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(201,168,76,0.08); color:rgba(201,168,76,0.9); border:1px solid rgba(201,168,76,0.2);">✓
+                                Logística 4x4</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(201,168,76,0.08); color:rgba(201,168,76,0.9); border:1px solid rgba(201,168,76,0.2);">✓
+                                Campamento propio</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(201,168,76,0.08); color:rgba(201,168,76,0.9); border:1px solid rgba(201,168,76,0.2);">✓
+                                Oxímetro + radio</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(201,168,76,0.08); color:rgba(201,168,76,0.9); border:1px solid rgba(201,168,76,0.2);">✓
+                                PAX Assistance</span>
+                            <span class="text-xs px-2 py-1 rounded-lg"
+                                style="background:rgba(201,168,76,0.08); color:rgba(201,168,76,0.9); border:1px solid rgba(201,168,76,0.2);">✓
+                                Prep. 6–12 meses</span>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20quiero%20consultar%20sobre%20el%20Pissis%20o%20Mercedario"
+                        class="block text-center text-sm font-black py-3 rounded-xl transition-opacity hover:opacity-90"
+                        style="background: linear-gradient(135deg, #c9a84c, #a07a30); color: #0D1B2A;">
+                        Consultar esta expedición
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       HISTORIAL VERIFICABLE
+       Esto es lo que Diego busca — evidencia real, no marketing
+  ═══════════════════════════════════════════ -->
+    <section
+        style="background:rgba(255,255,255,0.02); border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div class="max-w-6xl mx-auto px-8 py-14">
+
+            <div class="grid grid-cols-2 gap-16 items-start">
+
+                <!-- Izquierda: Historial con timeline -->
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-mx-red mb-2">Historial verificable</p>
+                    <h2 class="text-3xl font-black mb-2">Expediciones completadas</h2>
+                    <p class="text-sm mb-8" style="color:rgba(255,255,255,0.5);">No somos una agencia. Somos montañistas
+                        con historial.</p>
+
+                    <div class="space-y-0">
+
+                        <!-- Item timeline -->
+                        <div class="flex gap-5">
+                            <div class="flex flex-col items-center">
+                                <div class="tl-dot mt-1"></div>
+                                <div class="flex-1 w-px mt-1"
+                                    style="background:rgba(255,255,255,0.08); min-height:48px;"></div>
+                            </div>
+                            <div class="pb-8">
+                                <div class="text-xs font-bold text-mx-red mb-1">2024</div>
+                                <div class="font-bold text-sm">Aconcagua — Ruta Normal · 6.962 m</div>
+                                <div class="text-xs mt-1" style="color:rgba(255,255,255,0.5);">3 grupos · 11 personas ·
+                                    tasa de cumbre 91%</div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-5">
+                            <div class="flex flex-col items-center">
+                                <div class="tl-dot mt-1"></div>
+                                <div class="flex-1 w-px mt-1"
+                                    style="background:rgba(255,255,255,0.08); min-height:48px;"></div>
+                            </div>
+                            <div class="pb-8">
+                                <div class="text-xs font-bold text-mx-red mb-1">2023</div>
+                                <div class="font-bold text-sm">Kilimanjaro — Ruta Machame · 5.895 m</div>
+                                <div class="text-xs mt-1" style="color:rgba(255,255,255,0.5);">2 expediciones · 8
+                                    personas · cumbre 100%</div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-5">
+                            <div class="flex flex-col items-center">
+                                <div class="tl-dot mt-1"></div>
+                                <div class="flex-1 w-px mt-1"
+                                    style="background:rgba(255,255,255,0.08); min-height:48px;"></div>
+                            </div>
+                            <div class="pb-8">
+                                <div class="text-xs font-bold text-mx-red mb-1">2023</div>
+                                <div class="font-bold text-sm">Mercedario · 6.770 m — San Juan</div>
+                                <div class="text-xs mt-1" style="color:rgba(255,255,255,0.5);">Expedición técnica ·
+                                    grupo de 3 · cumbre lograda</div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-5">
+                            <div class="flex flex-col items-center">
+                                <div class="tl-dot mt-1"></div>
+                                <div class="flex-1 w-px mt-1"
+                                    style="background:rgba(255,255,255,0.08); min-height:48px;"></div>
+                            </div>
+                            <div class="pb-8">
+                                <div class="text-xs font-bold text-mx-red mb-1">2022</div>
+                                <div class="font-bold text-sm">Everest Base Camp · 5.364 m — Nepal</div>
+                                <div class="text-xs mt-1" style="color:rgba(255,255,255,0.5);">Primer grupo · 4 personas
+                                    · completada en 14 días</div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-5">
+                            <div class="flex flex-col items-center">
+                                <div class="tl-dot mt-1"></div>
+                            </div>
+                            <div class="pb-2">
+                                <div class="text-xs font-bold text-mx-red mb-1">2021–2010</div>
+                                <div class="font-bold text-sm">40+ ascensos al Aconcagua como guía</div>
+                                <div class="text-xs mt-1" style="color:rgba(255,255,255,0.5);">Ruta Normal y Ruta de los
+                                    Polacos · todas las temporadas</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Derecha: Credenciales + foto de expedición -->
+                <div>
+                    <img src="https://picsum.photos/seed/pablo-high-altitude-camp/600/380" alt="Pablo en alta montaña"
+                        class="w-full rounded-2xl object-cover mb-6"
+                        style="height:240px; border:1px solid rgba(255,255,255,0.08);">
+
+                    <p class="text-xs font-bold uppercase tracking-widest mb-4" style="color:rgba(255,255,255,0.35);">
+                        Credenciales</p>
+                    <div class="space-y-3">
+
+                        <div class="flex items-center gap-4 p-4 rounded-xl border"
+                            style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08);">
+                            <div
+                                class="w-10 h-10 rounded-full bg-mx-blue flex items-center justify-center flex-shrink-0">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#60a5fa"
+                                    stroke-width="1.8">
+                                    <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold">EPGAMT</div>
+                                <div class="text-xs" style="color:rgba(255,255,255,0.5);">Escuela de Guías de Alta
+                                    Montaña — Argentina</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 rounded-xl border"
+                            style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08);">
+                            <div
+                                class="w-10 h-10 rounded-full bg-mx-blue flex items-center justify-center flex-shrink-0">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#60a5fa"
+                                    stroke-width="1.8">
+                                    <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold">ANSILTA</div>
+                                <div class="text-xs" style="color:rgba(255,255,255,0.5);">Asociación Argentina de Guías
+                                    de Montaña</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 rounded-xl border"
+                            style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08);">
+                            <div
+                                class="w-10 h-10 rounded-full bg-mx-blue flex items-center justify-center flex-shrink-0">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#60a5fa"
+                                    stroke-width="1.8">
+                                    <path
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold">PAX Assistance</div>
+                                <div class="text-xs" style="color:rgba(255,255,255,0.5);">Seguro internacional de
+                                    rescate en montaña — todas las expediciones</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       DIFERENCIADOR NORTE SAN JUAN
+       El argumento que Diego no encuentra en ninguna otra operadora
+  ═══════════════════════════════════════════ -->
+    <section class="max-w-6xl mx-auto px-8 py-14">
+        <div class="rounded-2xl overflow-hidden grid grid-cols-2"
+            style="background:#111d2b; border:1px solid rgba(201,168,76,0.2);">
+
+            <div class="p-10">
+                <div class="inline-flex items-center gap-2 border border-gold px-3 py-1.5 rounded-full mb-6">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#c9a84c">
+                        <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                    </svg>
+                    <span class="text-xs font-bold uppercase tracking-widest gold">Ventaja competitiva</span>
+                </div>
+                <h2 class="text-3xl font-black mb-4 leading-tight">Pablo conoce el norte de San Juan como ningún otro
+                    guía argentino</h2>
+                <p class="text-sm leading-relaxed mb-5" style="color:rgba(255,255,255,0.65);">
+                    Mientras la mayoría de las operadoras trabaja sobre rutas publicadas y conocidas, Pablo lleva más de
+                    15 años explorando la cordillera del norte de San Juan — Pissis, Ojos del Salado, Bonete — con
+                    acceso 4x4 propio, relaciones con comunidades locales y logística que no depende de terceros.
+                </p>
+                <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                    Eso significa menos personas en la ruta, mejores condiciones de campamento, y un guía que conoce el
+                    terreno porque lo recorrió él mismo — no porque lo leyó en un manual.
+                </p>
+            </div>
+
+            <div style="background:url('https://picsum.photos/seed/san-juan-cordillera-4x4/600/500') center/cover;">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       FAQ — PREGUNTAS TÉCNICAS DE DIEGO
+       Responde objeciones de un evaluador exigente
+  ═══════════════════════════════════════════ -->
+    <section style="background:rgba(255,255,255,0.02); border-top:1px solid rgba(255,255,255,0.06);">
+        <div class="max-w-6xl mx-auto px-8 py-14">
+
+            <p class="text-xs font-bold uppercase tracking-widest text-mx-red mb-2">Preguntas frecuentes</p>
+            <h2 class="text-3xl font-black mb-10">Lo que necesitás saber antes de decidir</h2>
+
+            <div class="grid grid-cols-2 gap-4">
+
+                <details class="border rounded-xl overflow-hidden group" style="border-color:rgba(255,255,255,0.08);">
+                    <summary class="flex items-center justify-between px-6 py-4 hover:bg-white/5 transition-colors">
+                        <span class="text-sm font-bold">¿Qué experiencia previa necesito para el Kilimanjaro?</span>
+                        <svg class="chevron w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                            stroke="rgba(255,255,255,0.5)" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </summary>
+                    <div class="px-6 pb-4 text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                        Se requiere experiencia en montaña de al menos 3.000 metros de altitud — puede ser un cerro en
+                        la cordillera argentina. Buen estado físico aeróbico. Pablo hace una evaluación personal antes
+                        de confirmar tu lugar en el grupo.
+                    </div>
+                </details>
+
+                <details class="border rounded-xl overflow-hidden group" style="border-color:rgba(255,255,255,0.08);">
+                    <summary class="flex items-center justify-between px-6 py-4 hover:bg-white/5 transition-colors">
+                        <span class="text-sm font-bold">¿Qué pasa si no se puede alcanzar la cumbre?</span>
+                        <svg class="chevron w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                            stroke="rgba(255,255,255,0.5)" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </summary>
+                    <div class="px-6 pb-4 text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                        La montaña siempre manda. La decisión de descenso es del guía y es irrevocable — el objetivo de
+                        la expedición es que vuelvas. Trabajamos con margen de días para condiciones climáticas. En 15
+                        años, nunca tuvimos un incidente mayor.
+                    </div>
+                </details>
+
+                <details class="border rounded-xl overflow-hidden group" style="border-color:rgba(255,255,255,0.08);">
+                    <summary class="flex items-center justify-between px-6 py-4 hover:bg-white/5 transition-colors">
+                        <span class="text-sm font-bold">¿Cómo funciona la preparación de 6 meses?</span>
+                        <svg class="chevron w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                            stroke="rgba(255,255,255,0.5)" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </summary>
+                    <div class="px-6 pb-4 text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                        Incluye un plan de entrenamiento físico personalizado, lista de equipamiento con revisión de lo
+                        que ya tenés, al menos una salida de aclimatación local, y contacto directo con Pablo durante
+                        todo el proceso. No es un folleto — es preparación real.
+                    </div>
+                </details>
+
+                <details class="border rounded-xl overflow-hidden group" style="border-color:rgba(255,255,255,0.08);">
+                    <summary class="flex items-center justify-between px-6 py-4 hover:bg-white/5 transition-colors">
+                        <span class="text-sm font-bold">¿El seguro PAX cubre evacuación en Nepal o Tanzania?</span>
+                        <svg class="chevron w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                            stroke="rgba(255,255,255,0.5)" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </summary>
+                    <div class="px-6 pb-4 text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
+                        Sí. PAX Assistance tiene cobertura global, incluyendo evacuación helicóptero desde alta montaña.
+                        Es el único seguro que aceptamos porque es el único que funciona de verdad en terreno aislado.
+                        El costo está incluido en el precio de la expedición.
+                    </div>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       CTA FINAL — CONVERSIÓN DE DIEGO
+       Diego es un decisor serio — el CTA tiene que ser a su altura
+  ═══════════════════════════════════════════ -->
+    <section class="max-w-6xl mx-auto px-8 py-16">
+        <div class="rounded-2xl overflow-hidden grid grid-cols-2 gap-0"
+            style="background:#111d2b; border:1px solid rgba(255,255,255,0.08);">
+
+            <!-- WhatsApp — acción principal -->
+            <div class="p-10 border-r" style="border-color:rgba(255,255,255,0.08);">
+                <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color:rgba(255,255,255,0.4);">
+                    Contacto directo</p>
+                <h3 class="text-2xl font-black mb-3 leading-tight">Hablá directamente con Pablo</h3>
+                <p class="text-sm leading-relaxed mb-7" style="color:rgba(255,255,255,0.6);">
+                    No hay un equipo de ventas. Pablo atiende personalmente las consultas — porque la evaluación técnica
+                    de cada expedición la hace él.
+                </p>
+                <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20estoy%20evaluando%20una%20gran%20expedici%C3%B3n%20y%20quer%C3%ADa%20consultarte"
+                    class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-xl transition-colors text-sm w-full">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                    </svg>
+                    Escribir por WhatsApp
+                </a>
+                <p class="text-xs mt-3 text-center" style="color:rgba(255,255,255,0.3);">Responde en menos de 2 horas ·
+                    Horario Argentina</p>
+            </div>
+
+            <!-- Formulario — alternativa para Diego que prefiere escribir su consulta técnica -->
+            <div class="p-10">
+                <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color:rgba(255,255,255,0.4);">
+                    Consulta por escrito</p>
+                <h3 class="text-2xl font-black mb-6 leading-tight">Enviá tu consulta técnica</h3>
+
+                <form class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold mb-1.5"
+                                style="color:rgba(255,255,255,0.5);">Nombre</label>
+                            <input type="text" placeholder="Tu nombre"
+                                class="w-full bg-transparent border rounded-lg px-4 py-2.5 text-sm placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors"
+                                style="border-color:rgba(255,255,255,0.12);">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1.5"
+                                style="color:rgba(255,255,255,0.5);">Email</label>
+                            <input type="email" placeholder="tu@email.com"
+                                class="w-full bg-transparent border rounded-lg px-4 py-2.5 text-sm placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors"
+                                style="border-color:rgba(255,255,255,0.12);">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold mb-1.5" style="color:rgba(255,255,255,0.5);">Expedición de
+                            interés</label>
+                        <select
+                            class="w-full bg-mx-dark border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-white/30 transition-colors appearance-none"
+                            style="border-color:rgba(255,255,255,0.12); color:rgba(255,255,255,0.8);">
+                            <option value="">Seleccioná una expedición</option>
+                            <option>Kilimanjaro — Tanzania (5.895 m)</option>
+                            <option>Everest Base Camp — Nepal (5.364 m)</option>
+                            <option>Cerro Pissis — San Juan (6.882 m)</option>
+                            <option>Mercedario — San Juan (6.770 m)</option>
+                            <option>No sé todavía — quiero orientación</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold mb-1.5" style="color:rgba(255,255,255,0.5);">Tu
+                            experiencia previa y consulta</label>
+                        <textarea rows="4" placeholder="Contame tu experiencia en montaña y qué querés consultar..."
+                            class="w-full bg-transparent border rounded-lg px-4 py-2.5 text-sm placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors resize-none"
+                            style="border-color:rgba(255,255,255,0.12);"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full text-sm font-bold bg-mx-red hover:opacity-90 text-white py-3 rounded-xl transition-opacity">
+                        Enviar consulta
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20vi%20las%20grandes%20expediciones%20y%20quiero%20consultar"
+        class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-xl shadow-green-900/50 hover:scale-105 transition-transform"
+        aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+        </svg>
+        <span
+            class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-green-300 rounded-full border-2 border-white animate-ping"></span>
+        <span class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-white"></span>
+    </a>
+
+</body>
+
+</html>
