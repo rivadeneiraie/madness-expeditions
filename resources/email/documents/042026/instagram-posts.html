@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts Instagram — Madness Expeditions</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0a0a0a;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 60px 40px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 64px;
+        }
+
+        .page-title {
+            color: #333;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .post-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .post-label {
+            color: #444;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+        }
+
+        /* ── THE POST — 1:1 ratio (1080×1080 → 600×600 preview) ── */
+        .post {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: default;
+        }
+
+        .post-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        /* Dark vignette top */
+        .post-vignette-top {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.45) 0%,
+                    rgba(0, 0, 0, 0.05) 35%,
+                    rgba(0, 0, 0, 0) 55%);
+        }
+
+        /* Dark gradient bottom — where the text lives */
+        .post-vignette-bottom {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg,
+                    rgba(8, 18, 30, 0.98) 0%,
+                    rgba(8, 18, 30, 0.90) 28%,
+                    rgba(8, 18, 30, 0.55) 52%,
+                    rgba(0, 0, 0, 0) 70%);
+        }
+
+        /* Logo — top left */
+        .post-logo {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid rgba(74, 159, 212, 0.80);
+            background: #ffffff;
+            object-fit: cover;
+            padding: 0;
+        }
+
+        /* Brand name — top right */
+        .post-brand {
+            position: absolute;
+            top: 28px;
+            right: 22px;
+            text-align: right;
+        }
+
+        .post-brand span {
+            display: block;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.6;
+        }
+
+        .post-brand span.accent {
+            color: #4a9fd4;
+            letter-spacing: 3px;
+        }
+
+        /* ── Content — bottom area ── */
+        .post-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0 26px 24px;
+        }
+
+        /* Tag pill with red vertical bar */
+        .post-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .post-tag-bar {
+            width: 3px;
+            height: 13px;
+            background: #E63030;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .post-tag-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 9.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+        }
+
+        /* Main destination */
+        .post-destination {
+            color: #ffffff;
+            font-size: 60px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 0.92;
+            margin-bottom: 9px;
+        }
+
+        .post-destination.size-xl {
+            font-size: 60px;
+        }
+
+        .post-destination.size-lg {
+            font-size: 50px;
+        }
+
+        .post-destination.size-md {
+            font-size: 42px;
+        }
+
+        /* Subtitle / region */
+        .post-subtitle {
+            color: #4a9fd4;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        /* Extra trip details */
+        .post-details {
+            margin-bottom: 14px;
+        }
+
+        .post-detail-row {
+            display: flex;
+            align-items: baseline;
+            gap: 7px;
+            margin-bottom: 5px;
+        }
+
+        .post-detail-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #E63030;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .post-detail-text {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 11.5px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            line-height: 1.4;
+        }
+
+        .post-detail-text strong {
+            color: rgba(255, 255, 255, 0.90);
+            font-weight: 700;
+        }
+
+        /* Divider */
+        .post-rule {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.10);
+            margin-bottom: 13px;
+        }
+
+        /* Bottom row */
+        .post-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .post-date {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12.5px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .post-handle {
+            color: rgba(255, 255, 255, 0.30);
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Print helper */
+        @media print {
+            body {
+                background: #fff;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <p class="page-title">Posts Instagram · Madness Expeditions · Mayo 2026</p>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- POST 1 — FERIADO 25 DE MAYO · MENDOZA       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 1 — Feriado 25 de Mayo</span>
+
+        <div class="post">
+            <!-- Photo -->
+            <div class="post-bg"
+                style="background-image: url('../../images/mendoza/puntanegra.jpeg'); background-position: center 40%;">
+            </div>
+            <!-- Overlays -->
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+
+            <!-- Logo -->
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+
+            <!-- Brand top-right -->
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+
+            <!-- Text content -->
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Feriado de Mayo</span>
+                </div>
+                <div class="post-destination size-xl">Mendoza</div>
+                <div class="post-subtitle">Cordillera de los Andes</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Intermedio+</strong> · Cerro Punta Negra · 4.350
+                            msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Principiantes</strong> · Cordón del Plata · 3.650–4.000
+                            msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Salida desde Mendoza · Guía profesional incluido</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">23 · 24 · 25 Mayo 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- POST 2 — BOLIVIA                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 2 — Bolivia</span>
+
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/bolivia/54.jpg'); background-position: center 30%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Vacaciones de Invierno</span>
+                </div>
+                <div class="post-destination size-xl">Bolivia</div>
+                <div class="post-subtitle">Cordillera Real · La Paz</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>4 cumbres</strong> en la Cordillera Real</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Nivel intermedio · Alturas sobre 5.000 msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Campamentos de altura · Equipo técnico incluido</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">18 — 30 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- POST 3 — PERÚ                               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 3 — Perú</span>
+
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/peru/86.jpg'); background-position: center 25%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Vacaciones de Invierno</span>
+                </div>
+                <div class="post-destination size-xl">Perú</div>
+                <div class="post-subtitle">Cordillera Blanca · Huaraz</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Opción A</strong> · Curso Hielo + Trekking Santa Cruz +
+                            Vallunaraju</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Opción B</strong> · Vallunaraju + Chopicalqui (14–24
+                            jul)</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Dos fechas disponibles · Nivel intermedio-avanzado</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">8 — 29 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- POST 4 — KILIMANJARO                        -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 4 — Kilimanjaro</span>
+
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/kli/41%20-%20copia.jpg'); background-position: center 35%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Tanzania · Techo de África</span>
+                </div>
+                <div class="post-destination size-md">Kilimanjaro</div>
+                <div class="post-subtitle">5.895 msnm · Ruta Lemosho</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Kili + Safari</strong> · 7 al 20 de julio</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Kili + Safari + Zanzibar</strong> · 7 al 24 de
+                            julio</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Nivel principiantes avanzados · Guía en cumbre</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">7 — 24 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- ALTERNATIVAS — MENDOZA                                      -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+    <p class="page-title" style="margin-top:32px;">— Alternativas Mendoza —</p>
+
+    <!-- POST 1b — MENDOZA, foto panorámica -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 1b — Mendoza · Foto 2</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/mendoza/IMG_20251010_110426904.jpg'); background-position: center 45%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Feriado de Mayo</span>
+                </div>
+                <div class="post-destination size-xl">Mendoza</div>
+                <div class="post-subtitle">Cordillera de los Andes</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Intermedio+</strong> · Cerro Punta Negra · 4.350
+                            msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Principiantes</strong> · Cordón del Plata · 3.650–4.000
+                            msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Salida desde Mendoza · Guía profesional incluido</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">23 · 24 · 25 Mayo 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST 1c — MENDOZA, Cordón del Plata -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 1c — Mendoza · Foto 3</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/mendoza/lacadenita.jpg'); background-position: center 30%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Feriado de Mayo</span>
+                </div>
+                <div class="post-destination size-xl">Mendoza</div>
+                <div class="post-subtitle">Cordillera de los Andes</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Intermedio+</strong> · Cerro Punta Negra · 4.350
+                            msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Principiantes</strong> · Cordón del Plata · 3.650–4.000
+                            msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Salida desde Mendoza · Guía profesional incluido</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">23 · 24 · 25 Mayo 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- ALTERNATIVAS — BOLIVIA                                      -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+    <p class="page-title" style="margin-top:32px;">— Alternativas Bolivia —</p>
+
+    <!-- POST 2b — BOLIVIA, foto 2 -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 2b — Bolivia · Foto 2</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/bolivia/28.jpg'); background-position: center 35%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Vacaciones de Invierno</span>
+                </div>
+                <div class="post-destination size-xl">Bolivia</div>
+                <div class="post-subtitle">Cordillera Real · La Paz</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>4 cumbres</strong> en la Cordillera Real</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Nivel intermedio · Alturas sobre 5.000 msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Campamentos de altura · Equipo técnico incluido</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">18 — 30 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST 2c — BOLIVIA, foto 3 -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 2c — Bolivia · Foto 3</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/bolivia/84.jpg'); background-position: center 25%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Vacaciones de Invierno</span>
+                </div>
+                <div class="post-destination size-xl">Bolivia</div>
+                <div class="post-subtitle">Cordillera Real · La Paz</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>4 cumbres</strong> en la Cordillera Real</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Nivel intermedio · Alturas sobre 5.000 msnm</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Campamentos de altura · Equipo técnico incluido</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">18 — 30 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- ALTERNATIVAS — PERÚ                                         -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+    <p class="page-title" style="margin-top:32px;">— Alternativas Perú —</p>
+
+    <!-- POST 3b — PERÚ, foto 2 -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 3b — Perú · Foto 2</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/peru/88.jpg'); background-position: center 30%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Vacaciones de Invierno</span>
+                </div>
+                <div class="post-destination size-xl">Perú</div>
+                <div class="post-subtitle">Cordillera Blanca · Huaraz</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Opción A</strong> · Curso Hielo + Trekking Santa Cruz +
+                            Vallunaraju</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Opción B</strong> · Vallunaraju + Chopicalqui (14–24
+                            jul)</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Dos fechas disponibles · Nivel intermedio-avanzado</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">8 — 29 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST 3c — PERÚ, foto 3 -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 3c — Perú · Foto 3</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/peru/90.jpg'); background-position: center 20%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Vacaciones de Invierno</span>
+                </div>
+                <div class="post-destination size-xl">Perú</div>
+                <div class="post-subtitle">Cordillera Blanca · Huaraz</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Opción A</strong> · Curso Hielo + Trekking Santa Cruz +
+                            Vallunaraju</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Opción B</strong> · Vallunaraju + Chopicalqui (14–24
+                            jul)</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Dos fechas disponibles · Nivel intermedio-avanzado</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">8 — 29 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- ALTERNATIVAS — KILIMANJARO                                  -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+    <p class="page-title" style="margin-top:32px;">— Alternativas Kilimanjaro —</p>
+
+    <!-- POST 4b — KILI, cumbre -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 4b — Kilimanjaro · Foto 2</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/kli/41a%20-%20copia.jpg'); background-position: center 40%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Tanzania · Techo de África</span>
+                </div>
+                <div class="post-destination size-md">Kilimanjaro</div>
+                <div class="post-subtitle">5.895 msnm · Ruta Lemosho</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Kili + Safari</strong> · 7 al 20 de julio</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Kili + Safari + Zanzibar</strong> · 7 al 24 de
+                            julio</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Nivel principiantes avanzados · Guía en cumbre</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">7 — 24 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST 4c — KILI, safari -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 4c — Kilimanjaro · Foto 3 (Safari)</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/kli/96.jpg'); background-position: center 50%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Tanzania · Techo de África</span>
+                </div>
+                <div class="post-destination size-md">Kilimanjaro</div>
+                <div class="post-subtitle">5.895 msnm · Ruta Lemosho</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Kili + Safari</strong> · 7 al 20 de julio</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Kili + Safari + Zanzibar</strong> · 7 al 24 de
+                            julio</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Nivel principiantes avanzados · Guía en cumbre</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">7 — 24 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST 4d — KILI, Zanzibar -->
+    <div class="post-wrapper">
+        <span class="post-label">Post 4d — Kilimanjaro · Foto 4 (Zanzibar)</span>
+        <div class="post">
+            <div class="post-bg"
+                style="background-image: url('../../images/kli/zanziba.jpeg'); background-position: center 40%;">
+            </div>
+            <div class="post-vignette-top"></div>
+            <div class="post-vignette-bottom"></div>
+            <img class="post-logo" src="../032026/images/logo-removebg-preview.png" alt="Madness">
+            <div class="post-brand">
+                <span>The Madness</span>
+                <span>Expeditions</span>
+                <span class="accent">Argentina</span>
+            </div>
+            <div class="post-content">
+                <div class="post-tag">
+                    <div class="post-tag-bar"></div>
+                    <span class="post-tag-text">Tanzania · Techo de África</span>
+                </div>
+                <div class="post-destination size-md">Kilimanjaro</div>
+                <div class="post-subtitle">5.895 msnm · Ruta Lemosho</div>
+                <div class="post-details">
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Kili + Safari</strong> · 7 al 20 de julio</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text"><strong>Kili + Safari + Zanzibar</strong> · 7 al 24 de
+                            julio</span>
+                    </div>
+                    <div class="post-detail-row">
+                        <div class="post-detail-dot"></div>
+                        <span class="post-detail-text">Nivel principiantes avanzados · Guía en cumbre</span>
+                    </div>
+                </div>
+                <div class="post-rule"></div>
+                <div class="post-bottom">
+                    <span class="post-date">7 — 24 Julio 2026</span>
+                    <span class="post-handle">@madnessexpeditions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
