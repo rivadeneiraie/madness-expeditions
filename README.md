@@ -23,9 +23,9 @@ El proceso sigue el framework **WDS (Web Design System)** de BMad, que recorre l
 | 2 | Trigger Mapping | ✅ Completado |
 | 3 | UX Scenarios | ✅ Completado |
 | 4 | UX Design (prototipos HTML) | ✅ Completado — 7/7 páginas prototipadas |
-| 5 | Agentic Development | 🔄 En progreso — Home en implementación |
+| 5 | Agentic Development | 🔄 En progreso — Home completada, resto pendiente |
 
-**Branch activo:** `feature/home-page`
+**Branch activo:** `feature/home-page` → mergeado a `master`
 
 ---
 
@@ -98,7 +98,7 @@ madness-marketing/
 
 | # | Página | Prototipo | Código |
 |---|--------|-----------|--------|
-| 1 | Home | ✅ Mobile + Desktop | 🔄 En progreso |
+| 1 | Home | ✅ Mobile + Desktop | ✅ Completada — en revisión |
 | 2 | Catálogo de Viajes | ✅ Mobile | ⏳ Pendiente |
 | 3 | Ficha de Viaje | ✅ Mobile | ⏳ Pendiente |
 | 4 | Próximas Salidas | ✅ Desktop | ⏳ Pendiente |
