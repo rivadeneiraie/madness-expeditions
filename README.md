@@ -23,9 +23,9 @@ El proceso sigue el framework **WDS (Web Design System)** de BMad, que recorre l
 | 2    | Trigger Mapping             | ✅ Completado                                                |
 | 3    | UX Scenarios                | ✅ Completado                                                |
 | 4    | UX Design (prototipos HTML) | ✅ Completado — 7/7 páginas prototipadas                     |
-| 5    | Agentic Development         | 🔄 En progreso — Home, Catálogo y Ficha de Viaje completadas |
+| 5    | Agentic Development         | 🔄 En progreso — Home, Catálogo, Ficha de Viaje y El Equipo completadas |
 
-**Último merge:** `feature/ficha-viaje` → `master` (Abril 2026)
+**Último merge:** `feature/equipo` → `master` (Abril 2026)
 
 ---
 
@@ -114,7 +114,7 @@ madness-marketing/
 | 2   | Catálogo de Viajes (`/viajes`)    | ✅ Mobile           | ✅ Completada — filtros por nivel y zona        |
 | 3   | Ficha de Viaje (`/viajes/[slug]`) | ✅ Mobile           | ✅ Completada — galería con modal framer-motion |
 | 4   | Próximas Salidas                  | ✅ Desktop          | ⏳ Pendiente                                    |
-| 5   | Sobre Nosotros / El Equipo        | ✅ Desktop          | ⏳ Pendiente                                    |
+| 5   | Sobre Nosotros / El Equipo (`/equipo`) | ✅ Desktop          | ✅ Completada — perfil Pablo, guías, CTA           |
 | 6   | Cómo Trabajamos                   | ✅ Desktop          | ⏳ Pendiente                                    |
 | 7   | Grandes Expediciones              | ✅ Desktop          | ⏳ Pendiente                                    |
 

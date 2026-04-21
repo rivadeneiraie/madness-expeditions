@@ -76,6 +76,8 @@ web/src/app/
 ├── layout.tsx              — RootLayout con Inter font, lang="es", body min-h-full flex flex-col
 ├── page.tsx                — Home (/)
 ├── globals.css             — @import tailwindcss + @theme inline + tokens
+├── equipo/
+│   └── page.tsx            — El equipo (/equipo) — Server Component
 └── viajes/
     ├── page.tsx            — Catálogo de viajes (/viajes)
     └── [slug]/
@@ -85,7 +87,6 @@ web/src/app/
 **Páginas pendientes de implementar:**
 
 - `/proximas-salidas`
-- `/equipo` (Sobre Nosotros)
 - `/como-trabajamos`
 - `/grandes-expediciones`
 
@@ -128,6 +129,12 @@ web/src/app/
 | `FichaViaje.tsx`         | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`. |
 | `GalleryModal.tsx`       | Modal fullscreen con framer-motion backdrop (blur-2xl). Keyboard nav.  |
 | `GallerySharedModal.tsx` | Visor core: AnimatePresence, swipe (react-swipeable), thumbnails.      |
+
+### Equipo (`/equipo`)
+
+| Componente      | Descripción                                                                          |
+| --------------- | ------------------------------------------------------------------------------------ |
+| `EquipoPage.tsx` | Server Component. Hero con imagen de fondo, perfil Pablo (2col en lg), grid de guías (3col en lg), CTA. Datos ficticios en `GUIDES[]` — pendiente datos reales de guías. Pablo usa `/photos/pablo2.jpeg`. |
 
 ---
 
