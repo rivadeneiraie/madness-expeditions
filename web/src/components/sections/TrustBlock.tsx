@@ -26,7 +26,7 @@ export default function TrustBlock() {
                         ¿Es para alguien como yo?
                     </p>
                     <h2 className="text-2xl lg:text-4xl font-black leading-tight text-white">
-                        Sí. Trabajamos con personas de todos los niveles.
+                        Sí, trabajamos con personas de todos los niveles
                     </h2>
                 </div>
 
@@ -80,7 +80,7 @@ function PillarCard({
 
             {/* Desktop layout: ícono arriba, texto abajo, card con borde */}
             <div
-                className="hidden lg:flex flex-col gap-4 p-8 rounded-2xl w-full"
+                className="hidden lg:flex flex-col gap-4 p-8 rounded-2xl w-full h-full"
                 style={{
                     background: "rgba(255,255,255,0.04)",
                     border: "1px solid rgba(255,255,255,0.07)",

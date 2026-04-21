@@ -104,13 +104,13 @@ export default function HeroSection() {
                     {/* H1 */}
                     <h1 className="text-7xl font-black leading-none tracking-tight uppercase mb-5 text-white">
                         No te quedes<br />
-                        <span>en el Llano.</span>
+                        <span>en el Llano</span>
                     </h1>
 
                     {/* Subtítulo */}
                     <p className="text-xl leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.82)" }}>
                         Expediciones y ascensos guiados en Argentina.<br />
-                        Desde tu primera cumbre hasta los 6.000 m.
+                        Desde tu primera cumbre hasta los 6.000 m
                     </p>
 
                     {/* CTAs en fila */}
