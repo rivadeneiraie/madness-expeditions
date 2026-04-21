@@ -93,7 +93,7 @@ function StarIcon({ color }: { color: string }) {
     );
 }
 
-function CertBadge({ label, description, color }: (typeof CERTS)[number]) {
+function CertBadge({ label, description, color }: (typeof PABLO_BADGES)[number]) {
     return (
         <div
             className="rounded-xl p-4 flex items-start gap-3"
