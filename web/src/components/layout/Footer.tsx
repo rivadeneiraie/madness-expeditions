@@ -68,7 +68,8 @@ export default function Footer() {
                             href={waLink("default")}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm font-semibold text-green-400 hover:text-green-300 transition-colors mb-3"
+                            className="flex items-center gap-2 text-sm font-semibold transition-colors mb-3"
+                            style={{ color: "rgba(255,255,255,0.6)" }}
                         >
                             <WhatsAppIconSmall />
                             WhatsApp

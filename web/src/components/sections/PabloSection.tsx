@@ -23,7 +23,7 @@ export default function PabloSection() {
                             style={{ borderColor: "#E63030" }}
                         >
                             <Image
-                                src="/photos/pablo2.jpeg"
+                                src="/photos/fotoLogo.jpg"
                                 alt="Pablo Fortunato — Guía de montaña"
                                 width={64}
                                 height={64}
@@ -31,9 +31,9 @@ export default function PabloSection() {
                             />
                         </div>
                         <div>
-                            <div className="font-black text-lg leading-tight text-white">Pablo Fortunato</div>
+                            <div className="font-black text-lg leading-tight text-white">The Madness Expeditions</div>
                             <div className="text-sm font-semibold mt-0.5" style={{ color: "#E63030" }}>
-                                Fundador y líder de Madness Expeditions
+                                Generamos experiecias en montaña
                             </div>
                             <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.55)" }}>
                                 +15 años liderando expediciones en la Cordillera
@@ -65,7 +65,7 @@ export default function PabloSection() {
                             style={{ height: "380px", border: "1px solid rgba(255,255,255,0.08)" }}
                         >
                             <Image
-                                src="/photos/pablo2.jpeg"
+                                src="/photos/fotoLogo.jpg"
                                 alt="Pablo Fortunato — Guía de montaña"
                                 width={600}
                                 height={380}
@@ -95,9 +95,9 @@ export default function PabloSection() {
                         <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#E63030" }}>
                             Quién te guía
                         </p>
-                        <h2 className="text-4xl font-black leading-tight mb-2 text-white">Pablo Fortunato</h2>
+                        <h2 className="text-4xl font-black leading-tight mb-2 text-white">The Madness Expeditions</h2>
                         <p className="text-lg font-semibold mb-6" style={{ color: "rgba(255,255,255,0.5)" }}>
-                            Fundador y líder de Madness Expeditions · +15 años liderando expediciones en la Cordillera
+                            Madness Expeditions es una empresa con  +15  años liderando expediciones en la Cordillera
                         </p>
 
                         {/* Cita */}

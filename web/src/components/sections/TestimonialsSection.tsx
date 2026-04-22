@@ -48,7 +48,7 @@ export default function TestimonialsSection() {
                             Lo que dicen
                         </p>
                         <h2 className="text-2xl lg:text-4xl font-black leading-tight text-white">
-                            Personas que también<br className="hidden lg:block" />empezaron de cero
+                            Personas que también<br className="hidden lg:block" /> empezaron de cero
                         </h2>
                     </div>
 

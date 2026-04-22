@@ -11,7 +11,7 @@ export default function FinalCTA() {
                     ¿Lista para empezar?
                 </p>
                 <h2 className="text-2xl lg:text-5xl font-black leading-tight mb-3 lg:mb-4 text-white">
-                    Tu primera cumbre<br />empieza con una pregunta.
+                    Tu primera cumbre<br />empieza con una pregunta
                 </h2>
                 <p
                     className="text-sm lg:text-lg leading-relaxed mb-7 lg:mb-10"
@@ -19,7 +19,7 @@ export default function FinalCTA() {
                 >
                     Escribile a Pablo. Te responde él mismo, el mismo día.{" "}
                     <br className="hidden lg:block" />
-                    Sin formularios, sin esperas, sin compromiso.
+                    Sin formularios, sin esperas, sin compromiso
                 </p>
 
                 <div className="flex flex-col lg:flex-row items-center justify-center gap-3 lg:gap-4">

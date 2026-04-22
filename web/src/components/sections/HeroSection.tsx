@@ -47,7 +47,7 @@ export default function HeroSection() {
                 {/* H1 */}
                 <h1 className="animate-fadeup delay-200 text-4xl font-black leading-none tracking-tight mb-3 uppercase text-white">
                     No te quedes<br />
-                    <span>en el Llano.</span>
+                    <span>en el Llano</span>
                 </h1>
 
                 {/* Subtítulo */}
@@ -55,7 +55,7 @@ export default function HeroSection() {
                     className="animate-fadeup delay-300 text-base font-light leading-relaxed mb-7 max-w-xs"
                     style={{ color: "rgba(255,255,255,0.88)" }}
                 >
-                    Expediciones y ascensos guiados en Argentina. Desde tu primera cumbre hasta los 6000 m.
+                    Expediciones y ascensos guiados en Argentina. Desde tu primera cumbre hasta los 6000 m
                 </p>
 
                 {/* CTA principal */}
