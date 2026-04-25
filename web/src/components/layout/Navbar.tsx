@@ -9,7 +9,6 @@ const navLinks = [
     { label: "Viajes", href: "/viajes" },
     { label: "El equipo", href: "/equipo" },
     { label: "Cómo trabajamos", href: "/como-trabajamos" },
-    { label: "Grandes Expediciones", href: "/grandes-expediciones" },
     { label: "Contacto", href: "/contacto" },
 ];
 
