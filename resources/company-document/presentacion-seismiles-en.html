@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The SixThousanders — The Madness Expeditions</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #2a2a2a;
+    }
+
+    /*
+      Each .slide = 16:9 landscape for printing.
+      Ctrl+P → Save as PDF → Custom size 297×167 mm · Margins: None
+    */
+    .slide {
+      width: 297mm;
+      height: 167mm;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      margin: 16px auto;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.65);
+      background: #0d1b2a;
+    }
+
+    @page { size: 297mm 167mm; margin: 0; }
+
+    @media print {
+      body { background: none; }
+      .slide { margin: 0; box-shadow: none; }
+    }
+
+    /* ══ SHARED UTILITIES ═════════════════════════════════════ */
+
+    .bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+
+    .ov-dark {
+      position: absolute; inset: 0;
+      background: rgba(8,20,36,0.55);
+    }
+
+    .ov-bottom {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(8,20,36,0.97) 0%,
+        rgba(8,20,36,0.82) 30%,
+        rgba(8,20,36,0.35) 62%,
+        rgba(8,20,36,0.05) 100%
+      );
+    }
+
+    .ov-left {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(8,20,36,0.96) 0%,
+        rgba(8,20,36,0.80) 42%,
+        rgba(8,20,36,0.20) 72%,
+        rgba(8,20,36,0.00) 100%
+      );
+    }
+
+    .slide-num {
+      position: absolute; bottom: 5mm; right: 7mm;
+      color: rgba(74,159,212,0.30); font-size: 7px;
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .section-label {
+      color: #4a9fd4; font-size: 8px; letter-spacing: 4.5px;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; height: 1px; width: 36px;
+      background: rgba(74,159,212,0.45);
+    }
+
+
+    /* ══ SLIDE 1 · COVER ══════════════════════════════════════ */
+
+    #s1 .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 10mm 24mm;
+    }
+
+    #s1 .logo-wrap {
+      margin-bottom: 7mm;
+    }
+    #s1 .logo-wrap img {
+      width: 160px; height: 160px; border-radius: 50%;
+      border: 3px solid #4a9fd4; background: #fff;
+      object-fit: contain;
+    }
+
+    #s1 .eyebrow {
+      color: #4a9fd4; font-size: 8.5px; letter-spacing: 5px;
+      text-transform: uppercase; margin-bottom: 5mm;
+    }
+
+    #s1 h1 {
+      color: #fff; font-size: 72px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -2px; line-height: 0.88;
+      margin-bottom: 6mm;
+    }
+    #s1 h1 span { color: #4a9fd4; }
+
+    #s1 .tagline {
+      color: rgba(255,255,255,0.78); font-size: 13px;
+      letter-spacing: 5px; text-transform: uppercase;
+      border-top: 1px solid rgba(74,159,212,0.35);
+      border-bottom: 1px solid rgba(74,159,212,0.35);
+      padding: 8px 28px; margin-bottom: 6mm;
+    }
+
+    #s1 .brand-footer {
+      color: rgba(255,255,255,0.38); font-size: 7.5px;
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+
+
+    /* ══ SLIDE 2 · THE ZONE ═══════════════════════════════════ */
+
+    #s2 .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 14mm 20mm 14mm 14mm;
+      max-width: 58%;
+    }
+
+    #s2 .section-label { margin-bottom: 7mm; }
+
+    #s2 h2 {
+      color: #fff; font-size: 26px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.15;
+      margin-bottom: 6mm;
+    }
+
+    #s2 p {
+      color: rgba(255,255,255,0.80); font-size: 11px; line-height: 1.95;
+    }
+    #s2 p strong { color: #fff; }
+
+    #s2 .stats {
+      display: flex; gap: 5mm; margin-top: 8mm;
+    }
+    #s2 .stat {
+      background: rgba(74,159,212,0.10);
+      border: 1px solid rgba(74,159,212,0.28);
+      border-radius: 4px; padding: 7px 14px; text-align: center;
+    }
+    #s2 .stat .num {
+      color: #4a9fd4; font-size: 18px; font-weight: 900;
+      display: block; line-height: 1;
+    }
+    #s2 .stat .lbl {
+      color: rgba(255,255,255,0.50); font-size: 7px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      display: block; margin-top: 4px;
+    }
+
+
+    /* ══ SLIDE 3 · MAP ════════════════════════════════════════ */
+
+    #s3 .bg-map {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: contain; object-position: center;
+    }
+
+    #s3 .map-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center,
+        rgba(8,20,36,0.0) 40%,
+        rgba(8,20,36,0.65) 100%
+      );
+    }
+
+    #s3 .map-header {
+      position: absolute; top: 8mm; left: 0; right: 0;
+      text-align: center;
+      padding: 0 10mm;
+    }
+    #s3 .map-header .section-label {
+      justify-content: center; margin-bottom: 3mm;
+    }
+    #s3 .map-header .section-label::after { display: none; }
+    #s3 .map-header h2 {
+      color: #fff; font-size: 20px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    #s3 .map-footer {
+      position: absolute; bottom: 8mm; left: 0; right: 0;
+      text-align: center;
+      color: rgba(255,255,255,0.32); font-size: 7px;
+      letter-spacing: 2.5px; text-transform: uppercase;
+    }
+
+
+    /* ══ VOLCANO TEMPLATE (slides 4–15) ══════════════════════ */
+
+    .slide-v .v-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 14mm 11mm 14mm;
+    }
+
+    .slide-v .v-label {
+      color: #4a9fd4; font-size: 8px; letter-spacing: 4px;
+      text-transform: uppercase; margin-bottom: 3mm;
+    }
+
+    .slide-v h2 {
+      color: #fff; font-size: 42px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -1px; line-height: 0.95;
+      margin-bottom: 2.5mm;
+    }
+
+    .slide-v .altitude {
+      color: #4a9fd4; font-size: 19px; font-weight: 700;
+      letter-spacing: 0.5px; margin-bottom: 6mm;
+    }
+
+    .slide-v .v-desc {
+      color: rgba(255,255,255,0.80); font-size: 10.5px; line-height: 1.80;
+      max-width: 56%;
+      background: rgba(8,20,36,0.52);
+      border-left: 2.5px solid #4a9fd4;
+      border-radius: 0 4px 4px 0;
+      padding: 9px 14px;
+    }
+    .slide-v .v-desc strong { color: #fff; }
+
+    .slide-v.intro h2 { font-size: 30px; }
+    .slide-v.intro .altitude {
+      font-size: 12px; color: rgba(255,255,255,0.55);
+    }
+
+
+    /* ══ COMPANY SLIDE ════════════════════════════════════════ */
+
+    #s-empresa .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 12mm 14mm;
+      max-width: 60%;
+    }
+
+    #s-empresa .section-label { margin-bottom: 5mm; }
+
+    #s-empresa h2 {
+      color: #fff; font-size: 30px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1px; line-height: 1.1;
+      margin-bottom: 6mm;
+    }
+
+    #s-empresa .empresa-tagline {
+      color: rgba(255,255,255,0.80); font-size: 11px; line-height: 1.90;
+      margin-bottom: 8mm;
+    }
+    #s-empresa .empresa-tagline strong { color: #fff; }
+
+    #s-empresa .svc-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3mm;
+    }
+
+    #s-empresa .svc-item {
+      background: rgba(74,159,212,0.10);
+      border: 1px solid rgba(74,159,212,0.28);
+      border-radius: 4px; padding: 7px 12px;
+      color: rgba(255,255,255,0.82); font-size: 9.5px; line-height: 1.4;
+      display: flex; align-items: center; gap: 8px;
+    }
+    #s-empresa .svc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #4a9fd4; flex-shrink: 0;
+    }
+
+
+    /* ══ SERVICES SLIDE ═══════════════════════════════════════ */
+
+    #s-servicios .s-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      padding: 8mm 10mm 10mm 10mm;
+    }
+
+    #s-servicios .section-label { margin-bottom: 5mm; }
+
+    #s-servicios .svc-photos {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 6px; flex: 1; min-height: 0;
+    }
+
+    #s-servicios .svc-photo {
+      position: relative; overflow: hidden; border-radius: 5px;
+    }
+    #s-servicios .svc-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+
+    /* ══ CLOSING SLIDE ════════════════════════════════════════ */
+
+    #s-cierre .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 10mm 24mm;
+    }
+
+    #s-cierre .logo-wrap { margin-bottom: 6mm; }
+    #s-cierre .logo-wrap img {
+      width: 140px; height: 140px; border-radius: 50%;
+      border: 3px solid #4a9fd4; background: #fff;
+      object-fit: contain;
+    }
+
+    #s-cierre .closing {
+      color: #fff; font-size: 34px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 2px; line-height: 1.1;
+      margin-bottom: 5mm;
+    }
+    #s-cierre .closing span { color: #4a9fd4; }
+
+    #s-cierre .divider {
+      width: 80px; height: 1px;
+      background: rgba(74,159,212,0.4);
+      margin: 0 auto 5mm;
+    }
+
+    #s-cierre .brand-name {
+      color: rgba(255,255,255,0.55); font-size: 8px;
+      letter-spacing: 4px; text-transform: uppercase;
+      margin-bottom: 8mm;
+    }
+
+    #s-cierre .contact {
+      color: rgba(255,255,255,0.82); font-size: 12px; line-height: 2.0;
+    }
+    #s-cierre .contact .name {
+      color: #fff; font-size: 14px; font-weight: 700;
+    }
+    #s-cierre .contact .phone {
+      color: #4a9fd4; font-weight: 700;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 1 · COVER
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s1">
+    <img class="bg-img" src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/peru/86.jpg"
+         alt="The SixThousanders — The Madness Expeditions" style="object-position: center 25%;">
+    <div class="ov-dark"></div>
+    <div class="content">
+      <div class="logo-wrap">
+        <img src="../email/documents/032026/images/logo-removebg-preview.png" alt="Logo The Madness Expeditions">
+      </div>
+      <div class="eyebrow">The Madness Expeditions · Argentina</div>
+      <h1>The <span>Seis</span>Miles</h1>
+      <div class="tagline">Land of Giants</div>
+      <div class="brand-footer">Responsibility · Safety · Service · Commitment</div>
+    </div>
+    <span class="slide-num">1 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 2 · WHO WE ARE · THE COMPANY
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-empresa">
+    <img class="bg-img" src="photos/ascenso.jpeg" alt="Madness Expeditions">
+    <div class="ov-left"></div>
+    <div class="content">
+      <div class="section-label">Who We Are</div>
+      <h2>Madness<br>Expeditions</h2>
+      <p class="empresa-tagline">
+        We accompany you on every expedition to create a
+        <strong>unique and unforgettable adventure</strong> on every summit you want to conquer.
+        We handle all the logistics before and during the trip, so that
+        you only need to focus on reaching the top.
+      </p>
+      <div class="svc-grid">
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          4×4 truck transfers
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          Accommodation · Domes · Refuges · Hotels
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          Adapted menu · gluten-free · vegetarian
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          First aid WFR/WFA · Emergency oxygen
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">2 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 3 · THE REGION · INTRO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s2">
+    <img class="bg-img" src="photos/resumen.jpeg" alt="Cordillera de los Andes">
+    <div class="ov-left"></div>
+    <div class="content">
+      <div class="section-label">The Region</div>
+      <h2>Cordillera<br>de los Andes</h2>
+      <p>
+        Within the Andes mountain range, across the provinces of
+        <strong>Salta, Catamarca and La Rioja</strong>, lies this collection
+        of peaks and volcanoes that challenge everyone who loves
+        mountaineering and adventure tourism.
+      </p>
+      <div class="stats">
+        <div class="stat">
+          <span class="num">4,000+</span>
+          <span class="lbl">masl · starting point</span>
+        </div>
+        <div class="stat">
+          <span class="num">6,893</span>
+          <span class="lbl">masl · highest summit</span>
+        </div>
+        <div class="stat">
+          <span class="num">+10</span>
+          <span class="lbl">SixThousander Volcanoes</span>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">3 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 4 · MAP
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s3">
+    <img class="bg-map" src="photos/mapa2.jpeg" alt="Map The SixThousanders">
+    <div class="map-overlay"></div>
+    <div class="map-header">
+      <div class="section-label"> </div>
+      <h2></h2>
+    </div>
+    <div class="map-footer">
+     
+    </div>
+    <span class="slide-num">4 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 5 · FLORA, FAUNA AND HISTORY
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v intro" id="s4">
+    <img class="bg-img" src="photos/flora.jpg" alt="Flora and fauna of the Puna">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">The Argentine Puna</div>
+      <h2>Flora, Fauna<br>and History</h2>
+      <div class="altitude">Unique biodiversity above 4,000 masl</div>
+      <div class="v-desc">
+        The area is exceptionally rich in <strong>flora, fauna and landscape diversity</strong>,
+        not to mention the history of the region's ancient peoples. Endemic birds,
+        lagoons, hot springs and cultural relics coexist at high altitude, offering
+        an experience that goes far beyond the summit.
+      </div>
+    </div>
+    <span class="slide-num">5 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 6 · SAN FRANCISCO INTERNATIONAL PASS
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v intro" id="s5">
+    <img class="bg-img" src="photos/paso.jpg"
+         alt="San Francisco International Pass">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Gateway · Argentina – Chile</div>
+      <h2>San Francisco<br>International Pass</h2>
+      <div class="altitude">The first horizon of the SixThousanders</div>
+      <div class="v-desc">
+        Standing at the international pass, the first SixThousanders reveal themselves
+        in their full magnitude. The starting point of a unique and unrepeatable
+        experience in the heart of the Puna.
+      </div>
+    </div>
+    <span class="slide-num">6 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 7 · OJOS DEL SALADO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s6">
+    <img class="bg-img" src="photos/ojo-del-salado.jpeg" alt="Ojos del Salado">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Catamarca</div>
+      <h2>Ojos del Salado</h2>
+      <div class="altitude">6,893 masl</div>
+      <div class="v-desc">
+        The <strong>world's highest volcano</strong> and the second highest summit in the Americas.
+        On the border between Argentina and Chile — accessed from Catamarca by 4×4 truck.
+        A summit that very few people in the world can reach.
+      </div>
+    </div>
+    <span class="slide-num">7 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 8 · PISSIS
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s7">
+    <img class="bg-img" src="photos/pissis.png" alt="Pissis">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Catamarca</div>
+      <h2>Pissis</h2>
+      <div class="altitude">6,795 masl</div>
+      <div class="v-desc">
+        <strong>Second highest volcano in the world</strong> and third highest summit in the Americas.
+        It has 8 secondary peaks. Its main attraction: the
+        <strong>"Mar del Plata"</strong> base camp at 4,700 masl, reached by crossing
+        two large lagoons from which the SixThousanders can be seen in all their splendor.
+      </div>
+    </div>
+    <span class="slide-num">8 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 9 · BONETE CHICO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s8">
+    <img class="bg-img" src="photos/bonete-chico.jpeg" alt="Bonete Chico">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · La Rioja</div>
+      <h2>Bonete Chico</h2>
+      <div class="altitude">6,759 masl</div>
+      <div class="v-desc">
+        Surrounded by several SixThousanders. Access is via the
+        <strong>"Corona del Inca"</strong> route, crossing the
+        <strong>"Los Aparejos"</strong> lagoon at over 4,000 masl. The shelters used
+        are houses built during the time San Martín crossed the Andes.
+      </div>
+    </div>
+    <span class="slide-num">9 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 10 · TRES CRUCES
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s9">
+    <img class="bg-img" src="photos/tres_ruces.jpeg" alt="Tres Cruces">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Catamarca</div>
+      <h2>Tres Cruces</h2>
+      <div class="altitude">6,748 masl</div>
+      <div class="v-desc">
+        A volcano with three summits — the <strong>South Summit</strong> is the highest.
+        Accessible from Catamarca or from Chile, where the
+        <strong>Tres Cruces National Park</strong> is located. An experience that
+        combines two countries in a single expedition.
+      </div>
+    </div>
+    <span class="slide-num">10 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 11 · LLULLAILLACO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s10">
+    <img class="bg-img" src="photos/empresa.jpeg" alt="Llullaillaco">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Salta</div>
+      <h2>Llullaillaco</h2>
+      <div class="altitude">6,740 masl</div>
+      <div class="v-desc">
+        The volcano <strong>farthest from any city</strong>. To reach it,
+        two large salt flats must be crossed. Famous for the <strong>3 Inca mummies</strong>
+        discovered near the summit — on display at the Museum of High Altitude
+        (MAAM) in Salta.
+      </div>
+    </div>
+    <span class="slide-num">11 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 12 · WALTER PENCK
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s11">
+    <img class="bg-img" src="photos/Walter-Penck.jpg" alt="Walter Penck">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Catamarca</div>
+      <h2>Walter Penck</h2>
+      <div class="altitude">6,658 masl</div>
+      <div class="v-desc">
+        A volcano situated in the heart of the Catamarca Puna. A summit of
+        great beauty and challenge, accessed entirely through the province of
+        Catamarca. Part of the most impressive collection of volcanoes in the Americas.
+      </div>
+    </div>
+    <span class="slide-num">12 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 13 · INCAHUASI
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s12">
+    <img class="bg-img" src="photos/Incahuasi.jpeg" alt="Incahuasi">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Catamarca</div>
+      <h2>Incahuasi</h2>
+      <div class="altitude">6,640 masl</div>
+      <div class="v-desc">
+        <strong>"House of the Incas"</strong> — one of the most visited on the
+        circuit. Located next to Volcán San Francisco, accessed from the
+        province of Catamarca. Ideal for combining in a single expedition
+        with other summits in the area.
+      </div>
+    </div>
+    <span class="slide-num">13 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 14 · BARRANCAS BLANCAS
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s13">
+    <img class="bg-img" src="photos/barrancas_blancas.png" alt="Barrancas Blancas">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Chile</div>
+      <h2>Barrancas Blancas</h2>
+      <div class="altitude">6,260 masl</div>
+      <div class="v-desc">
+        A volcano <strong>rarely visited or summited</strong>. Its access logistics
+        are similar to Volcán San Francisco, with entry from the Argentine side.
+        A summit reserved for those who seek the authentic, off the beaten path.
+      </div>
+    </div>
+    <span class="slide-num">14 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 15 · PEÑAS BLANCAS
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s14">
+    <img class="bg-img" src="photos/peñas_blancas.png" alt="Peñas Blancas">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Chile</div>
+      <h2>Peñas Blancas</h2>
+      <div class="altitude">6,100 masl</div>
+      <div class="v-desc">
+        Located in Chile, also accessible from the province of Catamarca.
+        <strong>Rarely visited</strong> — a summit for those seeking adventure
+        beyond well-known destinations. An austere and monumental landscape
+        in equal measure.
+      </div>
+    </div>
+    <span class="slide-num">15 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 16 · VOLCÁN SAN FRANCISCO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s15">
+    <img class="bg-img" src="photos/san-francisco.png" alt="Volcán San Francisco">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Volcano · Catamarca</div>
+      <h2>Volcán<br>San Francisco</h2>
+      <div class="altitude">6,040 masl</div>
+      <div class="v-desc">
+        An icon of the region and the <strong>first experience at six thousand meters</strong>
+        for many mountaineers. Perfect for acclimatizing and preparing the
+        body for more demanding SixThousanders. Accessible by 4×4 truck
+        up to <strong>5,100 masl</strong>.
+      </div>
+    </div>
+    <span class="slide-num">16 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 17 · SERVICES · PHOTOS
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-servicios">
+    <div class="s-content">
+      <div class="section-label">The Experience in Images</div>
+      <div class="svc-photos">
+        <div class="svc-photo">
+          <img src="photos/servicio01.png" alt="Service 1" style="object-position: center center;">
+        </div>
+        <div class="svc-photo">
+          <img src="photos/servicio05.jpeg" alt="Service 5" style="object-position: center top;">
+        </div>
+        <div class="svc-photo">
+          <img src="photos/servicio06.jpeg" alt="Service 6" style="object-position: center center;">
+        </div>
+        <div class="svc-photo">
+          <img src="photos/servicio07.jpeg" alt="Service 7" style="object-position: center center;">
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">17 / 18</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 18 · CLOSING · CONTACT
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-cierre">
+    <img class="bg-img" src="photos/ojo-del-salado.png"
+         alt="Closing" style="object-position: center 60%;">
+    <div style="position:absolute;inset:0;background:rgba(8,20,36,0.72)"></div>
+    <div class="content">
+      <div class="logo-wrap">
+        <img src="../email/documents/032026/images/logo-removebg-preview.png" alt="Logo The Madness Expeditions">
+      </div>
+      <div class="closing">
+        Land of <span>Giants</span>
+      </div>
+      <div class="divider"></div>
+      <div class="brand-name">The Madness Expeditions · Argentina</div>
+      <div class="contact">
+        <div class="name">Pablo Fortunato</div>
+        <span class="phone">+54 9 11 3269-3505</span> (WhatsApp)<br>
+        pabloflater@hotmail.com · themadnessexpeditions@gmail.com
+      </div>
+    </div>
+    <span class="slide-num">18 / 18</span>
+  </div>
+
+
+</body>
+</html>
