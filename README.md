@@ -208,4 +208,3 @@ Este workspace usa el framework **BMad** con el módulo **WDS**. Para continuar 
 | --------------------------- | --------------- |
 | Propietario / Product Owner | Pablo Fortunato |
 | Diseño & Desarrollo         | Irivadeneira    |
-
