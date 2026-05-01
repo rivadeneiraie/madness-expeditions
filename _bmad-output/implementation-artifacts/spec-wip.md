@@ -2,7 +2,7 @@
 title: "Refactor: reorganización de módulos en web/src"
 type: "refactor"
 created: "2026-04-30"
-status: "in-review"
+status: "in-progress"
 baseline_commit: "dd983a455d3eefa6b66456c8e020d55b3aaba3d5"
 context:
   - "_bmad-output/project-context.md"
@@ -59,23 +59,23 @@ context:
 
 **Execution:**
 
-- [x] `src/sanity/client.ts` -- CREAR con el contenido exacto de sanity/lib/client.ts -- aplanar estructura innecesaria
-- [x] `src/sanity/queries.ts` -- CREAR con el contenido exacto de sanity/lib/queries.ts -- aplanar estructura innecesaria
-- [x] `src/lib/trips/types.ts` -- CREAR con las interfaces Trip, TripDate, ItineraryDay, TripTestimonial extraídas de trips-data.ts -- separar tipos de lógica de fetching
-- [x] `src/lib/trips/api.ts` -- CREAR con normalizeSpots, normalizeTrip, getAllTrips, getTripBySlug; imports desde `@/sanity/client` y `@/sanity/queries`; importar Trip desde `./types`; importar TripLevel/DifficultyLevel desde `@/components/ui/TripCard` -- capa de acceso a datos
-- [x] `src/components/gallery/utils.ts` -- CREAR con el contenido exacto de gallery-utils.ts -- co-ubicar utilidades con los componentes que las usan
-- [x] `src/components/views/FichaViaje.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/types`; `@/lib/gallery-utils` → `@/components/gallery/utils`
-- [x] `src/components/views/CatalogoViajes.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/types`
-- [x] `src/components/sections/FeaturedTrips.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/api`
-- [x] `src/components/gallery/GallerySharedModal.tsx` -- ACTUALIZAR: `@/lib/gallery-utils` → `./utils`
-- [x] `src/components/gallery/GalleryModal.tsx` -- ACTUALIZAR: `@/lib/gallery-utils` → `./utils`
-- [x] `src/app/viajes/[slug]/page.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/api`
-- [x] `src/app/viajes/page.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/api`
-- [x] `src/lib/trips-data.ts` -- ELIMINAR
-- [x] `src/lib/gallery-utils.ts` -- ELIMINAR
-- [x] `src/sanity/lib/client.ts` -- ELIMINAR
-- [x] `src/sanity/lib/queries.ts` -- ELIMINAR
-- [x] `src/sanity/lib/` -- ELIMINAR directorio vacío
+- [ ] `src/sanity/client.ts` -- CREAR con el contenido exacto de sanity/lib/client.ts -- aplanar estructura innecesaria
+- [ ] `src/sanity/queries.ts` -- CREAR con el contenido exacto de sanity/lib/queries.ts -- aplanar estructura innecesaria
+- [ ] `src/lib/trips/types.ts` -- CREAR con las interfaces Trip, TripDate, ItineraryDay, TripTestimonial extraídas de trips-data.ts -- separar tipos de lógica de fetching
+- [ ] `src/lib/trips/api.ts` -- CREAR con normalizeSpots, normalizeTrip, getAllTrips, getTripBySlug; imports desde `@/sanity/client` y `@/sanity/queries`; importar Trip desde `./types`; importar TripLevel/DifficultyLevel desde `@/components/ui/TripCard` -- capa de acceso a datos
+- [ ] `src/components/gallery/utils.ts` -- CREAR con el contenido exacto de gallery-utils.ts -- co-ubicar utilidades con los componentes que las usan
+- [ ] `src/components/views/FichaViaje.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/types`; `@/lib/gallery-utils` → `@/components/gallery/utils`
+- [ ] `src/components/views/CatalogoViajes.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/types`
+- [ ] `src/components/sections/FeaturedTrips.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/api`
+- [ ] `src/components/gallery/GallerySharedModal.tsx` -- ACTUALIZAR: `@/lib/gallery-utils` → `./utils`
+- [ ] `src/components/gallery/GalleryModal.tsx` -- ACTUALIZAR: `@/lib/gallery-utils` → `./utils`
+- [ ] `src/app/viajes/[slug]/page.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/api`
+- [ ] `src/app/viajes/page.tsx` -- ACTUALIZAR: `@/lib/trips-data` → `@/lib/trips/api`
+- [ ] `src/lib/trips-data.ts` -- ELIMINAR
+- [ ] `src/lib/gallery-utils.ts` -- ELIMINAR
+- [ ] `src/sanity/lib/client.ts` -- ELIMINAR
+- [ ] `src/sanity/lib/queries.ts` -- ELIMINAR
+- [ ] `src/sanity/lib/` -- ELIMINAR directorio vacío
 
 **Acceptance Criteria:**
 
