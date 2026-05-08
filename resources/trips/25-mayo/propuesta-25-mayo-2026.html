@@ -76,8 +76,8 @@
     #portada .main-title-block { text-align: center; }
     #portada .eyebrow {
       display: block; color: #4a9fd4;
-      font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
-      margin-bottom: 14px;
+      font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 12px; font-weight: 700;
     }
     #portada .date-badge {
       display: inline-block;
@@ -150,7 +150,7 @@
       text-transform: uppercase; margin-bottom: 4px;
     }
     .doc-footer .contact-item {
-      color: #ffffff; font-size: 11.5px; font-weight: 700; line-height: 1.7;
+      color: #8e9faa; font-size: 11.5px; font-weight: 400; line-height: 1.7;
     }
     .doc-footer .doc-values {
       color: rgba(255,255,255,0.35); font-size: 7.5px; letter-spacing: 1.5px;
@@ -183,7 +183,7 @@
     .option-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
     .option-hero .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(8,23,39,0.88) 0%, rgba(8,23,39,0.35) 55%, rgba(8,23,39,0.05) 100%);
+      background: linear-gradient(to right, rgba(8,23,39,0.97) 0%, rgba(8,23,39,0.75) 45%, rgba(8,23,39,0.2) 100%);
     }
     .option-hero .hero-content {
       position: absolute; top: 0; left: 0; bottom: 0;
@@ -201,13 +201,16 @@
     .option-hero .opt-mountain {
       color: #fff; font-size: 26px; font-weight: 900;
       text-transform: uppercase; letter-spacing: -0.5px; line-height: 1;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.7);
     }
     .option-hero .opt-alt {
       color: #4a9fd4; font-size: 15px; font-weight: 700; margin-top: 4px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
     }
     .option-hero .opt-zone {
-      color: rgba(255,255,255,0.65); font-size: 9px; letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.8); font-size: 9px; letter-spacing: 1.5px;
       text-transform: uppercase; margin-top: 6px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
     }
 
     /* Stats row de opción */
@@ -228,24 +231,28 @@
     /* Precio destacado */
     .price-band {
       background: rgba(26,58,92,0.5); border: 1px solid rgba(74,159,212,0.35);
-      border-radius: 5px; padding: 12px 18px;
-      display: flex; align-items: center; justify-content: space-between;
+      border-radius: 5px; padding: 12px 24px;
+      display: flex; align-items: center; justify-content: center; gap: 24px;
+    }
+    .price-band .pb-left {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
     }
     .price-band .pb-left .pb-label {
-      color: #4a9fd4; font-size: 8px; letter-spacing: 3px;
-      text-transform: uppercase; margin-bottom: 4px;
+      color: #4a9fd4; font-size: 7.5px; letter-spacing: 3px;
+      text-transform: uppercase;
     }
     .price-band .pb-left .pb-price {
-      color: #fff; font-size: 32px; font-weight: 900; line-height: 1;
+      color: #fff; font-size: 44px; font-weight: 900; line-height: 1;
     }
-    .price-band .pb-left .pb-price span { color: #4a9fd4; font-size: 18px; }
-    .price-band .pb-right {
-      text-align: right;
+    .price-band .pb-left .pb-price span { color: #4a9fd4; font-size: 13px; font-weight: 700; letter-spacing: 2px; vertical-align: middle; margin-right: 4px; }
+    .price-band .pb-divider {
+      width: 1px; height: 52px; background: rgba(74,159,212,0.3); flex-shrink: 0;
     }
+    .price-band .pb-right { text-align: left; }
     .price-band .pb-right .pb-cond {
-      color: rgba(255,255,255,0.55); font-size: 9.5px; line-height: 1.8;
+      color: rgba(255,255,255,0.55); font-size: 10px; line-height: 2;
     }
-    .price-band .pb-right .pb-cond strong { color: rgba(255,255,255,0.8); }
+    .price-band .pb-right .pb-cond strong { color: rgba(255,255,255,0.85); }
 
     /* Incluye */
     .two-cols-opt { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -293,16 +300,20 @@
       position: relative; overflow: hidden; border-radius: 4px; flex: 1;
     }
     .photo-card.big { flex: 1.6; }
+    .photo-img-wrap { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+    .photo-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+    }
     .photo-card img {
       width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
     }
     .photo-caption {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(8,23,39,0.92) 0%, rgba(8,23,39,0.0) 100%);
-      padding: 20px 10px 8px;
+      background: linear-gradient(to top, rgba(8,23,39,0.97) 0%, rgba(8,23,39,0.75) 40%, rgba(8,23,39,0.0) 100%);
+      padding: 28px 10px 10px;
     }
-    .photo-name { color: #fff; font-size: 11px; font-weight: 700; line-height: 1.2; }
-    .photo-meta { color: rgba(74,159,212,0.9); font-size: 7.5px; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+    .photo-name { color: #fff; font-size: 10px; font-weight: 700; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+    .photo-meta { color: rgba(74,159,212,0.9); font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 1px; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
     .photo-badge {
       position: absolute; top: 8px; left: 8px;
       font-size: 7.5px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
@@ -431,15 +442,30 @@
       </div>
 
       <div class="main-title-block">
-        <span class="date-badge">Feriado · 25 de Mayo 2026</span>
-        <span class="eyebrow">Montañismo &amp; Mucho Más · Mendoza · Argentina</span>
-        <h1>Un Feriado<br><span>Dos</span> Opciones</h1>
+        <span class="date-badge">25 de Mayo</span>
+        <h1><span>Un</span> Feriado<br><span>Dos</span> Opciones</h1>
         <div class="tagline-sep"></div>
+        <span class="eyebrow">Montañismo &amp; Mucho Más · Mendoza · Argentina</span>
         <p class="cover-subtitle">
           Cerro Punta Negra · Cordón del Portillo<br>
-          Cerros Arenales · Lomas Blancas · Estudiante · Vallecitos
+          La Cadenita · Vallecitos
         </p>
         <div class="two-options-badge">Del Sábado 23 al Lunes 25 de Mayo</div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10mm; margin-top: 12px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+            <span style="color: rgba(74,159,212,0.6); font-size: 6.5px; letter-spacing: 2.5px; text-transform: uppercase;">Asistencia médica</span>
+            <div style="width: 160px; height: 66px; display: flex; align-items: center; justify-content: center; padding: 6px 12px;">
+              <img src="images/pax_logo.jpeg" alt="PAX Assistance" style="max-height: 58px; max-width: 148px; width: auto; height: auto; object-fit: contain; display: block;">
+            </div>
+          </div>
+          <div style="width: 1px; height: 80px; background: rgba(74,159,212,0.2);"></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+            <span style="color: rgba(74,159,212,0.6); font-size: 6.5px; letter-spacing: 2.5px; text-transform: uppercase;">Trabajamos con</span>
+            <div style="width: 160px; height: 66px; display: flex; align-items: center; justify-content: center; padding: 6px 12px;">
+              <img src="images/ansilta_logo.jpg" alt="Ansilta" style="max-height: 54px; max-width: 136px; width: auto; height: auto; object-fit: contain; display: block; background: #fff; border-radius: 3px; padding: 2px 6px;">
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="cover-footer">
@@ -450,7 +476,7 @@
         <div class="kv-sep"></div>
         <div class="kv-item">
           <span class="kv-label">Opción B</span>
-          <span class="kv-value">Arenales / L. Blancas · hasta 4.000 m</span>
+          <span class="kv-value">La Cadenita · hasta 4.050 m</span>
         </div>
         <div class="kv-sep"></div>
         <div class="kv-item">
@@ -513,6 +539,10 @@
           <div class="os-val">3 días</div>
           <div class="os-key">Duración</div>
         </div>
+        <div class="opt-stat">
+          <div class="os-val" style="font-size: 11px;">Mendoza</div>
+          <div class="os-key">Pto. Encuentro</div>
+        </div>
       </div>
 
       <!-- Descripción -->
@@ -524,8 +554,9 @@
       <div class="price-band">
         <div class="pb-left">
           <div class="pb-label">Precio por persona</div>
-          <div class="pb-price"><span>U$</span>490</div>
+          <div class="pb-price"><span>USD</span>490</div>
         </div>
+        <div class="pb-divider"></div>
         <div class="pb-right">
           <div class="pb-cond">
             <strong>Reserva:</strong> 15% del total<br>
@@ -567,8 +598,12 @@
     <div class="doc-footer">
       <div>
         <div class="contact-label">Informes &amp; Reservas</div>
-        <div class="contact-item">pabloflater@hotmail.com &nbsp;·&nbsp; themadnessexpeditions@gmail.com</div>
-        <div class="contact-item">WhatsApp: +54 9 11 3269-3505</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">pabloflater@hotmail.com &nbsp;·&nbsp; themadnessexpeditions@gmail.com</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">+54 9 11 3269-3505</div>
+      </div>
+      <div class="doc-values" style="text-align: center;">
+        Trabajamos con<br>
+        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
       </div>
       <div class="doc-values">
         Responsabilidad · Seguridad<br>
@@ -592,21 +627,21 @@
     <div class="body">
 
       <!-- Hero foto -->
-      <div class="option-hero">
-        <img src="images/l-cadenita02.jpeg" alt="Cerros Arenales - Vallecitos">
+      <div class="option-hero" style="height: 40mm;">
+        <img src="images/l-cadenita02.jpeg" alt="La Cadenita - Vallecitos">
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="opt-badge b">Opción B</div>
-          <div class="opt-mountain">Arenales · L. Blancas · Estudiante</div>
-          <div class="opt-alt">3.650 m → 3.990 msnm</div>
-          <div class="opt-zone">Vallecitos · Parque Prov. Cordón del Plata · Mendoza</div>
+          <div class="opt-mountain">La Cadenita</div>
+          <div class="opt-alt">3.650 m → 4.050 msnm aprox.</div>
+          <div class="opt-zone">4 Cerros · Vallecitos · Parque Prov. Cordón del Plata · Mendoza</div>
         </div>
       </div>
 
       <!-- Stats -->
       <div class="opt-stats">
         <div class="opt-stat">
-          <div class="os-val">3.990 m</div>
+          <div class="os-val">4.050 m</div>
           <div class="os-key">Cima máx.</div>
         </div>
         <div class="opt-stat">
@@ -625,19 +660,24 @@
           <div class="os-val">3 días</div>
           <div class="os-key">Duración</div>
         </div>
+        <div class="opt-stat">
+          <div class="os-val" style="font-size: 11px;">Mendoza</div>
+          <div class="os-key">Pto. Encuentro</div>
+        </div>
       </div>
 
       <!-- Descripción -->
       <div class="aclaracion-box" style="border-left-color: rgba(74,159,212,0.6); background: rgba(74,159,212,0.06);">
-        <p>Programa ideal para quienes quieren <strong>iniciarse en la Alta Montaña</strong> y el Montañismo. Nos vamos a <strong>"Vallecitos"</strong>, el Parque Provincial Cordón del Plata — lugar ideal para tomarlo como escuela. Tres cumbres en un mismo viaje: Arenales (3.650 m), Lomas Blancas (3.900 m) y Estudiante (3.990 m). Alojamiento en <strong>refugio de montaña completo</strong>. Se realiza con <strong>mochila de ataque</strong>.</p>
+        <p>Programa ideal para quienes quieren <strong>iniciarse en la Alta Montaña</strong> y el Montañismo. Nos vamos a <strong>"Vallecitos"</strong>, el Parque Provincial Cordón del Plata — lugar ideal para tomarlo como escuela. Tres cumbres en un mismo viaje: Arenales (3.650 m), Lomas Blancas (3.900 m) y Estudiante (4.050 m). Alojamiento en <strong>refugio de montaña completo</strong>. Se realiza con <strong>mochila de ataque</strong>.</p>
       </div>
 
       <!-- Precio -->
       <div class="price-band">
         <div class="pb-left">
           <div class="pb-label">Precio por persona</div>
-          <div class="pb-price"><span>U$</span>475</div>
+          <div class="pb-price"><span>USD</span>475</div>
         </div>
+        <div class="pb-divider"></div>
         <div class="pb-right">
           <div class="pb-cond">
             <strong>Reserva:</strong> 15% del total<br>
@@ -679,8 +719,12 @@
     <div class="doc-footer">
       <div>
         <div class="contact-label">Informes &amp; Reservas</div>
-        <div class="contact-item">pabloflater@hotmail.com &nbsp;·&nbsp; themadnessexpeditions@gmail.com</div>
-        <div class="contact-item">WhatsApp: +54 9 11 3269-3505</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">pabloflater@hotmail.com &nbsp;·&nbsp; themadnessexpeditions@gmail.com</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">+54 9 11 3269-3505</div>
+      </div>
+      <div class="doc-values" style="text-align: center;">
+        Trabajamos con<br>
+        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
       </div>
       <div class="doc-values">
         Responsabilidad · Seguridad<br>
@@ -720,7 +764,7 @@
             <div class="photo-badge a">Opción A</div>
             <div class="photo-caption">
               <div class="photo-name">Campamento Base</div>
-              <div class="photo-meta">Carpas TNF · Alta Montaña</div>
+              <div class="photo-meta">Carpas TNF &middot; Alta Montaña</div>
             </div>
           </div>
         </div>
@@ -732,7 +776,7 @@
             <div class="photo-badge b">Opción B</div>
             <div class="photo-caption">
               <div class="photo-name">Cordón del Plata</div>
-              <div class="photo-meta">Vallecitos · Mendoza</div>
+              <div class="photo-meta">Vallecitos &middot; Mendoza</div>
             </div>
           </div>
           <div class="photo-card big">
@@ -740,7 +784,7 @@
             <div class="photo-badge b">Opción B</div>
             <div class="photo-caption">
               <div class="photo-name">Cumbre en Equipo</div>
-              <div class="photo-meta">Arenales · Lomas Blancas · Estudiante</div>
+              <div class="photo-meta">La Cadenita &middot; Vallecitos</div>
             </div>
           </div>
         </div>
@@ -751,8 +795,12 @@
     <div class="doc-footer">
       <div>
         <div class="contact-label">Informes &amp; Reservas</div>
-        <div class="contact-item">pabloflater@hotmail.com &nbsp;·&nbsp; themadnessexpeditions@gmail.com</div>
-        <div class="contact-item">WhatsApp: +54 9 11 3269-3505</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">pabloflater@hotmail.com &nbsp;·&nbsp; themadnessexpeditions@gmail.com</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">+54 9 11 3269-3505</div>
+      </div>
+      <div class="doc-values" style="text-align: center;">
+        Trabajamos con<br>
+        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
       </div>
       <div class="doc-values">
         Responsabilidad · Seguridad<br>
@@ -778,15 +826,21 @@
       <!-- No incluye -->
       <div>
         <div class="section-label">No incluido (ambas opciones)</div>
-        <div class="col-card excludes" style="padding: 9px 13px;">
-          <ul style="columns: 2; column-gap: 16px;">
-            <li style="font-size:10px; padding: 2.5px 0 2.5px 14px;">Pasaje de ida y vuelta a Mendoza</li>
-            <li style="font-size:10px; padding: 2.5px 0 2.5px 14px;">Gastos por abandono de expedición</li>
-            <li style="font-size:10px; padding: 2.5px 0 2.5px 14px;">Gastos de rescate</li>
-            <li style="font-size:10px; padding: 2.5px 0 2.5px 14px;">Comidas fuera del programa</li>
-            <li style="font-size:10px; padding: 2.5px 0 2.5px 14px;">Ducha de regreso</li>
-            <li style="font-size:10px; padding: 2.5px 0 2.5px 14px;">Todo lo no especificado en el programa</li>
-          </ul>
+        <div class="two-cols-opt">
+          <div class="col-card excludes">
+            <ul>
+              <li style="font-size:10px;">Pasaje de ida y vuelta a Mendoza</li>
+              <li style="font-size:10px;">Gastos por abandono de expedición</li>
+              <li style="font-size:10px;">Gastos de rescate</li>
+            </ul>
+          </div>
+          <div class="col-card excludes">
+            <ul>
+              <li style="font-size:10px;">Comidas fuera del programa</li>
+              <li style="font-size:10px;">Ducha de regreso</li>
+              <li style="font-size:10px;">Todo lo no especificado en el programa</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -859,20 +913,20 @@
       <!-- CTA Contacto -->
       <div class="contact-cta" style="margin-top: auto; margin-bottom: 12mm;">
         <div class="cta-eyebrow">Informes &amp; Reservas</div>
-        <div class="cta-heading">¿Te sumás? · Feriado 25 de Mayo 2026</div>
+        <div class="cta-heading">¿Te sumás?</div>
         <div class="cta-row">
           <div class="cta-item">
-            <div class="ci-label">Email</div>
-            <div class="ci-value" style="font-size: 10.5px;">pabloflater@hotmail.com<br>themadnessexpeditions@gmail.com</div>
+            <div class="ci-label"><img src="../../email/signature/icons/icon-mail.png" width="12" height="12" style="vertical-align:middle; opacity:0.7; margin-right:4px;">Email</div>
+            <div class="ci-value" style="font-size: 10.5px; color: #b8c4ce; font-weight: 400;">pabloflater@hotmail.com<br>themadnessexpeditions@gmail.com</div>
           </div>
           <div class="cta-item">
-            <div class="ci-label">WhatsApp · Pablo</div>
+            <div class="ci-label"><img src="../../email/signature/icons/icon-phone.png" width="12" height="12" style="vertical-align:middle; opacity:0.7; margin-right:4px;">Pablo</div>
             <div class="ci-value whatsapp">+54 9 11 3269-3505</div>
           </div>
         </div>
         <div class="partners-band">
           <div class="partner-item">
-            <div class="p-label">Seguro contratado</div>
+            <div class="p-label" style="font-size: 9px; font-weight: 800; color: #4a9fd4; letter-spacing: 2px;">Asistencia médica</div>
             <img src="images/pax_logo.jpeg" alt="PAX Assistance">
           </div>
           <div class="partner-sep"></div>
@@ -882,8 +936,9 @@
           </div>
         </div>
         <div class="cta-closing">
-          Gracias por tu difusión. <strong>Responsabilidad · Seguridad · Servicio · Compromiso &amp; Garantía</strong><br>
-          en todas nuestras Expediciones &amp; Ascensos. — Pablo
+          Responsabilidad · Seguridad · Servicio · Compromiso &amp; Garantía<br>
+          en todas nuestras Expediciones &amp; Ascensos.<br><br>
+          Gracias por tu difusión.
         </div>
       </div>
 
