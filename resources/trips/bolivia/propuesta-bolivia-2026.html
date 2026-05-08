@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bolivia 2026 — La Gran Cordillera Real — The Madness Expeditions</title>
+  <title>Bolivia — La Gran Cordillera Real — The Madness Expeditions</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -423,6 +423,44 @@
     .partner-sep {
       width: 1px; height: 68px; background: rgba(74,159,212,0.2);
     }
+
+    /* ══ TARJETAS DE MONTAÑAS (Página 3) ══════════════════ */
+    .mountain-cards {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+    }
+    .mountain-card {
+      background: rgba(26,58,92,0.45);
+      border: 1px solid rgba(74,159,212,0.28);
+      border-radius: 6px; padding: 12px 10px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .mc-order {
+      color: rgba(74,159,212,0.55); font-size: 7px; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .mc-name {
+      color: #fff; font-size: 14px; font-weight: 900;
+      letter-spacing: -0.3px; line-height: 1; margin-bottom: 6px;
+    }
+    .mc-alt {
+      color: #4a9fd4; font-size: 22px; font-weight: 900; line-height: 1;
+      margin-bottom: 6px;
+    }
+    .mc-role {
+      color: rgba(255,255,255,0.55); font-size: 8px; letter-spacing: 1px;
+      text-transform: uppercase; line-height: 1.4;
+    }
+    .mc-sep {
+      width: 24px; height: 1px; background: rgba(74,159,212,0.3);
+      margin: 6px 0;
+    }
+
+    /* Texto editorial limpio (sin recuadro) */
+    .editorial-text {
+      color: rgba(255,255,255,0.82); font-size: 11.5px;
+      line-height: 1.85; letter-spacing: 0.1px;
+    }
+    .editorial-text strong { color: #fff; }
   </style>
 </head>
 <body>
@@ -431,7 +469,7 @@
   <div class="page" id="portada">
     <img class="hero-img"
       src="images/99.jpg.jpeg"
-      alt="Bolivia 2026 — The Madness Expeditions">
+      alt="Bolivia — The Madness Expeditions">
     <div class="overlay"></div>
 
     <div class="content">
@@ -445,15 +483,15 @@
         <span class="date-badge">18 al 30 de Julio</span>
         <h1><span>Bolivia</span><br>2026</h1>
         <div class="tagline-sep"></div>
-        <span class="eyebrow">Montanismo &amp; Mucho Mas · Cordillera Real · La Paz</span>
+        <span class="eyebrow">Montañismo &amp; Mucho Más · Cordillera Real · La Paz</span>
         <p class="cover-subtitle">
-          Austria · Tarija · Pequeno Alpamayo · Huayna Potosi<br>
-          Comidas · Sabores · Paisajes · Cultura &amp; Muchas Montanas
+          Austria · Tarija · Pequeño Alpamayo · Huayna Potosí<br>
+          Comidas · Sabores · Paisajes · Cultura &amp; Muchas Montañas
         </p>
         <div class="two-options-badge">La Gran Cordillera Real</div>
         <div style="display: flex; align-items: center; justify-content: center; gap: 10mm; margin-top: 12px;">
           <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <span style="color: rgba(74,159,212,0.6); font-size: 6.5px; letter-spacing: 2.5px; text-transform: uppercase;">Asistencia medica</span>
+            <span style="color: rgba(74,159,212,0.6); font-size: 6.5px; letter-spacing: 2.5px; text-transform: uppercase;">Asistencia médica</span>
             <div style="width: 160px; height: 66px; display: flex; align-items: center; justify-content: center; padding: 6px 12px;">
               <img src="images/pax_logo.jpeg" alt="PAX Assistance" style="max-height: 58px; max-width: 148px; width: auto; height: auto; object-fit: contain; display: block;">
             </div>
@@ -470,18 +508,18 @@
 
       <div class="cover-footer">
         <div class="kv-item">
-          <span class="kv-label">Montanas</span>
+          <span class="kv-label">Montañas</span>
           <span class="kv-value">4 ascensos</span>
         </div>
         <div class="kv-sep"></div>
         <div class="kv-item">
-          <span class="kv-label">Altura maxima</span>
+          <span class="kv-label">Altura máxima</span>
           <span class="kv-value">6.088 m</span>
         </div>
         <div class="kv-sep"></div>
         <div class="kv-item">
-          <span class="kv-label">Duracion</span>
-          <span class="kv-value">13 dias</span>
+          <span class="kv-label">Duración</span>
+          <span class="kv-value">13 días</span>
         </div>
         <div class="kv-sep"></div>
         <div class="kv-item">
@@ -509,9 +547,9 @@
         <img src="images/103.jpg.jpeg" alt="Cordillera Real Bolivia">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <div class="opt-badge a">Expedicion Bolivia 2026</div>
+          <div style="font-size: 8px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; display: inline-block; margin-bottom: 8px; width: fit-content; background: rgba(74,159,212,0.25); border: 1px solid rgba(74,159,212,0.55); color: #fff;">Bolivia · 18 al 30 de Julio</div>
           <div class="opt-mountain">La Gran Cordillera Real</div>
-          <div class="opt-alt">Austria · Tarija · Pequeno Alpamayo · Huayna Potosi</div>
+          <div class="opt-alt">Austria · Tarija · Pequeño Alpamayo · Huayna Potosí</div>
           <div class="opt-zone">La Paz · Bolivia · Ruta Normal</div>
         </div>
       </div>
@@ -519,36 +557,173 @@
       <div class="opt-stats">
         <div class="opt-stat">
           <div class="os-val">6.088 m</div>
-          <div class="os-key">Cima max.</div>
+          <div class="os-key">Cima máxima</div>
+        </div>
+        <div class="opt-stat">
+          <div class="os-val">13 días</div>
+          <div class="os-key">Duración</div>
         </div>
         <div class="opt-stat">
           <div class="os-val">Alta</div>
-          <div class="os-key">Exig. Fisica</div>
+          <div class="os-key">Exig. Física</div>
         </div>
         <div class="opt-stat">
           <div class="os-val">Alta</div>
-          <div class="os-key">Exig. Tecnica</div>
-        </div>
-        <div class="opt-stat">
-          <div class="os-val">13 dias</div>
-          <div class="os-key">Duracion</div>
-        </div>
-        <div class="opt-stat">
-          <div class="os-val" style="font-size: 11px;">3 Pax</div>
-          <div class="os-key">Minimo</div>
-        </div>
-        <div class="opt-stat">
-          <div class="os-val" style="font-size: 10px;">Bs.As. / La Paz</div>
-          <div class="os-key">Encuentro</div>
+          <div class="os-key">Exig. Técnica</div>
         </div>
       </div>
 
-      <div class="aclaracion-box">
-        <p>
-          Te invitamos a una de las expediciones mas bonitas que se pueden vivir en Sudamerica:
-          conocer Bolivia, caminar por glaciares magicos, transitar puentes de hielo y contemplar
-          amaneceres inolvidables en la Cordillera Real. La Paz y su cultura, su gente y sus
-          costumbres completan una experiencia unica en montana.
+      <p class="editorial-text">
+        Te invitamos a una de las expediciones más bonitas que uno puede hacer — y sin dudarlo, a vivirla.
+        Bolivia es un país grande y hermoso: sus montañas con <strong>glaciares mágicos</strong>, su cultura, su gente y sus tradiciones
+        forman una experiencia única que va mucho más allá de la cumbre.
+        <strong>La Paz</strong>, encerrada en su valle, te dan ganas de caminarla todo el día: el teleférico que la recorre de punta a punta
+        y sus vistas son una parte más del viaje.<br><br>
+        En la <strong>Cordillera Real</strong> vas a sentirte en los Alpes: grandes paisajes, caminatas nocturnas, tránsito en glaciares
+        y ese momento mágico de contemplar un <strong>gran amanecer</strong> desde la altura.
+        Aprenderás técnicas de tránsito glaciar, cruzarás puentes de hielo y, por qué no, te asomarás a alguna grieta.
+        Cultura, paisajes, sabores, gente y montañas — todo en un solo programa.<br><br>
+        <em>Un viaje soñado. Vale la pena el esfuerzo. ¡Tu corazón va a latir muy fuerte!</em>
+      </p>
+
+      <div>
+        <div class="section-label">Qué incluye la expedición</div>
+        <div class="two-cols-opt">
+          <div class="col-card includes">
+            <ul>
+              <li>Transfer in/out aeropuerto-hotel-aeropuerto</li>
+              <li>Traslados La Paz-Tuni-La Paz y La Paz-Zongo-La Paz</li>
+              <li>Todas las comidas de expedición y box lunch</li>
+              <li>Guías de montaña (2 guías)</li>
+              <li>Equipo de rescate y botiquines</li>
+              <li>Carpas de alta montaña</li>
+            </ul>
+          </div>
+          <div class="col-card includes">
+            <ul>
+              <li>Hotel 5 estrellas en La Paz (5 noches)</li>
+              <li>Burros y porteadores para equipo general</li>
+              <li>Comunicación satelital y handys VHF</li>
+              <li>Entrada a parques nacionales</li>
+              <li>Asistencia pre y durante expedición</li>
+              <li>Ayuda para alquiler de equipo y logística</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="doc-footer">
+      <div>
+        <div class="contact-label">Informes &amp; Reservas</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">themadnessexpeditions@gmail.com &nbsp;·&nbsp; pabloflater@hotmail.com</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">+54 9 11 3269-3505</div>
+      </div>
+      <div class="doc-values" style="text-align: center;">
+        Trabajamos con<br>
+        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
+      </div>
+      <div class="doc-values">
+        Responsabilidad · Seguridad<br>
+        Servicio · Compromiso · Garantía
+      </div>
+    </div>
+    <span class="page-num">2 / 5</span>
+  </div>
+
+
+  <!-- HOJA 3 · MONTANAS & LOGISTICA ═════════════════════ -->
+  <div class="page opcion-page" id="itinerario-montanas">
+    <div class="doc-header">
+      <img src="../../../web/public/logo-v4.png" alt="Logo">
+      <div>
+        <div class="hdr-brand">The Madness Expeditions · ARG</div>
+        <div class="hdr-tagline">Responsabilidad · Seguridad · Servicio · Compromiso</div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <div>
+        <div class="section-label">Montañas objetivo · Ascenso progresivo en Cordillera Real</div>
+        <div class="mountain-cards">
+
+          <div class="mountain-card">
+            <div class="mc-order">1° Cumbre</div>
+            <div class="mc-name">Austria</div>
+            <div class="mc-sep"></div>
+            <div class="mc-alt">5.300 m</div>
+            <div class="mc-role">Apertura &amp;<br>aclimatación</div>
+          </div>
+
+          <div class="mountain-card">
+            <div class="mc-order">2° Cumbre</div>
+            <div class="mc-name">Tarija</div>
+            <div class="mc-sep"></div>
+            <div class="mc-alt">5.200 m</div>
+            <div class="mc-role">Consolidación<br>técnica</div>
+          </div>
+
+          <div class="mountain-card">
+            <div class="mc-order">3° Cumbre</div>
+            <div class="mc-name">Peq. Alpamayo</div>
+            <div class="mc-sep"></div>
+            <div class="mc-alt">5.330 m</div>
+            <div class="mc-role">Alta dificultad<br>glaciar</div>
+          </div>
+
+          <div class="mountain-card" style="border-color: rgba(74,159,212,0.55); background: rgba(26,58,92,0.65);">
+            <div class="mc-order" style="color: #4a9fd4;">Cima Final</div>
+            <div class="mc-name">Huayna Potosi</div>
+            <div class="mc-sep" style="background: #4a9fd4;"></div>
+            <div class="mc-alt" style="font-size: 28px;">6.088 m</div>
+            <div class="mc-role" style="color: rgba(255,255,255,0.75);">Cumbre principal<br>Ruta normal</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; align-items: stretch;">
+
+        <div style="display: flex; flex-direction: column;">
+          <div class="section-label">Logística &amp; punto de encuentro</div>
+          <div class="col-card includes" style="flex: 1;">
+            <ul>
+              <li>Salida desde Buenos Aires (opcional encuentro en La Paz)</li>
+              <li>Recepción y traslado al hotel en La Paz</li>
+              <li>Hotel 5 estrellas en La Paz · 5 noches</li>
+              <li>Traslados La Paz-Tuni-La Paz y La Paz-Zongo-La Paz</li>
+              <li>2 guías de montaña · comunicación satelital</li>
+              <li>Handys VHF · asistencia durante todo el viaje</li>
+              <li>Burros y porteadores para equipo general</li>
+              <li>Entrada a parques nacionales</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column;">
+          <div class="section-label">Qué no incluye</div>
+          <div class="col-card excludes" style="flex: 1;">
+            <ul>
+              <li>Pasaje ida y vuelta hasta La Paz</li>
+              <li>Gastos por abandono de la expedición</li>
+              <li>Gastos por rescate</li>
+              <li>Comidas en La Paz (fuera del programa)</li>
+              <li>Almuerzos de salida a Tuni y Zongo</li>
+              <li>Porter o burro extra si se requiere</li>
+              <li>Todo lo no especificado en QUE INCLUYE</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="aclaracion-box" style="border-left-color: rgba(74,159,212,0.5); background: rgba(74,159,212,0.05);">
+        <p style="font-size: 10.3px; line-height: 1.7;">
+          Los 4 ascensos están diseñados de forma progresiva para una aclimatación óptima.
+          La ruta normal en todas las montañas permite que el foco esté en la experiencia,
+          el equipo y el disfrute de glaciares, paisajes y cultura boliviana.
         </p>
       </div>
 
@@ -561,44 +736,18 @@
         <div class="pb-right">
           <div class="pb-cond">
             <strong>Reserva:</strong> 15% del total<br>
-            <strong>Minimo:</strong> 3 participantes<br>
+            <strong>Mínimo:</strong> 3 participantes<br>
             <strong>Ruta:</strong> Normal
           </div>
         </div>
       </div>
 
-      <div>
-        <div class="section-label">Que incluye la expedicion</div>
-        <div class="two-cols-opt">
-          <div class="col-card includes">
-            <ul>
-              <li>Transfer in/out aeropuerto-hotel-aeropuerto</li>
-              <li>Traslados La Paz-Tuni-La Paz y La Paz-Zongo-La Paz</li>
-              <li>Todas las comidas de expedicion y box lunch</li>
-              <li>Guias de montana (2 guias)</li>
-              <li>Equipo de rescate y botiquines</li>
-              <li>Carpas de alta montana</li>
-            </ul>
-          </div>
-          <div class="col-card includes">
-            <ul>
-              <li>Hotel 5 estrellas en La Paz (5 noches)</li>
-              <li>Burros y porteadores para equipo general</li>
-              <li>Comunicacion satelital y handys VHF</li>
-              <li>Entrada a parques nacionales</li>
-              <li>Asistencia pre y durante expedicion</li>
-              <li>Ayuda para alquiler de equipo y logistica</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <div class="doc-footer">
       <div>
         <div class="contact-label">Informes &amp; Reservas</div>
-        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">info@madnessexpeditions.com &nbsp;·&nbsp; pabloflater@hotmail.com</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">themadnessexpeditions@gmail.com &nbsp;·&nbsp; pabloflater@hotmail.com</div>
         <div class="contact-item"><img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">+54 9 11 3269-3505</div>
       </div>
       <div class="doc-values" style="text-align: center;">
@@ -607,113 +756,7 @@
       </div>
       <div class="doc-values">
         Responsabilidad · Seguridad<br>
-        Servicio · Compromiso · Garantia
-      </div>
-    </div>
-    <span class="page-num">2 / 5</span>
-  </div>
-
-
-  <!-- HOJA 3 · ITINERARIO Y MONTANAS OBJETIVO ═══════════ -->
-  <div class="page opcion-page" id="itinerario-montanas">
-    <div class="doc-header">
-      <img src="../../../web/public/logo-v4.png" alt="Logo">
-      <div>
-        <div class="hdr-brand">The Madness Expeditions · ARG</div>
-        <div class="hdr-tagline">Responsabilidad · Seguridad · Servicio · Compromiso</div>
-      </div>
-    </div>
-
-    <div class="body">
-
-      <div class="option-hero" style="height: 40mm;">
-        <img src="images/60.jpg.jpeg" alt="Glaciares de Bolivia">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <div class="opt-badge b">Un solo viaje, una sola ruta</div>
-          <div class="opt-mountain">Itinerario de La Gran Cordillera Real</div>
-          <div class="opt-alt">La Paz, cultura local y transito tecnico en glaciares</div>
-          <div class="opt-zone">Bolivia 2026 · Camino nuevo junto al equipo</div>
-        </div>
-      </div>
-
-      <div class="opt-stats">
-        <div class="opt-stat">
-          <div class="os-val">4</div>
-          <div class="os-key">Montanas</div>
-        </div>
-        <div class="opt-stat">
-          <div class="os-val">5</div>
-          <div class="os-key">Noches hotel</div>
-        </div>
-        <div class="opt-stat">
-          <div class="os-val">2</div>
-          <div class="os-key">Guias</div>
-        </div>
-        <div class="opt-stat">
-          <div class="os-val">VHF</div>
-          <div class="os-key">Comunicacion</div>
-        </div>
-        <div class="opt-stat">
-          <div class="os-val">PAX</div>
-          <div class="os-key">Asistencia</div>
-        </div>
-        <div class="opt-stat">
-          <div class="os-val" style="font-size: 10px;">ANSILTA</div>
-          <div class="os-key">Partner</div>
-        </div>
-      </div>
-
-      <div class="aclaracion-box" style="border-left-color: rgba(74,159,212,0.6); background: rgba(74,159,212,0.06);">
-        <p>
-          La Cordillera Real se vive como un viaje sonado: caminatas nocturnas,
-          transito en glaciares, puentes de hielo y la posibilidad de conocer grietas
-          en un entorno seguro, guiado y con asistencia permanente.
-          Vale la pena el esfuerzo: cultura, paisajes, sabores y montanas en un solo programa.
-        </p>
-      </div>
-
-      <div>
-        <div class="section-label">Montanas objetivo y logistica de encuentro</div>
-        <div class="two-cols-opt">
-          <div class="col-card includes">
-            <ul>
-              <li>Austria · 5.300 m</li>
-              <li>Tarija · 5.200 m</li>
-              <li>Pequeno Alpamayo · 5.330 m</li>
-              <li>Huayna Potosi · 6.088 m</li>
-              <li>Ascensos progresivos para aclimatacion</li>
-              <li>Ruta normal en toda la expedicion</li>
-            </ul>
-          </div>
-          <div class="col-card notes">
-            <ul>
-              <li>Punto de encuentro en Buenos Aires</li>
-              <li>Opcion de encuentro directo en La Paz</li>
-              <li>Recepcion y traslado al hotel en La Paz</li>
-              <li>Traslados coordinados a Tuni y Zongo</li>
-              <li>Comunicacion satelital y handys VHF</li>
-              <li>Asistencia previa y durante todo el viaje</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="doc-footer">
-      <div>
-        <div class="contact-label">Informes &amp; Reservas</div>
-        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">info@madnessexpeditions.com &nbsp;·&nbsp; pabloflater@hotmail.com</div>
-        <div class="contact-item"><img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">+54 9 11 3269-3505</div>
-      </div>
-      <div class="doc-values" style="text-align: center;">
-        Trabajamos con<br>
-        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
-      </div>
-      <div class="doc-values">
-        Responsabilidad · Seguridad<br>
-        Servicio · Compromiso · Garantia
+        Servicio · Compromiso · Garantía
       </div>
     </div>
     <span class="page-num">3 / 5</span>
@@ -731,16 +774,16 @@
     </div>
 
     <div class="body">
-      <div class="section-label">Bolivia 2026 · Galeria</div>
+      <div class="section-label">Bolivia · Galería</div>
       <div class="photo-grid">
 
         <div class="photo-row">
           <div class="photo-card big">
             <img src="images/0.jpg.jpeg" alt="Cumbre en Bolivia">
-            <div class="photo-badge a">Expedicion</div>
+            <div class="photo-badge a">Expedición</div>
             <div class="photo-caption">
               <div class="photo-name">Cordillera Real</div>
-              <div class="photo-meta">Altura · tecnica · equipo</div>
+              <div class="photo-meta">Altura · técnica · equipo</div>
             </div>
           </div>
           <div class="photo-card">
@@ -748,26 +791,26 @@
             <div class="photo-badge a">Cordillera Real</div>
             <div class="photo-caption">
               <div class="photo-name">Trabajo en equipo</div>
-              <div class="photo-meta">Guias + clientes</div>
+              <div class="photo-meta">Guías + clientes</div>
             </div>
           </div>
         </div>
 
         <div class="photo-row">
           <div class="photo-card">
-            <img src="images/35.jpg.jpeg" alt="Paisaje andino">
-            <div class="photo-badge b">Bolivia 2026</div>
+            <img src="images/41.jpg.jpeg" alt="Cima en Bolivia">
+            <div class="photo-badge b">Bolivia</div>
             <div class="photo-caption">
-              <div class="photo-name">Amaneceres en altura</div>
-              <div class="photo-meta">Bolivia · Andes</div>
+              <div class="photo-name">En la cima</div>
+              <div class="photo-meta">Equipo · cumbre · logro</div>
             </div>
           </div>
           <div class="photo-card big">
             <img src="images/94.jpg.jpeg" alt="Glaciar en Bolivia">
-            <div class="photo-badge b">Tecnica</div>
+            <div class="photo-badge b">Técnica</div>
             <div class="photo-caption">
-              <div class="photo-name">Transito en glaciares</div>
-              <div class="photo-meta">Experiencia tecnica guiada</div>
+              <div class="photo-name">Tránsito en glaciares</div>
+              <div class="photo-meta">Experiencia técnica guiada</div>
             </div>
           </div>
         </div>
@@ -778,7 +821,7 @@
     <div class="doc-footer">
       <div>
         <div class="contact-label">Informes &amp; Reservas</div>
-        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">info@madnessexpeditions.com &nbsp;·&nbsp; pabloflater@hotmail.com</div>
+        <div class="contact-item"><img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">themadnessexpeditions@gmail.com &nbsp;·&nbsp; pabloflater@hotmail.com</div>
         <div class="contact-item"><img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">+54 9 11 3269-3505</div>
       </div>
       <div class="doc-values" style="text-align: center;">
@@ -787,7 +830,7 @@
       </div>
       <div class="doc-values">
         Responsabilidad · Seguridad<br>
-        Servicio · Compromiso · Garantia
+        Servicio · Compromiso · Garantía
       </div>
     </div>
     <span class="page-num">4 / 5</span>
@@ -807,34 +850,35 @@
     <div class="body">
 
       <div>
-        <div class="section-label">Que no incluye</div>
-        <div class="two-cols-opt">
-          <div class="col-card excludes">
-            <ul>
-              <li style="font-size:10px;">Pasaje ida y vuelta hasta La Paz</li>
-              <li style="font-size:10px;">Gastos por abandono de la expedicion</li>
-              <li style="font-size:10px;">Gastos por rescate</li>
-            </ul>
+        <div class="section-label">Alimentación &amp; Nutrición</div>
+        <p class="body-text" style="font-size: 10px; line-height: 1.68;">
+          La alimentación es uno de los ítems más importantes de la expedición — y uno de los aspectos en los que más nos destacamos.
+          Cocinamos con elementos frescos, de calidad y con foco en proteínas, usando ollas de calidad para mantener los valores energéticos,
+          favorecer la digestión en la altura y optimizar la absorción. Priorizamos productos de la zona y la economía local: nada industrial.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 7px;">
+          <div class="col-card includes" style="padding: 9px 12px;">
+            <div class="col-title">Vegetarianos &amp; Carnívoros</div>
+            <p style="color: rgba(255,255,255,0.75); font-size: 9.5px; line-height: 1.6;">
+              Nos adaptamos a cada dieta para que te sientas como en casa.
+              Compartimos conocimientos sobre nutrición en altura durante toda la expedición.
+            </p>
           </div>
-          <div class="col-card excludes">
-            <ul>
-              <li style="font-size:10px;">Comidas en La Paz</li>
-              <li style="font-size:10px;">Almuerzos de salida a Tuni y Zongo</li>
-              <li style="font-size:10px;">Porter o burro extra y otros no especificados</li>
-            </ul>
+          <div class="col-card includes" style="padding: 9px 12px;">
+            <div class="col-title">Celíacos &amp; Veganos</div>
+            <p style="color: rgba(255,255,255,0.75); font-size: 9.5px; line-height: 1.6;">
+              Guías veganos en el equipo. Protocolos de transporte y separación de alimentos.
+              Comidas elaboradas en casa, sin mezcla ni contacto con el resto. Siempre te preguntamos qué te gustaría comer.
+            </p>
+          </div>
+          <div class="col-card includes" style="padding: 9px 12px;">
+            <div class="col-title">Lo Orgánico</div>
+            <p style="color: rgba(255,255,255,0.75); font-size: 9.5px; line-height: 1.6;">
+              Frutas y verduras de estación y de la zona. Productos orgánicos siempre que sea posible.
+              Comer sano es darle al cuerpo mayor potencia en todos los sentidos.
+            </p>
           </div>
         </div>
-      </div>
-
-      <div>
-        <div class="section-label">Alimentacion &amp; Nutricion</div>
-        <p class="body-text" style="font-size: 10.3px; line-height: 1.72;">
-          La alimentacion es uno de los items mas importantes de la expedicion.
-          Cocinamos con elementos frescos, de calidad y con foco en proteinas para sostener el esfuerzo en altura,
-          cuidando digestion y absorcion energetica. Priorizamos productos de la zona, cocina casera y menu variado.
-          Adaptamos dietas para vegetarianos, carnivoros, celiacos y veganos, con protocolos de transporte y cuidado.
-          Se trabaja con menu planificado para cada etapa del ascenso y recuperacion diaria.
-        </p>
       </div>
 
       <div>
@@ -846,10 +890,10 @@
               <li>Zapatillas de trekking (bota)</li>
               <li>Medias gruesas 3ra capa</li>
               <li>Medias trekking 2da capa</li>
-              <li>Botas dobles o semi rigidas</li>
-              <li>Pantalon 1ra capa sintetico</li>
-              <li>Pantalon de trekking</li>
-              <li>Pantalon impermeable</li>
+              <li>Botas dobles o semi rígidas</li>
+              <li>Pantalón 1ra capa sintético</li>
+              <li>Pantalón de trekking</li>
+              <li>Pantalón impermeable</li>
             </ul>
           </div>
           <div class="equipo-col">
@@ -866,18 +910,18 @@
             </ul>
           </div>
           <div class="equipo-col">
-            <div class="col-title">Tecnico &amp; general</div>
+            <div class="col-title">Técnico &amp; general</div>
             <ul>
-              <li>Crampones, arnes y piqueta de travesia</li>
-              <li>3 mosquetones con seguro + cordin prusik</li>
+              <li>Crampones, arnés y piqueta de travesía</li>
+              <li>3 mosquetones con seguro + cordín prusik</li>
               <li>Bastones, termo 1L y mochila 60L</li>
-              <li>Bolso expedicion, aislante y bolsa dormir</li>
+              <li>Bolso expedición, aislante y bolsa dormir</li>
               <li>Botellas agua, protector solar y labial</li>
-              <li>Botiquin personal y panel solar</li>
+              <li>Botiquín personal y panel solar</li>
               <li>Pilas, vaso, plato, cubiertos y toalla</li>
             </ul>
             <div style="margin-top: 8px; background: rgba(74,159,212,0.08); border: 1px solid rgba(74,159,212,0.2); border-radius: 4px; padding: 7px 9px;">
-              <p style="color: rgba(255,255,255,0.65); font-size: 8.5px; line-height: 1.6;">Si te falta equipo se puede alquilar: botas dobles, campera de pluma, bolsa de dormir, crampones, pantalon impermeable y mas.</p>
+              <p style="color: rgba(255,255,255,0.65); font-size: 8.5px; line-height: 1.6;">Si te falta equipo se puede alquilar: botas dobles, campera de pluma, bolsa de dormir, crampones, pantalón impermeable y más.</p>
             </div>
           </div>
         </div>
@@ -889,7 +933,7 @@
         <div class="cta-row">
           <div class="cta-item">
             <div class="ci-label"><img src="../../email/signature/icons/icon-mail.png" width="12" height="12" style="vertical-align:middle; opacity:0.7; margin-right:4px;">Email</div>
-            <div class="ci-value" style="font-size: 10.5px; color: #b8c4ce; font-weight: 400;">info@madnessexpeditions.com<br>pabloflater@hotmail.com</div>
+            <div class="ci-value" style="font-size: 10.5px; color: #b8c4ce; font-weight: 400;">themadnessexpeditions@gmail.com<br>pabloflater@hotmail.com</div>
           </div>
           <div class="cta-item">
             <div class="ci-label"><img src="../../email/signature/icons/icon-phone.png" width="12" height="12" style="vertical-align:middle; opacity:0.7; margin-right:4px;">Pablo</div>
@@ -898,7 +942,7 @@
         </div>
         <div class="partners-band">
           <div class="partner-item">
-            <div class="p-label" style="font-size: 9px; font-weight: 800; color: #4a9fd4; letter-spacing: 2px;">Asistencia medica</div>
+            <div class="p-label" style="font-size: 9px; font-weight: 800; color: #4a9fd4; letter-spacing: 2px;">Asistencia médica</div>
             <img src="images/pax_logo.jpeg" alt="PAX Assistance">
           </div>
           <div class="partner-sep"></div>
@@ -909,7 +953,7 @@
         </div>
         <div class="cta-closing">
           Facebook: The Madness Expeditions · Instagram: madnessexpeditions<br>
-          Responsabilidad · Seguridad · Servicio · Compromiso y Garantia en todas nuestras expediciones.<br><br>
+          Responsabilidad · Seguridad · Servicio · Compromiso y Garantía en todas nuestras expediciones.<br><br>
           Gracias por su difusion. Saludos y abrazos.
         </div>
       </div>
