@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trekking al Campo Base del Everest 2027 — The Madness Expeditions</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #2a2a2a;
+    }
+
+    /*
+      Cada .slide = 16:9 landscape para impresión.
+      Ctrl+P → Guardar como PDF → Tamaño personalizado 297×167 mm · Márgenes: Ninguno
+    */
+    .slide {
+      width: 297mm;
+      height: 167mm;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      margin: 16px auto;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.65);
+      background: #0d1b2a;
+    }
+
+    @page { size: 297mm 167mm; margin: 0; }
+
+    @media print {
+      body { background: none; }
+      .slide { margin: 0; box-shadow: none; }
+    }
+
+    /* ══ UTILIDADES COMPARTIDAS ═══════════════════════════════ */
+
+    .bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+
+    .ov-dark {
+      position: absolute; inset: 0;
+      background: rgba(8,20,36,0.55);
+    }
+
+    .ov-bottom {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(8,20,36,0.97) 0%,
+        rgba(8,20,36,0.82) 30%,
+        rgba(8,20,36,0.35) 62%,
+        rgba(8,20,36,0.05) 100%
+      );
+    }
+
+    .ov-left {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(8,20,36,0.96) 0%,
+        rgba(8,20,36,0.80) 42%,
+        rgba(8,20,36,0.20) 72%,
+        rgba(8,20,36,0.00) 100%
+      );
+    }
+
+    .slide-num {
+      position: absolute; bottom: 5mm; right: 7mm;
+      color: rgba(74,159,212,0.30); font-size: 7px;
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .section-label {
+      color: #4a9fd4; font-size: 8px; letter-spacing: 4.5px;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; height: 1px; width: 36px;
+      background: rgba(74,159,212,0.45);
+    }
+
+    /* ══ SLIDE 1 · PORTADA ════════════════════════════════════ */
+
+    #s1 .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 10mm 24mm;
+    }
+
+    #s1 .logo-wrap {
+      margin-bottom: 5mm;
+    }
+    #s1 .logo-wrap img {
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 3px solid #4a9fd4; background: #fff;
+      object-fit: contain;
+    }
+
+    #s1 .badge {
+      display: inline-block;
+      background: #4a9fd4; color: #0d1b2a;
+      font-size: 8px; font-weight: 900; letter-spacing: 4px;
+      text-transform: uppercase; padding: 4px 14px;
+      border-radius: 2px; margin-bottom: 5mm;
+    }
+
+    #s1 h1 {
+      color: #fff; font-size: 52px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -1.5px; line-height: 0.92;
+      margin-bottom: 5mm;
+    }
+    #s1 h1 span { color: #4a9fd4; }
+
+    #s1 .tagline {
+      color: rgba(255,255,255,0.78); font-size: 12px;
+      letter-spacing: 4px; text-transform: uppercase;
+      border-top: 1px solid rgba(74,159,212,0.35);
+      border-bottom: 1px solid rgba(74,159,212,0.35);
+      padding: 7px 24px; margin-bottom: 5mm;
+    }
+
+    #s1 .brand-footer {
+      color: rgba(255,255,255,0.38); font-size: 7.5px;
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+
+    /* ══ SLIDE EMPRESA ════════════════════════════════════════ */
+
+    #s-empresa .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 12mm 14mm;
+      max-width: 60%;
+    }
+
+    #s-empresa .section-label { margin-bottom: 5mm; }
+
+    #s-empresa h2 {
+      color: #fff; font-size: 30px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1px; line-height: 1.1;
+      margin-bottom: 6mm;
+    }
+
+    #s-empresa .empresa-tagline {
+      color: rgba(255,255,255,0.80); font-size: 11px; line-height: 1.90;
+      margin-bottom: 8mm;
+    }
+    #s-empresa .empresa-tagline strong { color: #fff; }
+
+    #s-empresa .svc-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3mm;
+    }
+
+    #s-empresa .svc-item {
+      background: rgba(74,159,212,0.10);
+      border: 1px solid rgba(74,159,212,0.28);
+      border-radius: 4px; padding: 7px 12px;
+      color: rgba(255,255,255,0.82); font-size: 9.5px; line-height: 1.4;
+      display: flex; align-items: center; gap: 8px;
+    }
+    #s-empresa .svc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #4a9fd4; flex-shrink: 0;
+    }
+
+    /* ══ VOLCÁN / TREK TEMPLATE (slides de día) ═══════════════ */
+
+    .slide-v .v-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 14mm 11mm 14mm;
+    }
+
+    .slide-v .v-label {
+      color: #4a9fd4; font-size: 8px; letter-spacing: 4px;
+      text-transform: uppercase; margin-bottom: 3mm;
+    }
+
+    .slide-v h2 {
+      color: #fff; font-size: 42px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -1px; line-height: 0.95;
+      margin-bottom: 2.5mm;
+    }
+
+    .slide-v .altitude {
+      color: #4a9fd4; font-size: 19px; font-weight: 700;
+      letter-spacing: 0.5px; margin-bottom: 6mm;
+    }
+
+    .slide-v .v-desc {
+      color: rgba(255,255,255,0.80); font-size: 10.5px; line-height: 1.80;
+      max-width: 56%;
+      background: rgba(8,20,36,0.52);
+      border-left: 2.5px solid #4a9fd4;
+      border-radius: 0 4px 4px 0;
+      padding: 9px 14px;
+    }
+    .slide-v .v-desc strong { color: #fff; }
+
+    /* Variante: slides de ciudades (Katmandu, etc.) — título más pequeño */
+    .slide-v.city h2 { font-size: 32px; }
+    .slide-v.city .altitude {
+      font-size: 12px; color: rgba(255,255,255,0.60);
+    }
+
+    /* ══ SLIDE EBC SERVICIOS ══════════════════════════════════ */
+
+    #s-servicios .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 12mm 14mm;
+      max-width: 62%;
+    }
+
+    #s-servicios .section-label { margin-bottom: 5mm; }
+
+    #s-servicios h2 {
+      color: #fff; font-size: 24px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1px; line-height: 1.15;
+      margin-bottom: 6mm;
+    }
+
+    #s-servicios .svc-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3mm;
+    }
+
+    #s-servicios .svc-item {
+      background: rgba(74,159,212,0.10);
+      border: 1px solid rgba(74,159,212,0.28);
+      border-radius: 4px; padding: 8px 12px;
+      color: rgba(255,255,255,0.82); font-size: 9.5px; line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    #s-servicios .svc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #4a9fd4; flex-shrink: 0; margin-top: 3px;
+    }
+    #s-servicios .svc-item strong { color: #fff; display: block; }
+
+    /* ══ SLIDE CIERRE ═════════════════════════════════════════ */
+
+    #s-cierre .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 10mm 24mm;
+    }
+
+    #s-cierre .logo-wrap { margin-bottom: 5mm; }
+    #s-cierre .logo-wrap img {
+      width: 130px; height: 130px; border-radius: 50%;
+      border: 3px solid #4a9fd4; background: #fff;
+      object-fit: contain;
+    }
+
+    #s-cierre .closing {
+      color: #fff; font-size: 30px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 2px; line-height: 1.1;
+      margin-bottom: 4mm;
+    }
+    #s-cierre .closing span { color: #4a9fd4; }
+
+    #s-cierre .divider {
+      width: 80px; height: 1px;
+      background: rgba(74,159,212,0.4);
+      margin: 0 auto 4mm;
+    }
+
+    #s-cierre .brand-name {
+      color: rgba(255,255,255,0.55); font-size: 8px;
+      letter-spacing: 4px; text-transform: uppercase;
+      margin-bottom: 7mm;
+    }
+
+    #s-cierre .contact {
+      color: rgba(255,255,255,0.82); font-size: 11.5px; line-height: 2.0;
+    }
+    #s-cierre .contact .name {
+      color: #fff; font-size: 14px; font-weight: 700;
+    }
+    #s-cierre .contact .phone {
+      color: #4a9fd4; font-weight: 700;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 1 · PORTADA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s1">
+    <img class="bg-img" src="image/introduccion/WhatsApp%20Image%202026-05-13%20at%2019.33.46%20%281%29.jpeg"
+         alt="Everest Base Camp Trek — The Madness Expeditions" style="object-position: center 40%;">
+    <div class="ov-dark"></div>
+    <div class="content">
+      <div class="logo-wrap">
+        <img src="../../email/documents/032026/images/logo-removebg-preview.png" alt="Logo The Madness Expeditions">
+      </div>
+      <div class="badge">ABRIL 2027</div>
+      <h1>Trekking al <span>Campo Base</span><br>del Everest</h1>
+      <div class="tagline">Un Viaje Al Corazón de los Himalaya &amp; La Cultura Sherpa</div>
+      <div class="brand-footer">Responsabilidad · Seguridad · Servicio · Compromiso</div>
+    </div>
+    <span class="slide-num">1 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 2 · QUIÉNES SOMOS · LA EMPRESA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-empresa">
+    <img class="bg-img" src="image/introduccion/WhatsApp%20Image%202026-05-13%20at%2019.33.46%20%282%29.jpeg"
+         alt="Madness Expeditions" style="object-position: center right;">
+    <div class="ov-left"></div>
+    <div class="content">
+      <div class="section-label">Quiénes somos</div>
+      <h2>Madness<br>Expeditions</h2>
+      <p class="empresa-tagline">
+        Te acompañamos en cada expedición para crear una aventura
+        <strong>única e inolvidable</strong> en cada destino que quieras conquistar.
+        Nos ocupamos de toda la logística previa y durante el viaje, para que
+        vos solo pienses en disfrutar cada paso del camino.
+      </p>
+      <div class="svc-grid">
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          Guías certificados · Experiencia Himalaya
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          Logística aérea y terrestre incluida
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          Alojamiento · Teahouses · Campo Base
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          Primeros auxilios WFR · Oxígeno de emergencia
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">2 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 3 · DÍA 1 · ARGENTINA → KATMANDU
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d1">
+    <img class="bg-img" src="image/Dia01/WhatsApp%20Image%202026-05-13%20at%2020.00.13%20%281%29.jpeg"
+         alt="Día 1 — Argentina a Katmandu">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 1</div>
+      <h2>Argentina → Katmandu</h2>
+      <div class="altitude">Aeropuerto Tribhuvan · KTM</div>
+      <div class="v-desc">
+        Inicio del viaje desde Buenos Aires. <strong>Más de 16.500 km</strong> y cerca de
+        <strong>37 hs. de vuelo</strong> con escalas (vía Doha, Turquía o Dubai). Una aventura
+        que comienza desde el primer despegue.
+      </div>
+    </div>
+    <span class="slide-num">3 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 4 · DÍA 2 · KATMANDÚ CITY TOUR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d2">
+    <img class="bg-img" src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%281%29.jpeg"
+         alt="Día 2 — Katmandú">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 2</div>
+      <h2>Katmandú</h2>
+      <div class="altitude">Llegada a KTM · City Tour</div>
+      <div class="v-desc">
+        Llegada y primer contacto con Nepal. Visitamos <strong>Thamel</strong>, el Crematorio,
+        el <strong>Templo de los Monos</strong>, el histórico <strong>Durbar Square</strong>
+        y la imponente <strong>Estupa de Boudhanath</strong>.
+      </div>
+    </div>
+    <span class="slide-num">4 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 5 · DÍA 3 · COMPRAS Y PREPARACIÓN
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d3">
+    <img class="bg-img" src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.55.jpeg"
+         alt="Día 3 — Compras para el Trekking">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 3</div>
+      <h2>Preparación<br>para el Trek</h2>
+      <div class="altitude">Katmandú · Tiendas de Montaña</div>
+      <div class="v-desc">
+        Día destinado a la preparación final. Recorremos las <strong>tiendas de montaña</strong>
+        de Katmandú para completar el equipo necesario. Ajustamos cada detalle antes de partir
+        hacia las alturas del Himalaya.
+      </div>
+    </div>
+    <span class="slide-num">5 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 6 · DÍA 4 · VUELO KTM → LUKLA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d4a">
+    <img class="bg-img" src="image/Dia04-01/WhatsApp%20Image%202026-05-13%20at%2020.14.30%20%281%29.jpeg"
+         alt="Día 4 — Vuelo a Lukla">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 4</div>
+      <h2>Vuelo a Lukla</h2>
+      <div class="altitude">Aeropuerto Tenzing-Hillary · 2.860 msnm</div>
+      <div class="v-desc">
+        Vuelo desde KTM al <strong>Aeropuerto Tenzing-Hillary de Lukla</strong>, uno de los
+        aeropuertos más emocionantes del mundo. En avión: 35-45 min desde otra ciudad
+        (4 hs. por tierra). En helicóptero: 45-60 min directo desde KTM.
+      </div>
+    </div>
+    <span class="slide-num">6 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 7 · DÍA 4 · LUKLA → PHAKDING · INICIO DEL TREK
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d4b">
+    <img class="bg-img" src="image/D%C3%ADa04-02/WhatsApp%20Image%202026-05-13%20at%2020.18.13%20%281%29.jpeg"
+         alt="Día 4 — Lukla a Phakding">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 4 · Inicio del Trekking</div>
+      <h2>Lukla → Phakding</h2>
+      <div class="altitude">2.840 msnm → 2.610 msnm · 3-4 hs.</div>
+      <div class="v-desc">
+        ¡Arranca el Trek! Descenso desde Lukla hasta el pintoresco pueblo de
+        <strong>Phakding</strong>, a orillas del río Dudh Koshi. Primera jornada de caminata
+        para entrar en ritmo y conocer el paisaje sherpa.
+      </div>
+    </div>
+    <span class="slide-num">7 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 8 · DÍA 5 · PHAKDING → NAMCHE BAZAAR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d5">
+    <img class="bg-img" src="image/Dia05/WhatsApp%20Image%202026-05-13%20at%2020.23.00%20%2810%29.jpeg"
+         alt="Día 5 — Phakding a Namche Bazaar">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 5</div>
+      <h2>Phakding →<br>Namche Bazaar</h2>
+      <div class="altitude">2.610 msnm → 3.440 msnm · 7-8 hs.</div>
+      <div class="v-desc">
+        ¡Subida intensa! Cruzamos los <strong>puentes colgantes más altos y largos</strong>
+        del Himalaya y entramos triunfantes a <strong>Namche Bazaar</strong>, la capital
+        de los Sherpas. Un día que no se olvida.
+      </div>
+    </div>
+    <span class="slide-num">8 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 9 · DÍA 6 · DESCANSO NAMCHE BAZAAR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d6">
+    <img class="bg-img" src="image/dia06/WhatsApp%20Image%202026-05-13%20at%2020.26.02%20%281%29.jpeg"
+         alt="Día 6 — Namche Bazaar">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 6</div>
+      <h2>Namche Bazaar</h2>
+      <div class="altitude">3.440 msnm · Día de Aclimatación</div>
+      <div class="v-desc">
+        Jornada de descanso y aclimatación en la vibrante ciudad sherpa. Visitamos el
+        <strong>Museo Sherpa</strong>, exploramos el mercado y preparamos el cuerpo para
+        las alturas que vienen. Aquí la montaña empieza a sentirse.
+      </div>
+    </div>
+    <span class="slide-num">9 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 10 · DÍA 7 · NAMCHE → SANASA · EVEREST VIEW
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d7">
+    <img class="bg-img" src="image/D%C3%ADa07/WhatsApp%20Image%202026-05-13%20at%2020.30.39%20%281%29.jpeg"
+         alt="Día 7 — Namche a Sanasa">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 7</div>
+      <h2>Namche →<br>Sanasa</h2>
+      <div class="altitude">3.440 msnm → 3.860 msnm · Everest View</div>
+      <div class="v-desc">
+        Pasamos por la <strong>Hillary School</strong> y llegamos a Sanasa. Desde aquí tenemos
+        la primera <strong>vista panorámica del Everest</strong> y el viejo aeropuerto. Un
+        momento de emoción pura frente al techo del mundo.
+      </div>
+    </div>
+    <span class="slide-num">10 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 11 · DÍA 8 · SANASA → PANGBOCHE · MONASTERIO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d8">
+    <img class="bg-img" src="image/D%C3%ADa08/WhatsApp%20Image%202026-05-13%20at%2020.34.46%20%281%29.jpeg"
+         alt="Día 8 — Sanasa a Pangboche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 8</div>
+      <h2>Sanasa →<br>Pangboche</h2>
+      <div class="altitude">3.860 msnm → 3.960 msnm · 7-8 hs.</div>
+      <div class="v-desc">
+        Gran bajada y luego gran subida en <strong>ZIG-ZAG</strong> entre bosques de rododendros.
+        Visitamos el impresionante <strong>Monasterio de Tengboche</strong> y recibimos las
+        primeras bendiciones del viaje. Un tramo espiritual e intenso.
+      </div>
+    </div>
+    <span class="slide-num">11 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 12 · DÍA 9 · PANGBOCHE → PHERICHE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d9">
+    <img class="bg-img" src="image/Dia09/WhatsApp%20Image%202026-05-14%20at%2017.39.36%20%2810%29.jpeg"
+         alt="Día 9 — Pangboche a Pheriche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 9</div>
+      <h2>Pangboche →<br>Pheriche</h2>
+      <div class="altitude">3.960 msnm → 4.270 msnm · 6-8 hs.</div>
+      <div class="v-desc">
+        Superamos los <strong>+4.000 metros</strong>. Los pueblitos y puestos del camino
+        quedan atrás. Entramos en un verdadero <strong>Trekking de Altura</strong>: el paisaje
+        cambia, el aire se afina y cada paso se siente diferente.
+      </div>
+    </div>
+    <span class="slide-num">12 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 13 · DÍA 10 · ACLIMATACIÓN EN PHERICHE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d10">
+    <img class="bg-img" src="image/Dia10/WhatsApp%20Image%202026-05-14%20at%2017.46.34%20%281%29.jpeg"
+         alt="Día 10 — Pheriche aclimatación">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 10</div>
+      <h2>Pheriche</h2>
+      <div class="altitude">4.270 msnm · Día de Aclimatación</div>
+      <div class="v-desc">
+        Descanso y aclimatación. Caminata por las zonas altas para <strong>ganar altura
+        y volver</strong>, técnica clave para la adaptación. Vistas impresionantes del
+        <strong>Ama Dablam</strong> y otros ochomiles de la región.
+      </div>
+    </div>
+    <span class="slide-num">13 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 14 · DÍA 11 · PHERICHE → LOBUCHE · THE MEMORIAL
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d11">
+    <img class="bg-img" src="image/Dia11/WhatsApp%20Image%202026-05-14%20at%2017.55.44%20%2810%29.jpeg"
+         alt="Día 11 — Pheriche a Lobuche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 11</div>
+      <h2>Pheriche →<br>Lobuche</h2>
+      <div class="altitude">4.270 msnm → 4.940 msnm · 6-7 hs.</div>
+      <div class="v-desc">
+        Alta montaña en estado puro. Pasamos por <strong>"The Memorial"</strong>, el lugar
+        donde descansan restos de algunos escaladores del Everest. Subida en ZIG-ZAG con
+        escalones y tramo recto hasta el campo base de Lobuche. <strong>¡Casi 5.000 metros!</strong>
+      </div>
+    </div>
+    <span class="slide-num">14 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 15 · DÍA 12 · LOBUCHE → CAMPO BASE EVEREST
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d12">
+    <img class="bg-img" src="image/Dia12/WhatsApp%20Image%202026-05-14%20at%2018.06.13%20%2810%29.jpeg"
+         alt="Día 12 — Lobuche al Campo Base Everest">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 12 · El Gran Día</div>
+      <h2>¡Campo Base<br>Everest!</h2>
+      <div class="altitude">4.940 → 5.400 msnm · Gorak Shep · 7-8 hs.</div>
+      <div class="v-desc">
+        El día más esperado. Caminamos entre <strong>bloques de roca y glaciar</strong>,
+        pasamos el último poblado Gorak Shep (5.160 msnm) y llegamos al
+        <strong>Campo Base del Everest a 5.400 msnm</strong>. Desde la entrada, 1 hora más
+        por el glaciar hasta nuestro campamento. ¡A disfrutar!
+      </div>
+    </div>
+    <span class="slide-num">15 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 16 · DÍA 13 · DÍA ENTERO EN EL CAMPO BASE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d13a">
+    <img class="bg-img" src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%2810%29.jpeg"
+         alt="Día 13 — Campo Base Everest">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 13</div>
+      <h2>Campo Base<br>Everest</h2>
+      <div class="altitude">5.400 msnm · Día completo en el EBC</div>
+      <div class="v-desc">
+        Un día entero para vivir el Campo Base. Recorremos el campamento, conocemos
+        el entorno y, si las <strong>condiciones lo permiten, caminamos por el glaciar</strong>.
+        Momento único: estar donde los mejores alpinistas del mundo parten hacia la cima.
+      </div>
+    </div>
+    <span class="slide-num">16 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 17 · DÍA 13b · SERVICIOS EN EL CAMPO BASE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-servicios">
+    <img class="bg-img" src="image/Dia13-02/WhatsApp%20Image%202026-05-14%20at%2018.18.21.jpeg"
+         alt="Servicios en el Campo Base Everest" style="object-position: center right;">
+    <div class="ov-left"></div>
+    <div class="content">
+      <div class="section-label">Campo Base Everest · 5.400 msnm</div>
+      <h2>Servicios en<br>el Campamento</h2>
+      <div class="svc-grid">
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Tiendas de campaña</strong>Carpa individual · Carpa comedor · Zona común</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Cocina y comidas</strong>3 comidas calientes diarias incluidas</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Equipo de apoyo</strong>Guías certificados · Sherpas · Porteadores</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Seguridad</strong>Primeros auxilios · Oxígeno de emergencia</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Comunicaciones</strong>Radio y contacto permanente con el equipo</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Equipo colectivo</strong>Todo el material de campamento incluido</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">17 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 18 · DÍA 14 · EBC → DINGBOCHE · REGRESO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d14">
+    <img class="bg-img" src="image/Dia14/WhatsApp%20Image%202026-05-18%20at%2019.15.58%20%281%29.jpeg"
+         alt="Día 14 — EBC a Dingboche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 14 · Inicio del Regreso</div>
+      <h2>EBC →<br>Dingboche</h2>
+      <div class="altitude">5.400 msnm → 4.410 msnm · 6-7 hs.</div>
+      <div class="v-desc">
+        Inicia el descenso. Con el corazón lleno de la experiencia vivida en el Campo Base,
+        comenzamos el camino de regreso. El paisaje del <strong>Khumbu</strong> se despide
+        desde lo alto con toda su majestuosidad.
+      </div>
+    </div>
+    <span class="slide-num">18 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 19 · DÍA 15 · DINGBOCHE → TENGBOCHE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d15">
+    <img class="bg-img" src="image/Dia15/WhatsApp%20Image%202026-05-18%20at%2019.18.23.jpeg"
+         alt="Día 15 — Dingboche a Tengboche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 15</div>
+      <h2>Dingboche →<br>Tengboche</h2>
+      <div class="altitude">4.410 msnm → 3.860 msnm · 7-8 hs.</div>
+      <div class="v-desc">
+        Jornada de travesía bajando hacia la zona del monasterio. Dormimos en la
+        <strong>zona de Tengboche</strong>, junto al gran templo budista que visitamos
+        en el ascenso. Una noche especial entre la espiritualidad y el Himalaya.
+      </div>
+    </div>
+    <span class="slide-num">19 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 20 · DÍA 16 · PANGBOCHE → NAMCHE BAZAAR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d16">
+    <img class="bg-img" src="image/Dia16/WhatsApp%20Image%202026-05-18%20at%2019.27.59%20%281%29.jpeg"
+         alt="Día 16 — Pangboche a Namche Bazaar">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 16</div>
+      <h2>Pangboche →<br>Namche Bazaar</h2>
+      <div class="altitude">→ 3.440 msnm · 7-8 hs.</div>
+      <div class="v-desc">
+        Bajada larga hasta el río y luego <strong>subida por un hermoso bosque</strong>.
+        Continuamos por la ladera de la montaña hasta llegar nuevamente a
+        <strong>Namche Bazaar</strong>, donde celebraremos el reencuentro con la "ciudad".
+      </div>
+    </div>
+    <span class="slide-num">20 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 21 · DÍA 17 · ÚLTIMO DÍA DE TREKKING
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d17">
+    <img class="bg-img" src="image/Dia17/WhatsApp%20Image%202026-05-18%20at%2019.33.05%20%281%29.jpeg"
+         alt="Día 17 — Último día de trekking">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 17 · ¡Último Día de Trek!</div>
+      <h2>Namche →<br>Lukla</h2>
+      <div class="altitude">3.440 msnm → 2.840 msnm · 8-9 hs.</div>
+      <div class="v-desc">
+        El tramo más largo... y el más emotivo. Desde el inicio se <strong>pierde altura
+        rápidamente</strong> y el paisaje verde vuelve a aparecer. La entrada a
+        <strong>Lukla es cuesta arriba</strong>, ¡el Himalaya no se despide fácil! A disfrutar.
+      </div>
+    </div>
+    <span class="slide-num">21 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 22 · DÍA 18 · VUELO LUKLA → KATMANDU
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d18">
+    <img class="bg-img" src="image/Dia18/WhatsApp%20Image%202026-05-18%20at%2019.36.09%20%2810%29.jpeg"
+         alt="Día 18 — Vuelo Lukla a Katmandu">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 18</div>
+      <h2>Lukla → Katmandu</h2>
+      <div class="altitude">Vuelo de regreso · Cena de Despedida</div>
+      <div class="v-desc">
+        Vuelo muy temprano de regreso a Katmandú (en avión o helicóptero). De vuelta al hotel,
+        tiempo libre para recuerdos y regalos. Por la noche,
+        <strong>gran cena de despedida</strong> con todo el grupo. ¡Lo logramos!
+      </div>
+    </div>
+    <span class="slide-num">22 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 23 · DÍA 19 · REGRESO A ARGENTINA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d19">
+    <img class="bg-img" src="image/Dia19/WhatsApp%20Image%202026-05-18%20at%2019.40.19%20%281%29.jpeg"
+         alt="Día 19 — Regreso a Argentina">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 19</div>
+      <h2>Regreso a<br>Argentina</h2>
+      <div class="altitude">Katmandú → Buenos Aires · NAMASTE 🙏</div>
+      <div class="v-desc">
+        Últimas horas en Katmandú. Partimos de regreso a casa con el corazón repleto
+        de montañas, espiritual y culturalmente transformados. <strong>¡Nos vemos,
+        Te esperamos!</strong>
+      </div>
+    </div>
+    <span class="slide-num">23 / 24</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 24 · CIERRE · CONTACTO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-cierre">
+    <img class="bg-img" src="image/introduccion/WhatsApp%20Image%202026-05-13%20at%2019.33.46%20%283%29.jpeg"
+         alt="Cierre — The Madness Expeditions" style="object-position: center 60%;">
+    <div class="ov-dark"></div>
+    <div class="content">
+      <div class="logo-wrap">
+        <img src="../../email/documents/032026/images/logo-removebg-preview.png" alt="Logo The Madness Expeditions">
+      </div>
+      <div class="closing">¡Te Esperamos en<br><span>Los Himalaya!</span></div>
+      <div class="divider"></div>
+      <div class="brand-name">The Madness Expeditions · Argentina</div>
+      <div class="contact">
+        <div class="name">Pablo Fortunato</div>
+        <span class="phone">+54 9 11 3269-3505</span> (WhatsApp)<br>
+        pabloflater@hotmail.com · themadnessexpeditions@gmail.com
+      </div>
+    </div>
+    <span class="slide-num">24 / 24</span>
+  </div>
+
+
+</body>
+</html>
