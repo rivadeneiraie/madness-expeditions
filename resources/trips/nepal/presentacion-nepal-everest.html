@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -292,6 +292,37 @@
       color: #4a9fd4; font-weight: 700;
     }
 
+    .slide-partners {
+      position: absolute; top: 7mm; right: 9mm;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .slide-partners img {
+      height: 55px; width: auto;
+      object-fit: contain; display: block; opacity: 0.88;
+    }
+    .slide-partners .partner-ansilta img {
+      background: #fff; border-radius: 4px; padding: 4px 10px;
+    }
+
+    #s-cierre .partners {
+      margin-top: 6mm;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    #s-cierre .partners-label {
+      color: rgba(255,255,255,0.42); font-size: 7px;
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+    #s-cierre .partners-logos {
+      display: flex; align-items: center; gap: 14px;
+    }
+    #s-cierre .partners-logos img {
+      height: 80px; width: auto;
+      object-fit: contain; display: block;
+    }
+    #s-cierre .partner-ansilta img {
+      background: #fff; border-radius: 6px; padding: 6px 14px;
+    }
+
     /* ══ SLIDE GALERÍA (grid de fotos por día) ═══════════════ */
 
     .slide-gallery {
@@ -334,6 +365,30 @@
       min-height: 0;
     }
 
+    .photo-grid-1x3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 5px;
+      flex: 1;
+      min-height: 0;
+    }
+    .photo-grid-1x3 .p-card {
+      position: relative; overflow: hidden; border-radius: 3px;
+    }
+    .photo-grid-1x3 .p-card img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+    }
+    .photo-grid-1x3 .p-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(8,20,36,0.90) 0%, rgba(8,20,36,0.0) 100%);
+      padding: 22px 10px 8px;
+    }
+    .photo-grid-1x3 .p-name {
+      color: rgba(255,255,255,0.90); font-size: 9px; font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    }
+
     .photo-grid-2x2 .p-card {
       position: relative; overflow: hidden; border-radius: 3px;
     }
@@ -371,7 +426,7 @@
       <div class="tagline">Un Viaje Al Corazón de los Himalaya &amp; La Cultura Sherpa</div>
       <div class="brand-footer">Responsabilidad · Seguridad · Servicio · Compromiso</div>
     </div>
-    <span class="slide-num">1 / 43</span>
+    <span class="slide-num">1 / 44</span>
   </div>
 
 
@@ -403,7 +458,11 @@
         <div class="svc-item"><div class="svc-dot"></div>Permisos y Trámites</div>
       </div>
     </div>
-    <span class="slide-num">2 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">2 / 44</span>
   </div>
 
 
@@ -424,7 +483,11 @@
         que comienza desde el primer despegue.
       </div>
     </div>
-    <span class="slide-num">3 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">3 / 44</span>
   </div>
 
 
@@ -446,7 +509,11 @@
         y la imponente <strong>Estupa de Boudhanath</strong>.
       </div>
     </div>
-    <span class="slide-num">4 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">4 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 2 · KATMANDÚ -->
@@ -463,7 +530,7 @@
         <div class="p-card"><img src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%284%29.jpeg" alt="Templo de los Monos"><div class="p-caption"><div class="p-name">Templo de los Monos</div></div></div>
       </div>
     </div>
-    <span class="slide-num">5 / 43</span>
+    <span class="slide-num">5 / 44</span>
   </div>
 
 
@@ -484,7 +551,11 @@
         hacia las alturas del Himalaya.
       </div>
     </div>
-    <span class="slide-num">6 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">6 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 3 · PREPARACIÓN -->
@@ -498,10 +569,10 @@
         <div class="p-card"><img src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.55.jpeg" alt="Tiendas de montaña"><div class="p-caption"><div class="p-name">Tiendas de Montaña</div></div></div>
         <div class="p-card"><img src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.56%20%281%29.jpeg" alt="Equipamiento"><div class="p-caption"><div class="p-name">Equipamiento</div></div></div>
         <div class="p-card"><img src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.56%20%282%29.jpeg" alt="Katmandú"><div class="p-caption"><div class="p-name">Katmandú</div></div></div>
-        <div class="p-card"><img src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.56%20%281%29.jpeg" alt="Preparación"><div class="p-caption"><div class="p-name">Preparación</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%281%29.jpeg" alt="Stupa Boudhanath"><div class="p-caption"><div class="p-name">Stupa Boudhanath</div></div></div>
       </div>
     </div>
-    <span class="slide-num">7 / 43</span>
+    <span class="slide-num">7 / 44</span>
   </div>
 
 
@@ -522,7 +593,11 @@
         (4 hs. por tierra). En helicóptero: 45-60 min directo desde KTM.
       </div>
     </div>
-    <span class="slide-num">8 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">8 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 4 · VUELO LUKLA -->
@@ -539,7 +614,7 @@
         <div class="p-card"><img src="image/Dia04-01/WhatsApp%20Image%202026-05-13%20at%2020.14.30%20%284%29.jpeg" alt="Himalaya desde el aire"><div class="p-caption"><div class="p-name">Himalaya desde el Aire</div></div></div>
       </div>
     </div>
-    <span class="slide-num">9 / 43</span>
+    <span class="slide-num">9 / 44</span>
   </div>
 
 
@@ -560,7 +635,11 @@
         para entrar en ritmo y conocer el paisaje sherpa.
       </div>
     </div>
-    <span class="slide-num">10 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">10 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 4b · LUKLA → PHAKDING -->
@@ -577,7 +656,7 @@
         <div class="p-card"><img src="image/D%C3%ADa04-02/WhatsApp%20Image%202026-05-13%20at%2020.18.13%20%284%29.jpeg" alt="Río Dudh Koshi"><div class="p-caption"><div class="p-name">Río Dudh Koshi</div></div></div>
       </div>
     </div>
-    <span class="slide-num">11 / 43</span>
+    <span class="slide-num">11 / 44</span>
   </div>
 
 
@@ -598,7 +677,11 @@
         de los Sherpas. Un día que no se olvida.
       </div>
     </div>
-    <span class="slide-num">12 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">12 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 5 · PHAKDING → NAMCHE -->
@@ -615,7 +698,7 @@
         <div class="p-card"><img src="image/Dia05/WhatsApp%20Image%202026-05-13%20at%2020.23.00%20%284%29.jpeg" alt="Himalaya"><div class="p-caption"><div class="p-name">Himalaya</div></div></div>
       </div>
     </div>
-    <span class="slide-num">13 / 43</span>
+    <span class="slide-num">13 / 44</span>
   </div>
 
 
@@ -636,7 +719,11 @@
         las alturas que vienen. Aquí la montaña empieza a sentirse.
       </div>
     </div>
-    <span class="slide-num">14 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">14 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 6 · NAMCHE BAZAAR -->
@@ -653,7 +740,7 @@
         <div class="p-card"><img src="image/dia06/WhatsApp%20Image%202026-05-13%20at%2020.26.05.jpeg" alt="Namche"><div class="p-caption"><div class="p-name">La Ciudad Sherpa</div></div></div>
       </div>
     </div>
-    <span class="slide-num">15 / 43</span>
+    <span class="slide-num">15 / 44</span>
   </div>
 
 
@@ -674,7 +761,11 @@
         y el viejo aeropuerto. Un momento de emoción pura frente al techo del mundo.
       </div>
     </div>
-    <span class="slide-num">16 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">16 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 7 · NAMCHE → SANASA -->
@@ -691,7 +782,7 @@
         <div class="p-card"><img src="image/D%C3%ADa07/WhatsApp%20Image%202026-05-13%20at%2020.30.39%20%284%29.jpeg" alt="Panorama Himalaya"><div class="p-caption"><div class="p-name">Panorama Himalaya</div></div></div>
       </div>
     </div>
-    <span class="slide-num">17 / 43</span>
+    <span class="slide-num">17 / 44</span>
   </div>
 
 
@@ -712,7 +803,11 @@
         primeras bendiciones del viaje. Un tramo espiritual e intenso.
       </div>
     </div>
-    <span class="slide-num">18 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">18 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 8 · SANASA → PANGBOCHE -->
@@ -729,7 +824,7 @@
         <div class="p-card"><img src="image/D%C3%ADa08/WhatsApp%20Image%202026-05-13%20at%2020.34.46%20%284%29.jpeg" alt="Bendiciones"><div class="p-caption"><div class="p-name">Bendiciones del Viaje</div></div></div>
       </div>
     </div>
-    <span class="slide-num">19 / 43</span>
+    <span class="slide-num">19 / 44</span>
   </div>
 
 
@@ -750,7 +845,11 @@
         cambia, el aire se afina y cada paso se siente diferente.
       </div>
     </div>
-    <span class="slide-num">20 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">20 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 9 · PANGBOCHE → PHERICHE -->
@@ -767,7 +866,7 @@
         <div class="p-card"><img src="image/Dia09/WhatsApp%20Image%202026-05-14%20at%2017.39.36%20%284%29.jpeg" alt="+4000 metros"><div class="p-caption"><div class="p-name">+4.000 msnm</div></div></div>
       </div>
     </div>
-    <span class="slide-num">21 / 43</span>
+    <span class="slide-num">21 / 44</span>
   </div>
 
 
@@ -788,7 +887,11 @@
         <strong>Ama Dablam</strong> y otros ochomiles de la región.
       </div>
     </div>
-    <span class="slide-num">22 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">22 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 10 · PHERICHE ACLIMATACIÓN -->
@@ -805,7 +908,7 @@
         <div class="p-card"><img src="image/Dia10/WhatsApp%20Image%202026-05-14%20at%2017.46.35%20%282%29.jpeg" alt="Aclimatación"><div class="p-caption"><div class="p-name">Aclimatación</div></div></div>
       </div>
     </div>
-    <span class="slide-num">23 / 43</span>
+    <span class="slide-num">23 / 44</span>
   </div>
 
 
@@ -826,7 +929,11 @@
         escalones y tramo recto hasta el campo base de Lobuche. <strong>¡Casi 5.000 metros!</strong>
       </div>
     </div>
-    <span class="slide-num">24 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">24 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 11 · PHERICHE → LOBUCHE -->
@@ -843,7 +950,7 @@
         <div class="p-card"><img src="image/Dia11/WhatsApp%20Image%202026-05-14%20at%2017.55.44%20%284%29.jpeg" alt="5000 msnm"><div class="p-caption"><div class="p-name">5.000 msnm</div></div></div>
       </div>
     </div>
-    <span class="slide-num">25 / 43</span>
+    <span class="slide-num">25 / 44</span>
   </div>
 
 
@@ -865,7 +972,11 @@
         y llegamos al <strong>Campo Base del Everest a 5.400 msnm</strong>. ¡A disfrutar!
       </div>
     </div>
-    <span class="slide-num">26 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">26 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 12 · CAMPO BASE EVEREST -->
@@ -882,7 +993,7 @@
         <div class="p-card"><img src="image/Dia12/WhatsApp%20Image%202026-05-14%20at%2018.06.13%20%284%29.jpeg" alt="5400 msnm"><div class="p-caption"><div class="p-name">5.400 msnm</div></div></div>
       </div>
     </div>
-    <span class="slide-num">27 / 43</span>
+    <span class="slide-num">27 / 44</span>
   </div>
 
 
@@ -903,7 +1014,11 @@
         Momento único: estar donde los mejores montañistas del mundo parten hacia la cima.
       </div>
     </div>
-    <span class="slide-num">28 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">28 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 13a · CAMPO BASE DIA COMPLETO -->
@@ -917,10 +1032,10 @@
         <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%281%29.jpeg" alt="EBC"><div class="p-caption"><div class="p-name">Campo Base Everest</div></div></div>
         <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%282%29.jpeg" alt="Glaciar"><div class="p-caption"><div class="p-name">Caminata por el Glaciar</div></div></div>
         <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%283%29.jpeg" alt="Campamento"><div class="p-caption"><div class="p-name">Campamento</div></div></div>
-        <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%284%29.jpeg" alt="Montañistas"><div class="p-caption"><div class="p-name">Montañistas</div></div></div>
+        <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%285%29.jpeg" alt="En el Campo Base"><div class="p-caption"><div class="p-name">En el Campo Base</div></div></div>
       </div>
     </div>
-    <span class="slide-num">29 / 43</span>
+    <span class="slide-num">29 / 44</span>
   </div>
 
 
@@ -965,7 +1080,30 @@
         </div>
       </div>
     </div>
-    <span class="slide-num">30 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">30 / 44</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 17b · GALERÍA SERVICIOS CAMPO BASE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-gallery" id="s-gal-servicios">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Campo Base Everest &middot; 5.400 msnm</div>
+        <div class="gal-title">Servicios en el Campamento &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-1x3">
+        <div class="p-card"><img src="image/servicios/WhatsApp%20Image%202026-05-31%20at%2020.07.09.jpeg" alt="Torta EBC Trek" style="object-position: center 30%;"><div class="p-caption"><div class="p-name">Torta del Campo Base</div></div></div>
+        <div class="p-card"><img src="image/servicios/WhatsApp%20Image%202026-05-31%20at%2020.05.47.jpeg" alt="Cocina del Campamento"><div class="p-caption"><div class="p-name">Cocina del Campamento</div></div></div>
+        <div class="p-card"><img src="image/servicios/WhatsApp%20Image%202026-05-31%20at%2020.05.46.jpeg" alt="Comidas" style="object-position: center 30%;"><div class="p-caption"><div class="p-name">Comidas en el Campo Base</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">31 / 44</span>
   </div>
 
 
@@ -986,7 +1124,11 @@
         desde lo alto con toda su majestuosidad.
       </div>
     </div>
-    <span class="slide-num">31 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">32 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 14 · EBC → DINGBOCHE -->
@@ -1003,7 +1145,7 @@
         <div class="p-card"><img src="image/Dia14/WhatsApp%20Image%202026-05-18%20at%2019.15.59%20%282%29.jpeg" alt="Himalaya"><div class="p-caption"><div class="p-name">Himalaya</div></div></div>
       </div>
     </div>
-    <span class="slide-num">32 / 43</span>
+    <span class="slide-num">33 / 44</span>
   </div>
 
 
@@ -1024,7 +1166,11 @@
         en el ascenso. Una noche especial entre la espiritualidad y el Himalaya.
       </div>
     </div>
-    <span class="slide-num">33 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">34 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 15 · DINGBOCHE → TENGBOCHE -->
@@ -1041,7 +1187,7 @@
         <div class="p-card"><img src="image/Dia15/WhatsApp%20Image%202026-05-18%20at%2019.20.35.jpeg" alt="Himalaya"><div class="p-caption"><div class="p-name">Himalaya</div></div></div>
       </div>
     </div>
-    <span class="slide-num">34 / 43</span>
+    <span class="slide-num">35 / 44</span>
   </div>
 
 
@@ -1062,7 +1208,11 @@
         <strong>Namche Bazaar</strong>, donde celebraremos el reencuentro con la "ciudad".
       </div>
     </div>
-    <span class="slide-num">35 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">36 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 16 · PANGBOCHE → NAMCHE -->
@@ -1079,7 +1229,7 @@
         <div class="p-card"><img src="image/Dia16/WhatsApp%20Image%202026-05-18%20at%2019.28.00%20%282%29.jpeg" alt="Himalaya"><div class="p-caption"><div class="p-name">Himalaya</div></div></div>
       </div>
     </div>
-    <span class="slide-num">36 / 43</span>
+    <span class="slide-num">37 / 44</span>
   </div>
 
 
@@ -1100,7 +1250,11 @@
         <strong>Lukla es cuesta arriba</strong>, ¡el Himalaya no se despide fácil! A disfrutar.
       </div>
     </div>
-    <span class="slide-num">37 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">38 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 17 · NAMCHE → LUKLA -->
@@ -1117,7 +1271,7 @@
         <div class="p-card"><img src="image/Dia17/WhatsApp%20Image%202026-05-18%20at%2019.33.05%20%284%29.jpeg" alt="Himalaya Final"><div class="p-caption"><div class="p-name">Despedida del Himalaya</div></div></div>
       </div>
     </div>
-    <span class="slide-num">38 / 43</span>
+    <span class="slide-num">39 / 44</span>
   </div>
 
 
@@ -1138,7 +1292,11 @@
         <strong>gran cena de despedida</strong> con todo el grupo. ¡Lo logramos!
       </div>
     </div>
-    <span class="slide-num">39 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">40 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 18 · LUKLA → KATMANDU -->
@@ -1155,7 +1313,7 @@
         <div class="p-card"><img src="image/Dia18/WhatsApp%20Image%202026-05-18%20at%2019.36.09%20%284%29.jpeg" alt="Grupo"><div class="p-caption"><div class="p-name">El Grupo</div></div></div>
       </div>
     </div>
-    <span class="slide-num">40 / 43</span>
+    <span class="slide-num">41 / 44</span>
   </div>
 
 
@@ -1176,7 +1334,11 @@
         Te esperamos!</strong>
       </div>
     </div>
-    <span class="slide-num">41 / 43</span>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">42 / 44</span>
   </div>
 
   <!-- GALERÍA DÍA 19 · REGRESO A ARGENTINA -->
@@ -1193,7 +1355,7 @@
         <div class="p-card"><img src="image/Dia19/WhatsApp%20Image%202026-05-18%20at%2019.40.20%20%282%29.jpeg" alt="Namaste"><div class="p-caption"><div class="p-name">Namaste 🙏</div></div></div>
       </div>
     </div>
-    <span class="slide-num">42 / 43</span>
+    <span class="slide-num">43 / 44</span>
   </div>
 
 
@@ -1216,8 +1378,15 @@
         <span class="phone">+54 9 11 3269-3505</span> (WhatsApp)<br>
         pabloflater@hotmail.com · themadnessexpeditions@gmail.com
       </div>
+      <div class="partners">
+        <div class="partners-label">Trabajamos con</div>
+        <div class="partners-logos">
+          <div class="partner-pax"><img src="../peru/images/pax_logo.jpeg" alt="PAX Assistance"></div>
+          <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+        </div>
+      </div>
     </div>
-    <span class="slide-num">43 / 43</span>
+    <span class="slide-num">44 / 44</span>
   </div>
 
 
