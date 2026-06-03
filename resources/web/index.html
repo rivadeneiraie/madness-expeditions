@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Madness Expeditions — Próximamente</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --mx-dark:   #0D1B2A;
+            --mx-blue:   #1a3a5c;
+            --mx-accent: #4a9fd4;
+            --mx-red:    #E63030;
+            --mx-gray:   #1C1C1E;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--mx-dark);
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ── Scrollbar ───────────────────────────────── */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--mx-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--mx-blue); border-radius: 3px; }
+
+        /* ── Banner construcción ─────────────────────── */
+        .banner-construccion {
+            background: linear-gradient(90deg, #7B3F00 0%, #9B4F00 50%, #7B3F00 100%);
+            border-bottom: 1px solid rgba(255,180,50,0.3);
+            text-align: center;
+            padding: 9px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #FFD580;
+            position: relative;
+            z-index: 60;
+        }
+        .banner-construccion span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .banner-icon {
+            font-size: 14px;
+        }
+
+        /* ── Navbar ───────────────────────────────────── */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(13,27,42,0.97);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .navbar-logo {
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+        }
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .navbar-name {
+            line-height: 1.2;
+        }
+        .navbar-name-main {
+            display: block;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #fff;
+        }
+        .navbar-name-sub {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.45);
+        }
+        .navbar-cta {
+            background: var(--mx-red);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 9px 20px;
+            border-radius: 8px;
+            letter-spacing: 0.03em;
+            transition: opacity 0.2s;
+        }
+        .navbar-cta:hover { opacity: 0.88; }
+
+        /* ── Hero ─────────────────────────────────────── */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+            display: block;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                rgba(13,27,42,0.2) 0%,
+                rgba(13,27,42,0.55) 50%,
+                rgba(13,27,42,0.97) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3.5rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(230,48,48,0.9);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 900;
+            line-height: 0.95;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        .hero-title .accent { color: var(--mx-accent); }
+        .hero-sub {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.82);
+            max-width: 480px;
+            margin-bottom: 32px;
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--mx-red);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            letter-spacing: 0.04em;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.88; }
+        .btn-wa {
+            background: #25D366;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+        .btn-wa:hover { opacity: 0.9; }
+
+        /* ── Sección base ─────────────────────────────── */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--mx-accent);
+            margin-bottom: 10px;
+        }
+        .section-title {
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .section-sub {
+            font-size: 15px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+            max-width: 520px;
+        }
+        .section-header { margin-bottom: 2.5rem; }
+
+        /* ── Cards de viajes ──────────────────────────── */
+        .trips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .trip-card {
+            background: #0f1e2e;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            flex-direction: column;
+        }
+        .trip-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            object-position: center 40%;
+            display: block;
+        }
+        .trip-card-header {
+            padding: 16px 20px 14px;
+            border-left: 4px solid var(--mx-accent);
+            background: #14273d;
+        }
+        .trip-card-header.red { border-left-color: var(--mx-red); }
+        .trip-card-header.green { border-left-color: #2ecc71; }
+
+        .trip-card-eyebrow {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--mx-accent);
+            margin-bottom: 5px;
+            display: block;
+        }
+        .trip-card-eyebrow.red { color: #f0a8a8; }
+        .trip-card-eyebrow.green { color: #7dcea0; }
+
+        .trip-card-title {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            line-height: 1.1;
+        }
+        .trip-card-subtitle {
+            font-size: 12px;
+            color: rgba(255,255,255,0.55);
+            margin-top: 4px;
+        }
+
+        .trip-card-body {
+            padding: 18px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .trip-card-desc {
+            font-size: 13px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* Altitudes row */
+        .altitudes {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .alt-chip {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(74,159,212,0.25);
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 11px;
+            text-align: center;
+            flex: 1;
+            min-width: 70px;
+        }
+        .alt-chip-label {
+            display: block;
+            color: var(--mx-accent);
+            font-weight: 700;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 2px;
+        }
+        .alt-chip-name {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            font-weight: 600;
+            font-size: 10px;
+            margin-bottom: 1px;
+        }
+        .alt-chip-m {
+            display: block;
+            color: var(--mx-red);
+            font-weight: 900;
+            font-size: 13px;
+        }
+        .alt-chip.featured {
+            background: rgba(13,27,42,0.9);
+            border-color: var(--mx-accent);
+        }
+        .alt-chip.featured .alt-chip-label { color: var(--mx-red); }
+        .alt-chip.featured .alt-chip-m { color: var(--mx-accent); font-size: 16px; }
+
+        /* Info row */
+        .info-row {
+            display: flex;
+            gap: 0;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
+        }
+        .info-cell {
+            flex: 1;
+            padding: 10px 14px;
+            text-align: center;
+        }
+        .info-cell + .info-cell {
+            border-left: 1px solid rgba(255,255,255,0.08);
+        }
+        .info-cell-label {
+            display: block;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--mx-accent);
+            margin-bottom: 4px;
+        }
+        .info-cell-value {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.35;
+        }
+        .badge-exigencia {
+            display: inline-block;
+            background: var(--mx-red);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        /* Sub-opciones Perú */
+        .sub-option {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(74,159,212,0.35);
+        }
+        .sub-option.red { border-color: rgba(230,48,48,0.45); }
+        .sub-option-header {
+            background: rgba(74,159,212,0.12);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sub-option.red .sub-option-header { background: rgba(230,48,48,0.1); }
+        .sub-option-badge {
+            display: inline-block;
+            background: var(--mx-accent);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+        .sub-option.red .sub-option-badge { background: var(--mx-red); }
+        .sub-option-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .sub-option-alt {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--mx-accent);
+            white-space: nowrap;
+            padding-left: 12px;
+        }
+        .sub-option.red .sub-option-alt { color: var(--mx-red); }
+        .sub-option-alt span {
+            display: block;
+            font-size: 9px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+        .sub-option-img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            object-position: center 50%;
+            display: block;
+        }
+        .sub-option-body {
+            padding: 10px 14px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.65);
+        }
+
+        /* ── Divisor ──────────────────────────────────── */
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.07);
+            margin: 0 2rem;
+        }
+
+        /* ── CTA Section ──────────────────────────────── */
+        .cta-section {
+            background: linear-gradient(135deg, #0f1e2e 0%, var(--mx-dark) 100%);
+            border-top: 1px solid rgba(74,159,212,0.2);
+            border-bottom: 1px solid rgba(74,159,212,0.2);
+            padding: 3.5rem 2rem;
+            text-align: center;
+        }
+        .cta-inner { max-width: 560px; margin: 0 auto; }
+        .cta-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .cta-sub {
+            font-size: 15px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.65;
+            margin-bottom: 28px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-outline {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 13px 26px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.25);
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .btn-outline:hover {
+            border-color: rgba(255,255,255,0.5);
+            color: #fff;
+        }
+
+        /* ── Footer ───────────────────────────────────── */
+        .footer {
+            background: var(--mx-gray);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 2.5rem 2rem 1.5rem;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+        }
+        .footer-logo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 2px solid rgba(74,159,212,0.5);
+            background: #fff;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .footer-name-main {
+            display: block;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #fff;
+        }
+        .footer-name-sub {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.4);
+        }
+        .footer-tagline {
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0;
+            text-align: center;
+        }
+        .footer-contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 32px;
+            margin-bottom: 0;
+            justify-items: start;
+            align-content: center;
+        }
+        .footer-contact-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+        .footer-contact-row img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            opacity: 0.85;
+            flex-shrink: 0;
+        }
+        .footer-contact-row a {
+            color: #b8c4ce;
+            font-size: 13px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-contact-row a:hover { color: #fff; }
+        .footer-copy {
+            font-size: 10px;
+            color: rgba(255,255,255,0.2);
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+        }
+
+        /* ── Floating WhatsApp ────────────────────────── */
+        .wa-float {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            z-index: 100;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .wa-float:hover {
+            transform: scale(1.07);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.55);
+        }
+        .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+        /* ── Responsive ───────────────────────────────── */
+        @media (max-width: 600px) {
+            .navbar-inner { padding: 0 1rem; }
+            .navbar-cta { padding: 8px 14px; font-size: 12px; }
+            .section { padding: 2.5rem 1rem; }
+            .hero-content { padding: 0 1rem 2.5rem; }
+            .divider { margin: 0 1rem; }
+            .cta-section { padding: 2.5rem 1rem; }
+            .footer { padding: 2rem 1rem 1.5rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+            .footer-brand { flex-direction: row; text-align: left; align-items: center; }
+            .footer-tagline { text-align: left; }
+            .footer-contact { grid-template-columns: 1fr; }
+            .trips-grid { grid-template-columns: 1fr; }
+            .hero-actions { flex-direction: column; }
+            .btn-primary, .btn-wa { text-align: center; justify-content: center; }
+            .banner-construccion { font-size: 10.5px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BANNER EN CONSTRUCCIÓN                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="banner-construccion">
+    <span>
+        <span class="banner-icon">🚧</span>
+        Sitio en construcción — Estamos trabajando para vos. Pronto la nueva web completa.
+        <span class="banner-icon">🚧</span>
+    </span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- NAVBAR                                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a class="navbar-brand" href="#">
+            <div class="navbar-logo">
+                <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/web/public/logo-v4.png"
+                     alt="Madness Expeditions">
+            </div>
+            <div class="navbar-name">
+                <span class="navbar-name-main">The Madness Expeditions</span>
+                <span class="navbar-name-sub">Argentina</span>
+            </div>
+        </a>
+    </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- HERO                                                         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="hero">
+    <div class="hero-bg">
+        <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/peru/88.jpg"
+             alt="Expedición en alta montaña">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            ✦ Bolivia · Perú · Mendoza — Vacaciones de Invierno 2026
+        </div>
+        <h1 class="hero-title">
+            Glaciares mágicos.<br>
+            <span class="accent">Los Andes.</span>
+        </h1>
+        <p class="hero-sub">
+            Cordillera Real hasta <strong style="color:#fff;">6.088 m</strong>,
+            Cordillera Blanca hasta <strong style="color:#fff;">6.354 m</strong>
+            y Curso de Hielo en Mendoza. Expediciones guiadas con logística completa,
+            comidas frescas y guías certificados.
+        </p>
+        <div class="hero-actions">
+            <a class="btn-wa"
+               href="https://wa.me/5491132693505?text=Hola%20Pablo%2C%20no%20s%C3%A9%20por%20d%C3%B3nde%20empezar%2C%20%C2%BFme%20pod%C3%A9s%20orientar%3F"
+               target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.52 3.48A11.93 11.93 0 0012.02 0C5.39 0 .02 5.37.02 11.99c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A12.04 12.04 0 0012.02 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.5-8.52zM12.02 21.97a9.96 9.96 0 01-5.08-1.39l-.36-.22-3.74.98 1-3.65-.24-.38A9.93 9.93 0 012.04 12C2.04 6.48 6.5 2 12.02 2c2.65 0 5.14 1.03 7.01 2.9a9.86 9.86 0 012.94 7.08c0 5.52-4.46 9.99-9.95 9.99zm5.45-7.46c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.07 4.48.71.31 1.26.49 1.69.63.71.22 1.35.19 1.86.12.57-.09 1.77-.73 2.01-1.42.25-.7.25-1.3.18-1.42-.07-.13-.27-.2-.57-.35z"/>
+                </svg>
+                WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PRÓXIMAS EXPEDICIONES                                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="viajes" class="section">
+    <div class="section-header">
+        <p class="section-label">Vacaciones de invierno · Julio &amp; Agosto 2026</p>
+        <h2 class="section-title">Próximas Expediciones</h2>
+        <p class="section-sub">
+            Bolivia, Perú y Mendoza te esperan. Tres destinos, múltiples opciones, 
+            un solo objetivo: llevarte a las cumbres de Los Andes.
+        </p>
+    </div>
+
+    <div class="trips-grid">
+
+        <!-- ── CARD: BOLIVIA ──────────────────────────── -->
+        <div class="trip-card">
+            <img class="trip-card-image"
+                 src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/bolivia/78.jpg"
+                 alt="Huayna Potosí — Bolivia"
+                 style="object-position: center 40%;">
+            <div class="trip-card-header">
+                <span class="trip-card-eyebrow">Vacaciones de Invierno · 18 al 30 de Julio</span>
+                <div class="trip-card-title">Bolivia</div>
+                <div class="trip-card-subtitle">La Gran Cordillera Real · La Paz</div>
+            </div>
+            <div class="trip-card-body">
+                <p class="trip-card-desc">
+                    Una de las expediciones más hermosas de Los Andes. Bolivia y su 
+                    <strong>Cordillera Real</strong> te llevan a transitar glaciares mágicos 
+                    con cumbres de hasta 6.000 metros. La Paz, encerrada en su valle, 
+                    el teleférico que la recorre de punta a punta… 
+                    <strong>¡Tu corazón latirá muy fuerte!</strong>
+                </p>
+
+                <div class="altitudes">
+                    <div class="alt-chip">
+                        <span class="alt-chip-label">Warm-up</span>
+                        <span class="alt-chip-name">Tarija</span>
+                        <span class="alt-chip-m">5.200 m</span>
+                    </div>
+                    <div class="alt-chip">
+                        <span class="alt-chip-label">Acceso</span>
+                        <span class="alt-chip-name">Austria</span>
+                        <span class="alt-chip-m">5.300 m</span>
+                    </div>
+                    <div class="alt-chip">
+                        <span class="alt-chip-label">Principal</span>
+                        <span class="alt-chip-name">Peq. Alpamayo</span>
+                        <span class="alt-chip-m">5.330 m</span>
+                    </div>
+                    <div class="alt-chip featured">
+                        <span class="alt-chip-label">Cumbre</span>
+                        <span class="alt-chip-name">Huayna Potosí</span>
+                        <span class="alt-chip-m">6.088 m</span>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <div class="info-cell">
+                        <span class="info-cell-label">Fechas</span>
+                        <span class="info-cell-value">18 al 30 de Julio</span>
+                    </div>
+                    <div class="info-cell">
+                        <span class="info-cell-label">Exigencia</span>
+                        <span class="info-cell-value"><span class="badge-exigencia">Alta</span></span>
+                    </div>
+                    <div class="info-cell">
+                        <span class="info-cell-label">Salida</span>
+                        <span class="info-cell-value">Bs. As. o La Paz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ── CARD: PERÚ ─────────────────────────────── -->
+        <div class="trip-card">
+            <img class="trip-card-image"
+                 src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/peru/86.jpg"
+                 alt="Cordillera Blanca — Perú"
+                 style="object-position: center 35%;">
+            <div class="trip-card-header red">
+                <span class="trip-card-eyebrow red">Vacaciones de Invierno · Julio 2026</span>
+                <div class="trip-card-title">Perú</div>
+                <div class="trip-card-subtitle">La Belleza de la Cordillera Blanca · Huaraz</div>
+            </div>
+            <div class="trip-card-body">
+                <p class="trip-card-desc">
+                    La <strong>Cordillera Blanca</strong> es la cordillera tropical más alta del planeta, 
+                    emplazada en la Región de Ancash a 400 km de Lima. Nevados de 5.000 y 6.000 msnm, 
+                    glaciares imponentes y quebradas llenas de historia ancestral. <strong>Dos opciones para vos:</strong>
+                </p>
+
+                <!-- Opción A -->
+                <div class="sub-option">
+                    <div class="sub-option-header">
+                        <div>
+                            <span class="sub-option-badge">Opción A</span>
+                            <span class="sub-option-title">Trekking Santa Cruz + Vallunaraju</span>
+                            <div style="font-size:11px; color: rgba(255,255,255,0.5); margin-top:3px;">+ Curso de Hielo · Exigencia Media</div>
+                        </div>
+                        <div class="sub-option-alt">5.687<span>msnm</span></div>
+                    </div>
+                    <img class="sub-option-img"
+                         src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/peru/85.jpg"
+                         alt="Trekking Santa Cruz — Perú">
+                    <div class="sub-option-body">
+                        Trekking + Cumbre: <strong style="color:#fff;">8–19 jul / 18–29 jul</strong> &nbsp;·&nbsp;
+                        Solo Trekking: <strong style="color:#fff;">8–14 jul / 18–24 jul</strong>
+                    </div>
+                </div>
+
+                <!-- Opción B -->
+                <div class="sub-option red">
+                    <div class="sub-option-header">
+                        <div>
+                            <span class="sub-option-badge">Opción B</span>
+                            <span class="sub-option-title">Vallunaraju + Chopicalqui</span>
+                            <div style="font-size:11px; color: rgba(255,255,255,0.5); margin-top:3px;">+ Curso de Hielo · Exigencia Alta</div>
+                        </div>
+                        <div class="sub-option-alt red">6.354<span>msnm</span></div>
+                    </div>
+                    <img class="sub-option-img"
+                         src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/peru/90.jpg"
+                         alt="Chopicalqui — Cordillera Blanca"
+                         style="object-position: center 40%;">
+                    <div class="sub-option-body">
+                        Fechas: <strong style="color:#fff;">14 al 24 de julio</strong> &nbsp;·&nbsp;
+                        Encuentro: <strong style="color:#fff;">Lima</strong> o Huaraz
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ── CARD: CURSO DE HIELO ───────────────────── -->
+        <div class="trip-card">
+            <img class="trip-card-image"
+                 src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/mendoza/IMG_20251010_110426904.jpg"
+                 alt="Curso de Hielo — Mendoza"
+                 style="object-position: center 30%;">
+            <div class="trip-card-header green">
+                <span class="trip-card-eyebrow green">Feriados · Julio &amp; Agosto</span>
+                <div class="trip-card-title">Curso de Hielo &amp; Glaciar</div>
+                <div class="trip-card-subtitle">Puente del Inca · Las Cuevas · Mendoza — Portillo · Chile</div>
+            </div>
+            <div class="trip-card-body">
+                <p class="trip-card-desc">
+                    Aprenderás a moverte de forma segura en el hielo y pendientes congeladas, 
+                    instalar reuniones y anclajes, y analizar rutas de progresión. Teoría en el 
+                    refugio + práctica intensiva sobre el hielo.
+                    <strong> No se requieren conocimientos previos.</strong>
+                </p>
+
+                <!-- Fotos -->
+                <div style="display:flex; gap:8px;">
+                    <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/mendoza/curso-hielo-accion.jpeg"
+                         alt="Escalada en hielo"
+                         style="width:50%; height:120px; object-fit:cover; object-position:center 30%; border-radius:7px; display:block;">
+                    <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/images/mendoza/curso-hielo-grupo.jpeg"
+                         alt="Grupo en el glaciar"
+                         style="width:50%; height:120px; object-fit:cover; object-position:center 40%; border-radius:7px; display:block;">
+                </div>
+
+                <div class="info-row">
+                    <div class="info-cell">
+                        <span class="info-cell-label">Julio</span>
+                        <span class="info-cell-value">9 al 12 de julio</span>
+                    </div>
+                    <div class="info-cell">
+                        <span class="info-cell-label">Agosto</span>
+                        <span class="info-cell-value">15 al 17 de agosto</span>
+                    </div>
+                </div>
+                <p style="font-size:11px; color:rgba(255,255,255,0.4); text-align:center;">
+                    Mínimo 2 personas · 20% reserva
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CTA                                                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="cta-section">
+    <div class="cta-inner">
+        <h2 class="cta-title">¿Te sumás?</h2>
+        <p class="cta-sub">
+            ¿Dudas sobre el equipo, los programas o la reserva?<br>
+            Escribinos — te orientamos sin compromiso.
+        </p>
+        <div class="cta-buttons">
+            <a class="btn-wa"
+               href="https://wa.me/5491132693505?text=Hola%20Pablo%2C%20me%20interesa%20una%20expedici%C3%B3n"
+               target="_blank" rel="noopener noreferrer">
+                WhatsApp
+            </a>
+            <a class="btn-outline"
+               href="mailto:info@madnessexpeditions.com">
+                Escribinos por email
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- FOOTER                                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <!-- Columna izquierda: logo + nombre -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/documents/032026/images/logo-removebg-preview.png"
+                         alt="Madness Expeditions">
+                </div>
+                <div>
+                    <span class="footer-name-main">The Madness Expeditions</span>
+                    <span class="footer-name-sub">Argentina</span>
+                </div>
+                <p class="footer-tagline">Responsabilidad · Seguridad<br>Compromiso · Garantía</p>
+            </div>
+            <!-- Columna derecha: contacto -->
+            <div class="footer-contact">
+                <div class="footer-contact-row">
+                    <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/signature/icons/icon-mail.png" alt="Email">
+                    <a href="mailto:info@madnessexpeditions.com">info@madnessexpeditions.com</a>
+                </div>
+                <div class="footer-contact-row">
+                    <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/signature/icons/icon-phone.png" alt="Teléfono">
+                    <a href="https://wa.me/5491132693505" target="_blank" rel="noopener noreferrer">+54 9 11 3269-3505</a>
+                </div>
+                <div class="footer-contact-row">
+                    <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/signature/icons/icon-instagram.png" alt="Instagram">
+                    <a href="https://instagram.com/madnessexpeditions" target="_blank" rel="noopener noreferrer">@madnessexpeditions</a>
+                </div>
+                <div class="footer-contact-row">
+                    <img src="https://raw.githubusercontent.com/rivadeneiraie/madness-marketing/master/resources/email/signature/icons/icon-facebook.png" alt="Facebook">
+                    <a href="https://facebook.com/madnessexpeditions" target="_blank" rel="noopener noreferrer">The Madness Expeditions</a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-copy">
+            © 2026 The Madness Expeditions · Argentina. Todos los derechos reservados.
+        </p>
+    </div>
+</footer>
+
+
+
+
+</body>
+</html>
