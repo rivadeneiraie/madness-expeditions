@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios — The Madness Expeditions · Argentina</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #2a2a2a;
+    }
+
+    /*
+      Cada .page = exactamente una hoja A4 al imprimir.
+      Ctrl+P → Guardar como PDF → Tamaño A4 · Portrait · Márgenes: Ninguno
+    */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      margin: 20px auto;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.65);
+      background: #0d1b2a;
+    }
+
+    @page { size: A4 portrait; margin: 0; }
+
+    @media print {
+      body { background: none; }
+      .page { margin: 0; box-shadow: none; }
+    }
+
+    /* ══ UTILIDADES COMPARTIDAS ═══════════════════════════════ */
+
+    .bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+
+    .ov-dark {
+      position: absolute; inset: 0;
+      background: rgba(8,20,36,0.58);
+    }
+
+    .ov-bottom {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(8,20,36,0.97) 0%,
+        rgba(8,20,36,0.82) 28%,
+        rgba(8,20,36,0.32) 62%,
+        rgba(8,20,36,0.05) 100%
+      );
+    }
+
+    .section-label {
+      color: #4a9fd4; font-size: 9px; letter-spacing: 4.5px;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; height: 1px; flex: 1;
+      background: rgba(74,159,212,0.35);
+    }
+
+    .page-num {
+      position: absolute; bottom: 11px; right: 18mm;
+      color: rgba(74,159,212,0.4); font-size: 7.5px;
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    /* ══ HEADER Y FOOTER COMPARTIDOS ════════════════════════ */
+    .doc-header {
+      background: #081727; border-bottom: 3px solid #4a9fd4;
+      padding: 10px 18mm;
+      display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+    }
+    .doc-header img {
+      width: 44px; height: 44px; object-fit: contain;
+    }
+    .doc-header .hdr-brand {
+      color: #fff; font-size: 12.5px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; line-height: 1.25;
+    }
+    .doc-header .hdr-tagline {
+      color: #4a9fd4; font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase;
+    }
+
+    .doc-footer {
+      background: #081727; border-top: 2px solid rgba(74,159,212,0.45);
+      padding: 9px 18mm;
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .doc-footer .contact-label {
+      color: #4a9fd4; font-size: 7.5px; letter-spacing: 2.5px;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .doc-footer .contact-item {
+      color: #8e9faa; font-size: 11px; font-weight: 400; line-height: 1.7;
+    }
+    .doc-footer .doc-values {
+      color: rgba(255,255,255,0.35); font-size: 7.5px; letter-spacing: 1.5px;
+      text-align: right; line-height: 1.85;
+    }
+
+    /* ══ PHOTO CELLS ══════════════════════════════════════════ */
+    .photo-cell {
+      position: relative; overflow: hidden; border-radius: 5px;
+    }
+    .photo-cell img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .photo-cell .photo-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(8,20,36,0.92));
+      color: rgba(255,255,255,0.88); font-size: 7.5px;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 20px 8px 7px 8px; text-align: center;
+    }
+
+    /* ══ SERVICE ITEMS ═════════════════════════════════════════ */
+    .svc-list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8mm;
+    }
+    .svc-item {
+      display: flex; align-items: flex-start; gap: 7px;
+      color: rgba(255,255,255,0.80); font-size: 11.5px; line-height: 1.55;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(74,159,212,0.10);
+    }
+    .svc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #4a9fd4; flex-shrink: 0; margin-top: 4px;
+    }
+
+    .highlight-band {
+      background: rgba(26,58,92,0.38); border-left: 3px solid #4a9fd4;
+      border-radius: 0 5px 5px 0; padding: 10px 14px;
+    }
+    .highlight-band p {
+      color: rgba(255,255,255,0.82); font-size: 13px; line-height: 1.95; text-align: justify;
+    }
+    .highlight-band strong { color: #4a9fd4; }
+
+    .body-text {
+      color: rgba(255,255,255,0.80); font-size: 13px; line-height: 1.95; text-align: justify;
+    }
+    .body-text strong { color: #fff; }
+
+
+    /* ══ PÁGINA 1 · PORTADA ═══════════════════════════════════ */
+
+    #portada .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(13,27,42,0.08) 0%,
+        rgba(13,27,42,0.32) 28%,
+        rgba(13,27,42,0.88) 64%,
+        rgba(13,27,42,0.97) 100%
+      );
+    }
+
+    #portada .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: space-between;
+      padding: 24mm 22mm 16mm 22mm;
+      text-align: center;
+    }
+
+    #portada .logo-block { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    #portada .logo-block img {
+      width: 190px; height: 190px; border-radius: 50%;
+      border: 1px solid rgba(74, 159, 212, 0.5); background: transparent; object-fit: contain;
+      padding: 1px;
+    }
+    #portada .logo-block .brand-name {
+      color: #fff; font-size: 13px; font-weight: 700;
+      letter-spacing: 3.5px; text-transform: uppercase;
+    }
+    #portada .logo-block .brand-country {
+      color: #4a9fd4; font-size: 8.5px; letter-spacing: 5px;
+      text-transform: uppercase; margin-top: -4px;
+    }
+
+    #portada .main-block { text-align: center; }
+    #portada .eyebrow {
+      display: block; color: #4a9fd4;
+      font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    #portada h1 {
+      color: #fff; font-size: 88px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -2px; line-height: 0.88;
+      margin-bottom: 14px;
+    }
+    #portada h1 span { color: #4a9fd4; }
+    #portada .cover-sub {
+      color: rgba(255,255,255,0.78); font-size: 13.5px;
+      letter-spacing: 5px; text-transform: uppercase;
+      border-top: 1px solid rgba(74,159,212,0.35);
+      border-bottom: 1px solid rgba(74,159,212,0.35);
+      padding: 8px 28px; margin-bottom: 0;
+    }
+
+    #portada .cover-footer {
+      width: 100%; border-top: 1px solid rgba(74,159,212,0.40);
+      padding-top: 13px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .kv-item .kv-label {
+      display: block; color: #4a9fd4; font-size: 7px;
+      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3px;
+    }
+    .kv-item .kv-value {
+      color: rgba(255,255,255,0.88); font-size: 10.5px; font-weight: 700;
+    }
+    .kv-sep { width: 1px; height: 30px; background: rgba(74,159,212,0.28); }
+
+
+    /* ══ PÁGINA 2 · BIENVENIDA ════════════════════════════════ */
+
+    #bienvenida { display: flex; flex-direction: column; }
+    #bienvenida .body {
+      flex: 1; padding: 5mm 16mm 4mm 16mm;
+      display: flex; flex-direction: column; gap: 4mm; overflow: hidden;
+    }
+
+    #bienvenida h2 {
+      color: #fff; font-size: 22px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1;
+    }
+    #bienvenida h2 span { color: #4a9fd4; }
+
+    .photo-trio {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px; height: 148mm;
+    }
+
+
+    /* ══ PÁGINA 3 · LOGÍSTICA, GUÍAS & TRANSPORTE ═════════════ */
+
+    #logistica { display: flex; flex-direction: column; }
+    #logistica .body {
+      flex: 1; padding: 3mm 16mm 3mm 16mm;
+      display: flex; flex-direction: column; gap: 3mm; overflow: hidden;
+    }
+
+    .two-photo-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px; height: 142mm;
+    }
+
+
+    #logistica .svc-list, #campamento .svc-list {
+      gap: 0px 8mm;
+    }
+    #logistica .svc-item, #campamento .svc-item {
+      font-size: 11px; line-height: 1.45; padding: 2px 0;
+    }
+
+    /* ══ PÁGINA 4 · CAMPAMENTO & ALOJAMIENTO ══════════════════ */
+
+    #campamento { display: flex; flex-direction: column; }
+    #campamento .body {
+      flex: 1; padding: 3mm 16mm 3mm 16mm;
+      display: flex; flex-direction: column; gap: 3mm; overflow: hidden;
+    }
+
+    .three-photo-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px; height: 142mm;
+    }
+
+
+    /* ══ PÁGINA 5 · ALIMENTACIÓN & NUTRICIÓN ══════════════════ */
+
+    #alimentacion { display: flex; flex-direction: column; }
+    #alimentacion .body {
+      flex: 1; padding: 3mm 16mm 3mm 16mm;
+      display: flex; flex-direction: column; gap: 3mm; overflow: hidden;
+    }
+
+    .food-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px; height: 160mm;
+    }
+    .food-grid .photo-cell.tall {
+      grid-row: span 1;
+    }
+
+    .diet-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
+    }
+    .diet-pill {
+      background: rgba(26,58,92,0.45); border: 1px solid rgba(74,159,212,0.25);
+      border-radius: 5px; padding: 8px 10px; text-align: center;
+    }
+    .diet-pill .d-title {
+      color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2;
+    }
+    .diet-pill .d-desc {
+      color: rgba(255,255,255,0.50); font-size: 9px; letter-spacing: 0.5px; margin-top: 3px;
+    }
+
+
+    /* ══ PÁGINA 6 · NO INCLUIMOS & CONTACTO ══════════════════ */
+
+    #cierre { display: flex; flex-direction: column; }
+    #cierre .body {
+      flex: 1; padding: 7mm 16mm 7mm 16mm;
+      display: flex; flex-direction: column; gap: 7mm; overflow: hidden;
+    }
+
+    .no-incluye-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+      background: rgba(40,18,18,0.38); border: 1px solid rgba(230,48,48,0.18);
+      border-radius: 6px; padding: 10px 12px;
+    }
+    .excl-item {
+      display: flex; align-items: flex-start; gap: 7px;
+      color: rgba(255,255,255,0.72); font-size: 11.5px; line-height: 1.55;
+      padding: 3px 0;
+    }
+    .excl-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(220,80,80,0.70); flex-shrink: 0; margin-top: 4px;
+    }
+    .no-incluye-title {
+      color: rgba(220,100,100,0.85); font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase; font-weight: 700; margin-bottom: 7px;
+    }
+
+    .contact-block {
+      background: rgba(26,58,92,0.40); border: 1px solid rgba(74,159,212,0.30);
+      border-radius: 6px; padding: 14px 18px;
+      display: flex; align-items: center; gap: 18px;
+    }
+    .contact-block .logo-sm img {
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 2.5px solid #4a9fd4; background: #fff; object-fit: contain;
+    }
+    .contact-block .contact-info { flex: 1; }
+    .contact-block .contact-headline {
+      color: #fff; font-size: 17px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1px; line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .contact-block .contact-headline span { color: #4a9fd4; }
+    .contact-block .contact-line {
+      color: rgba(255,255,255,0.80); font-size: 11.5px; line-height: 1.85;
+    }
+    .contact-block .contact-line strong { color: #fff; }
+    .contact-block .contact-line a { color: #4a9fd4; text-decoration: none; }
+
+    .values-strip {
+      display: flex; border-radius: 5px; overflow: hidden;
+    }
+
+    /* ══ CONTACT CTA (última hoja) ══════════════════════════ */
+    .contact-cta {
+      background: linear-gradient(135deg, rgba(26,58,92,0.7) 0%, rgba(13,27,42,0.9) 100%);
+      border: 1.5px solid rgba(74,159,212,0.45);
+      border-radius: 8px;
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .contact-cta .cta-eyebrow {
+      color: #4a9fd4; font-size: 8.5px; letter-spacing: 4px;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .contact-cta .cta-heading {
+      color: #fff; font-size: 15px; font-weight: 900;
+      letter-spacing: 0.5px; margin-bottom: 16px; line-height: 1.25;
+    }
+    .contact-cta .cta-row {
+      display: flex; justify-content: center; gap: 14px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .contact-cta .cta-item {
+      background: rgba(13,27,42,0.6);
+      border: 1px solid rgba(74,159,212,0.3);
+      border-radius: 6px; padding: 12px 22px; text-align: center; min-width: 160px;
+    }
+    .contact-cta .cta-item .ci-label {
+      color: #4a9fd4; font-size: 7.5px; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .contact-cta .cta-item .ci-value {
+      color: #fff; font-size: 12px; font-weight: 700; line-height: 1.4;
+    }
+    .contact-cta .cta-item .ci-value.whatsapp { color: #4ade80; }
+    .contact-cta .cta-closing {
+      color: rgba(255,255,255,0.45); font-size: 9px; line-height: 1.9;
+      border-top: 1px solid rgba(74,159,212,0.2); padding-top: 12px; margin-top: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .partners-band {
+      display: flex; align-items: center; justify-content: center; gap: 10mm;
+      padding: 10px 20px;
+      border-top: 1px solid rgba(74,159,212,0.2);
+      margin-top: 8px;
+    }
+    .partner-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .partner-item .p-label {
+      color: rgba(74,159,212,0.75); font-size: 7px; letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .partner-item img {
+      height: 56px; width: auto; max-width: 150px;
+      object-fit: contain; border-radius: 5px;
+    }
+    .partner-sep {
+      width: 1px; height: 60px; background: rgba(74,159,212,0.2);
+    }
+    .value-box {
+      flex: 1; background: rgba(26,58,92,0.38); border: 1px solid rgba(74,159,212,0.18);
+      padding: 12px 8px; text-align: center;
+    }
+    .value-box:not(:last-child) { border-right: none; }
+    .value-box .v-title {
+      color: #4a9fd4; font-size: 9px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .value-box .v-desc {
+      color: rgba(255,255,255,0.45); font-size: 7.5px; letter-spacing: 0.5px;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PÁGINA 1 · PORTADA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="portada">
+    <img class="bg-img" src="images/52.jpg.jpeg" alt="The Madness Expeditions — Servicios" style="object-position: center 30%;">
+    <div class="overlay"></div>
+    <div class="content">
+
+      <div class="logo-block">
+        <img src="../trips/bolivia/images/logo02.png" alt="Logo The Madness Expeditions">
+        <div class="brand-name">The Madness Expeditions</div>
+        <div class="brand-country">Argentina</div>
+      </div>
+
+      <div class="main-block">
+        <span class="eyebrow">Montañismo &amp; Mucho Más</span>
+        <h1><span>Ser</span>vicios</h1>
+        <div class="cover-sub">¡Sé el Protagonista de tu Salida!</div>
+      </div>
+
+      <div class="cover-footer">
+        <div class="kv-item">
+          <span class="kv-label">Contacto</span>
+          <span class="kv-value">Pablo Flater</span>
+        </div>
+        <div class="kv-sep"></div>
+        <div class="kv-item">
+          <span class="kv-label">WhatsApp &amp; Cel.</span>
+          <span class="kv-value">+54 9 11 3269-3505</span>
+        </div>
+        <div class="kv-sep"></div>
+        <div class="kv-item">
+          <span class="kv-label">Email</span>
+          <span class="kv-value">pabloflater@hotmail.com</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PÁGINA 2 · BIENVENIDA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="bienvenida">
+
+    <div class="doc-header">
+      <img src="../../web/public/logo-v4.png" alt="Logo">
+      <div>
+        <div class="hdr-brand">The Madness Expeditions · ARG</div>
+        <div class="hdr-tagline">Responsabilidad · Seguridad · Servicio · Compromiso</div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <div class="section-label">Bienvenidos</div>
+
+      <h2>Tu <span>Servicio</span> — Desde que Salís<br>hasta que Volvés</h2>
+
+      <!-- 4 FOTOS 2×2 -->
+      <div class="photo-trio">
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.39%20(14).jpeg" alt="Briefing del equipo en refugio" style="object-position: center 40%;">
+          <div class="photo-label">Nuestro Equipo en Acción</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.39%20(17).jpeg" alt="Guías y clientes en la cumbre" style="object-position: center 30%;">
+          <div class="photo-label">Guías Profesionales</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.39%20(19).jpeg" alt="Grupo celebrando en refugio" style="object-position: center 50%;">
+          <div class="photo-label">Momentos Únicos</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.43.04%20(2).jpeg" alt="Cena de bienvenida grupal" style="object-position: center 40%;">
+          <div class="photo-label">Cenas de Bienvenida</div>
+        </div>
+      </div>
+
+      <div class="highlight-band">
+        <p>
+          En todas nuestras expediciones encontrarás <strong>Responsabilidad · Seguridad ·
+          Servicio · Compromiso y Garantía</strong> en cada ascenso. Nuestro equipo de guías,
+          choferes y cocineros trabaja como una máquina aceitada para que tu experiencia
+          sea <strong>única e inolvidable</strong>.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="doc-footer">
+      <div>
+        <div class="contact-label">Informes &amp; Reservas</div>
+        <div class="contact-item">
+          <img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">
+          themadnessexpeditions@gmail.com &nbsp;&middot;&nbsp; pabloflater@hotmail.com
+        </div>
+        <div class="contact-item">
+          <img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">
+          +54 9 11 3269-3505
+        </div>
+      </div>
+      <div class="doc-values" style="text-align: center;">
+        Trabajamos con<br>
+        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
+      </div>
+      <div class="doc-values">
+        Responsabilidad &middot; Seguridad<br>
+        Servicio &middot; Compromiso &middot; Garant&iacute;a
+      </div>
+    </div>
+
+    <span class="page-num">2 / 6</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PÁGINA 3 · LOGÍSTICA, GUÍAS & TRANSPORTE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="logistica">
+
+    <div class="doc-header">
+      <img src="../../web/public/logo-v4.png" alt="Logo">
+      <div>
+        <div class="hdr-brand">The Madness Expeditions · ARG</div>
+        <div class="hdr-tagline">Responsabilidad · Seguridad · Servicio · Compromiso</div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <div class="section-label">Lo que Incluimos</div>
+
+      <!-- 4 FOTOS 2×2 -->
+      <div class="two-photo-row">
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.58.11.jpeg" alt="Camioneta 4x4 en la Cordillera" style="object-position: center 40%;">
+          <div class="photo-label">4×4 en Alta Montaña</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.58.12%20(1).jpeg" alt="Camioneta en ruta con el equipo" style="object-position: center 50%;">
+          <div class="photo-label">Cubrimos Toda Argentina</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.39%20(1).jpeg" alt="Mulas de carga en los Andes" style="object-position: center 50%;">
+          <div class="photo-label">Burros y Mulas con Arrieros</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.39%20(12).jpeg" alt="Equipamiento de montaña profesional" style="object-position: center 40%;">
+          <div class="photo-label">Equipamiento Profesional</div>
+        </div>
+      </div>
+
+      <!-- LISTA DE SERVICIOS -->
+      <div class="svc-list">
+        <div class="svc-item"><div class="svc-dot"></div>Guía / Asistente (ratio 1:3 según dificultad)</div>
+        <div class="svc-item"><div class="svc-dot"></div>Logística previa y durante el viaje</div>
+        <div class="svc-item"><div class="svc-dot"></div>Camionetas 4×4 totalmente equipadas</div>
+        <div class="svc-item"><div class="svc-dot"></div>Combustible Full Time</div>
+        <div class="svc-item"><div class="svc-dot"></div>Guía de Montaña bilingüe (Inglés)</div>
+        <div class="svc-item"><div class="svc-dot"></div>Asistencia vía internet o presencial</div>
+        <div class="svc-item"><div class="svc-dot"></div>In-Reach — comunicación satelital</div>
+        <div class="svc-item"><div class="svc-dot"></div>Handys VHF entre guías y clientes</div>
+        <div class="svc-item"><div class="svc-dot"></div>Internet móvil</div>
+        <div class="svc-item"><div class="svc-dot"></div>Generador / motor para carga de dispositivos</div>
+        <div class="svc-item"><div class="svc-dot"></div>Porteadores para carga grupal o personal</div>
+        <div class="svc-item"><div class="svc-dot"></div>Permisos, accesos y trámites de autorización</div>
+        <div class="svc-item"><div class="svc-dot"></div>Oxígeno de emergencia</div>
+        <div class="svc-item"><div class="svc-dot"></div>Botiquín general y elementos de rescate</div>
+        <div class="svc-item"><div class="svc-dot"></div>Transfers In/Out aeropuertos y terminales</div>
+        <div class="svc-item"><div class="svc-dot"></div>Todos los kilómetros habilitados por salida</div>
+      </div>
+
+    </div>
+
+    <div class="doc-footer">
+      <div>
+        <div class="contact-label">Informes &amp; Reservas</div>
+        <div class="contact-item">
+          <img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">
+          themadnessexpeditions@gmail.com &nbsp;&middot;&nbsp; pabloflater@hotmail.com
+        </div>
+        <div class="contact-item">
+          <img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">
+          +54 9 11 3269-3505
+        </div>
+      </div>
+      <div class="doc-values" style="text-align: center;">
+        Trabajamos con<br>
+        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
+      </div>
+      <div class="doc-values">
+        Responsabilidad &middot; Seguridad<br>
+        Servicio &middot; Compromiso &middot; Garant&iacute;a
+      </div>
+    </div>
+
+    <span class="page-num">3 / 6</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PÁGINA 4 · CAMPAMENTO & ALOJAMIENTO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="campamento">
+
+    <div class="doc-header">
+      <img src="../../web/public/logo-v4.png" alt="Logo">
+      <div>
+        <div class="hdr-brand">The Madness Expeditions · ARG</div>
+        <div class="hdr-tagline">Responsabilidad · Seguridad · Servicio · Compromiso</div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <div class="section-label">Lo que Incluimos</div>
+
+      <!-- 4 FOTOS 2×2 -->
+      <div class="three-photo-row">
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.40%20(2).jpeg" alt="Base camp con carpas y camionetas" style="object-position: center 40%;">
+          <div class="photo-label">Base Camp — Carpas TNF + 4×4</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.58.12%20(10).jpeg" alt="Cocinando en carpa TNF con Jetboil" style="object-position: center 50%;">
+          <div class="photo-label">Cocina en la Carpa</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.40%20(3).jpeg" alt="Grupo en hostería exterior" style="object-position: center 30%;">
+          <div class="photo-label">Hosterías y Cabañas</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.58.12%20(12).jpeg" alt="Alojamiento en ciudad" style="object-position: center 40%;">
+          <div class="photo-label">Alojamiento en Ciudades</div>
+        </div>
+      </div>
+
+      <!-- LISTA DE SERVICIOS -->
+      <div class="svc-list">
+        <div class="svc-item"><div class="svc-dot"></div>Carpas de alta montaña TNF · Kailash · Etc.</div>
+        <div class="svc-item"><div class="svc-dot"></div>Domos para cocinar y comer en el Base</div>
+        <div class="svc-item"><div class="svc-dot"></div>Colchonetas (2 personas por carpa o individual)</div>
+        <div class="svc-item"><div class="svc-dot"></div>Luz eléctrica en los domos</div>
+        <div class="svc-item"><div class="svc-dot"></div>Mesas y sillas en los campamentos</div>
+        <div class="svc-item"><div class="svc-dot"></div>Estufa en el base camp</div>
+        <div class="svc-item"><div class="svc-dot"></div>Cocina con hornallas y horno a gas</div>
+        <div class="svc-item"><div class="svc-dot"></div>Vajilla completa (vasos, cubiertos, platos)</div>
+        <div class="svc-item"><div class="svc-dot"></div>Alojamiento hoteles, hosterías, refugios, cabañas</div>
+        <div class="svc-item"><div class="svc-dot"></div>1 noche en ciudad en ida + 1 en regreso</div>
+        <div class="svc-item"><div class="svc-dot"></div>Alojamiento en ciudades secundarias del trayecto</div>
+        <div class="svc-item"><div class="svc-dot"></div>Entrada a Parques Nacionales y Termas</div>
+        <div class="svc-item"><div class="svc-dot"></div>Cenas de bienvenida y despedida</div>
+        <div class="svc-item"><div class="svc-dot"></div>Asistencia para alquiler de equipo de montaña</div>
+        <div class="svc-item"><div class="svc-dot"></div>Asistencia médica y seguro de viajero</div>
+        <div class="svc-item"><div class="svc-dot"></div>Días extra por logística o climatología</div>
+      </div>
+
+    </div>
+
+    <div class="doc-footer">
+      <div>
+        <div class="contact-label">Informes &amp; Reservas</div>
+        <div class="contact-item">
+          <img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">
+          themadnessexpeditions@gmail.com &nbsp;&middot;&nbsp; pabloflater@hotmail.com
+        </div>
+        <div class="contact-item">
+          <img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">
+          +54 9 11 3269-3505
+        </div>
+      </div>
+      <div class="doc-values" style="text-align: center;">
+        Trabajamos con<br>
+        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
+      </div>
+      <div class="doc-values">
+        Responsabilidad &middot; Seguridad<br>
+        Servicio &middot; Compromiso &middot; Garant&iacute;a
+      </div>
+    </div>
+
+    <span class="page-num">4 / 6</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PÁGINA 5 · ALIMENTACIÓN & NUTRICIÓN
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="alimentacion">
+
+    <div class="doc-header">
+      <img src="../../web/public/logo-v4.png" alt="Logo">
+      <div>
+        <div class="hdr-brand">The Madness Expeditions · ARG</div>
+        <div class="hdr-tagline">Responsabilidad · Seguridad · Servicio · Compromiso</div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <div class="section-label">Comidas Incluidas</div>
+
+      <!-- GRILLA DE FOTOS 3x2 -->
+      <div class="food-grid">
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.39%20(36).jpeg" alt="Asado en horno de piedra" style="object-position: center 40%;">
+          <div class="photo-label">Asado en la Montaña</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.58.11%20(4).jpeg" alt="Vino y quesos con vista a la montaña" style="object-position: center 50%;">
+          <div class="photo-label">Vino y Quesos con Vista</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.39%20(39).jpeg" alt="Brochetas de verduras al fuego" style="object-position: center 40%;">
+          <div class="photo-label">Brochetas Gourmet</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.58.12%20(6).jpeg" alt="Salmón y vino en cajón de camioneta" style="object-position: center 35%;">
+          <div class="photo-label">Salmón con Vino Malbec</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/144.jpg.jpeg" alt="Plato completo de almuerzo" style="object-position: center 40%;">
+          <div class="photo-label">Almuerzos Variados</div>
+        </div>
+        <div class="photo-cell">
+          <img src="images/WhatsApp%20Image%202026-06-11%20at%2023.35.40%20(7).jpeg" alt="Hamburguesa vegetariana" style="object-position: center 50%;">
+          <div class="photo-label">Opciones Vegetarianas</div>
+        </div>
+      </div>
+
+      <!-- DIETAS -->
+      <div class="diet-row">
+        <div class="diet-pill">
+          <div class="d-title">Carnívoros</div>
+          <div class="d-desc">Carnes · Pollo · Cerdo</div>
+        </div>
+        <div class="diet-pill">
+          <div class="d-title">Vegetarianos</div>
+          <div class="d-desc">Adaptación total</div>
+        </div>
+        <div class="diet-pill">
+          <div class="d-title">Veganos</div>
+          <div class="d-desc">Comidas sin contacto</div>
+        </div>
+        <div class="diet-pill">
+          <div class="d-title">Celíacos</div>
+          <div class="d-desc">Sin gluten garantizado</div>
+        </div>
+      </div>
+
+      <p class="body-text">
+        La alimentación es uno de nuestros grandes diferenciales. Cocinamos elementos
+        <strong>frescos, de calidad y de proteínas</strong> en ollas de primera, manteniendo
+        los valores energéticos y favoreciendo la digestión en la altura. Elegimos
+        productos <strong>orgánicos y de la zona</strong> para fomentar la economía local.
+        Desayunos · Almuerzos · Cenas · Box Lunch · Recepciones · Picadas — todo incluido según el programa.
+        Agua potable permanente, bebidas y vino en las cenas.
+      </p>
+
+    </div>
+
+    <div class="doc-footer">
+      <div>
+        <div class="contact-label">Informes &amp; Reservas</div>
+        <div class="contact-item">
+          <img src="../../email/signature/icons/icon-mail.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">
+          themadnessexpeditions@gmail.com &nbsp;&middot;&nbsp; pabloflater@hotmail.com
+        </div>
+        <div class="contact-item">
+          <img src="../../email/signature/icons/icon-phone.png" width="13" height="13" style="vertical-align:middle; opacity:0.65; margin-right:6px;">
+          +54 9 11 3269-3505
+        </div>
+      </div>
+      <div class="doc-values" style="text-align: center;">
+        Trabajamos con<br>
+        <strong style="color: rgba(255,255,255,0.55); letter-spacing: 1px;">PAX &middot; Ansilta</strong>
+      </div>
+      <div class="doc-values">
+        Responsabilidad &middot; Seguridad<br>
+        Servicio &middot; Compromiso &middot; Garant&iacute;a
+      </div>
+    </div>
+
+    <span class="page-num">5 / 6</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PÁGINA 6 · NO INCLUIMOS & CONTACTO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="cierre">
+
+    <div class="doc-header">
+      <img src="../../web/public/logo-v4.png" alt="Logo">
+      <div>
+        <div class="hdr-brand">The Madness Expeditions · ARG</div>
+        <div class="hdr-tagline">Responsabilidad · Seguridad · Servicio · Compromiso</div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <div class="section-label">Lo que NO Incluimos</div>
+
+      <div>
+        <div class="no-incluye-title">No forman parte de los paquetes</div>
+        <div class="no-incluye-grid">
+          <div class="excl-item"><div class="excl-dot"></div>Gastos por abandono del viaje o expedición</div>
+          <div class="excl-item"><div class="excl-dot"></div>Pasajes desde el lugar de origen al punto de encuentro</div>
+          <div class="excl-item"><div class="excl-dot"></div>Bebidas en cenas de bienvenida y despedida</div>
+          <div class="excl-item"><div class="excl-dot"></div>Gastos por rescate aéreo o terrestre eventual</div>
+          <div class="excl-item"><div class="excl-dot"></div>Gastos extras fuera del programa</div>
+          <div class="excl-item"><div class="excl-dot"></div>Gastos eventuales no contemplados en el itinerario</div>
+        </div>
+      </div>
+
+      <!-- CONTACTO CTA -->
+      <div class="contact-cta" style="margin-top: auto; margin-bottom: 14mm;">
+        <div class="cta-eyebrow">Informes &amp; Reservas</div>
+        <div class="cta-heading">&iexcl;Esperamos Verte en Nuestra<br>Pr&oacute;xima Salida!</div>
+        <div class="cta-row">
+          <div class="cta-item">
+            <div class="ci-label"><img src="../../email/signature/icons/icon-mail.png" width="12" height="12" style="vertical-align:middle;opacity:0.7;margin-right:4px;">Email</div>
+            <div class="ci-value" style="font-size:10px;color:#b8c4ce;font-weight:400;">pabloflater@hotmail.com<br>themadnessexpeditions@gmail.com</div>
+          </div>
+          <div class="cta-item">
+            <div class="ci-label"><img src="../../email/signature/icons/icon-phone.png" width="12" height="12" style="vertical-align:middle;opacity:0.7;margin-right:4px;">Pablo &middot; WhatsApp</div>
+            <div class="ci-value whatsapp">+54 9 11 3269-3505</div>
+          </div>
+        </div>
+        <div class="partners-band">
+          <div class="partner-item">
+            <div class="p-label" style="font-size:9px;font-weight:800;color:#4a9fd4;letter-spacing:2px;">Asistencia m&eacute;dica</div>
+            <img src="../trips/bolivia/images/pax_logo.jpeg" alt="PAX Assistance">
+          </div>
+          <div class="partner-sep"></div>
+          <div class="partner-item">
+            <div class="p-label" style="font-size:9px;font-weight:800;color:#4a9fd4;letter-spacing:2px;">Trabajamos con</div>
+            <img src="../trips/bolivia/images/ansilta_logo.jpg" alt="Ansilta" style="background:#fff;padding:4px 8px;border-radius:5px;">
+          </div>
+        </div>
+        <div class="cta-closing">
+          Responsabilidad &middot; Seguridad &middot; Servicio &middot; Compromiso &amp; Garant&iacute;a<br>
+          en todas nuestras Expediciones &amp; Ascensos.
+        </div>
+      </div>
+
+    </div>
+
+    <span class="page-num">6 / 6</span>
+  </div>
+
+
+</body>
+</html>
