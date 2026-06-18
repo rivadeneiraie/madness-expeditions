@@ -22,7 +22,16 @@ function normalizeTrip(raw: any): Trip {
 
 export async function getAllTrips(): Promise<Trip[]> {
     const raw = await client.fetch(ALL_TRIPS_QUERY, {}, { next: { revalidate: 3600 } });
-    return (raw ?? []).map(normalizeTrip);
+    const trips = (raw ?? []).map(normalizeTrip);
+    return trips.filter((trip: Trip) => {
+        if (!trip.slug) return false;
+        const hasInvalidChars = /[\/\\:\*\?"<>\|]/.test(trip.slug);
+        if (hasInvalidChars) {
+            console.warn(`Skipping trip with invalid slug: "${trip.slug}"`);
+            return false;
+        }
+        return true;
+    });
 }
 
 export async function getTripBySlug(slug: string): Promise<Trip | undefined> {

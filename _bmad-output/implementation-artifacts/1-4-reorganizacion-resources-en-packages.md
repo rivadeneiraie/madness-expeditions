@@ -23,15 +23,18 @@ para que cualquier miembro del equipo encuentre rápidamente dónde vive cada ti
 **Given** la estructura actual de `resources/`
 **When** se ejecuta la reorganización
 **Then** la estructura resultante es:
-- `packages/assets/images/` ← contenido de `resources/trips/`
-- `packages/pdf-generator/` ← contenido de `resources/company-document/`
-- `packages/marketing-docs/email/` ← contenido de `resources/email/`
-- `packages/marketing-docs/servicios/` ← contenido de `resources/sevices/`
+
+- `packages/documents/<viaje>/` ← propuestas HTML/PDF + scripts Puppeteer por viaje
+  - `packages/documents/seis-miles/` ← contenido de `resources/company-document/`
+  - `packages/documents/bolivia/`, `packages/documents/peru/`, etc. ← propuestas de `resources/trips/<viaje>/`
+- `packages/marketing/email/` ← contenido de `resources/email/`
+- `packages/marketing/servicios/` ← contenido de `resources/sevices/`
+- `packages/images/` ← logos e imágenes de marca
 - La carpeta `resources/` original queda eliminada del repo
 
-**AC2 — Cada subdirectorio en `packages/` tiene su `package.json` mínimo:**
+**AC2 — Cada subdirectorio raíz en `packages/` tiene su `package.json` mínimo:**
 
-**Given** cada subdirectorio raíz en `packages/` (`assets/`, `pdf-generator/`, `marketing-docs/`)
+**Given** cada subdirectorio raíz en `packages/` (`documents/`, `marketing/`, `images/`)
 **When** se verifica su contenido
 **Then** tiene un `package.json` mínimo con nombre `@madness/<nombre>` para que npm workspaces lo reconozca
 
@@ -42,6 +45,7 @@ para que cualquier miembro del equipo encuentre rápidamente dónde vive cada ti
 > ⚠️ **Esta historia DEPENDE de Historia 1.1 (Configuración del Monorepo Raíz).**
 >
 > La Historia 1.1 debe estar completada ANTES de implementar esta historia. El `package.json` raíz debe tener:
+>
 > - `"name": "madness-expeditions"`
 > - `"workspaces": ["apps/*", "packages/*"]`
 > - La carpeta `packages/` (con `.gitkeep`) debe existir
@@ -234,6 +238,7 @@ resources/
 Crear estos archivos con **contenido exacto** (3 workspaces raíz en `packages/`):
 
 **`packages/assets/package.json`:**
+
 ```json
 {
   "name": "@madness/assets",
@@ -244,6 +249,7 @@ Crear estos archivos con **contenido exacto** (3 workspaces raíz en `packages/`
 ```
 
 **`packages/pdf-generator/package.json`:**
+
 ```json
 {
   "name": "@madness/pdf-generator",
@@ -263,6 +269,7 @@ Crear estos archivos con **contenido exacto** (3 workspaces raíz en `packages/`
 > **Nota sobre `puppeteer` en pdf-generator:** Puppeteer ya está como `devDependency` en el `package.json` raíz. Para el workspace `@madness/pdf-generator`, es opcional agregarlo aquí también — npm workspaces lo hará disponible desde la raíz. Sin embargo, es buena práctica declararlo en el workspace que lo usa directamente. Opcionalmente se puede omitir `devDependencies` aquí y depender del hoisting — ambas opciones son válidas.
 
 **`packages/marketing-docs/package.json`:**
+
 ```json
 {
   "name": "@madness/marketing-docs",
@@ -277,12 +284,12 @@ El epics.md define que `packages/marketing-docs/` es un único workspace que agr
 
 ### Convención Completa de Nombres del Monorepo
 
-| Workspace | Carpeta | Nombre en package.json |
-|---|---|---|
-| `apps/web/` | apps/web/ | `@madness/web` (Historia 1.2) |
-| `apps/coming-soon/` | apps/coming-soon/ | `@madness/coming-soon` (Historia 1.3) |
-| `packages/assets/` | packages/assets/ | `@madness/assets` ← **esta historia** |
-| `packages/pdf-generator/` | packages/pdf-generator/ | `@madness/pdf-generator` ← **esta historia** |
+| Workspace                  | Carpeta                  | Nombre en package.json                        |
+| -------------------------- | ------------------------ | --------------------------------------------- |
+| `apps/web/`                | apps/web/                | `@madness/web` (Historia 1.2)                 |
+| `apps/coming-soon/`        | apps/coming-soon/        | `@madness/coming-soon` (Historia 1.3)         |
+| `packages/assets/`         | packages/assets/         | `@madness/assets` ← **esta historia**         |
+| `packages/pdf-generator/`  | packages/pdf-generator/  | `@madness/pdf-generator` ← **esta historia**  |
 | `packages/marketing-docs/` | packages/marketing-docs/ | `@madness/marketing-docs` ← **esta historia** |
 
 ### Rutas en los Scripts JS — Análisis Crítico
@@ -290,6 +297,7 @@ El epics.md define que `packages/marketing-docs/` es un único workspace que agr
 Los scripts de generación de PDF usan Puppeteer y referencian archivos HTML con rutas relativas o absolutas. Al mover los archivos, las rutas dentro de estos scripts **pueden romperse**.
 
 **Scripts afectados:**
+
 1. `packages/pdf-generator/generate-pdf.js` (movido desde `resources/company-document/`)
 2. `packages/pdf-generator/generate-presentacion-pdf.js` (movido desde `resources/company-document/`)
 3. `packages/marketing-docs/servicios/generate-pdf.js` (movido desde `resources/sevices/`)
@@ -298,7 +306,7 @@ Los scripts de generación de PDF usan Puppeteer y referencian archivos HTML con
 
 ```javascript
 // Patrón típico — el script se ejecuta desde su propio directorio:
-const htmlFile = path.join(__dirname, 'presentacion-seismiles.html');
+const htmlFile = path.join(__dirname, "presentacion-seismiles.html");
 // → __dirname referencia la carpeta del script, siempre correcta
 // → NO HAY RUPTURA si el script y el HTML están en la misma carpeta
 ```
@@ -365,6 +373,7 @@ git mv resources\sevices\images packages\marketing-docs\servicios\images
 ```
 
 **En bash/Linux/Mac:**
+
 ```bash
 # Task 3: trips/ → assets/images/
 mkdir -p packages/assets/images
@@ -402,6 +411,7 @@ git mv resources/sevices/images packages/marketing-docs/servicios/images
 La carpeta fuente **`resources/sevices/`** tiene un typo histórico (debería ser `services`). El destino en `packages/` usa el nombre en español **`servicios`** (correcto semánticamente para el proyecto).
 
 **Al ejecutar el `git mv`:**
+
 ```powershell
 # CORRECTO — fuente: "sevices" (con typo), destino: "servicios" (correcto)
 git mv resources\sevices\servicios-madness.html packages\marketing-docs\servicios\
@@ -469,6 +479,7 @@ packages/
 ```
 
 **Estado de `resources/` después:**
+
 ```
 resources/
 └── web-en-contruccion/       ← Solo si Historia 1.3 NO fue implementada aún
@@ -476,6 +487,7 @@ resources/
     ├── index.html
     └── logo-madness-expeditions.png
 ```
+
 Si Historia 1.3 fue completada, `resources/` no existirá en absoluto.
 
 ### Impacto en Historia 1.3 (coming-soon) — Coordinación Importante
@@ -495,6 +507,7 @@ La Historia 1.5 hace el refactor de URLs `raw.githubusercontent.com` en los HTML
 Usar siempre `git mv` (no copiar-pegar o mover con el OS) para preservar el historial de cada archivo. Los PDFs y documentos tienen historial valioso.
 
 **Verificación rápida post-movimiento:**
+
 ```bash
 # Ver que los archivos aparecen como renamed (no como delete+add)
 git status --short | grep "^R"
@@ -502,6 +515,7 @@ git status --short | grep "^R"
 ```
 
 Si algún archivo aparece como `D` (deleted) + `??` (untracked), significa que fue movido con el OS en lugar de `git mv`. Corregir con:
+
 ```bash
 git add packages/ruta/nueva/
 git rm resources/ruta/vieja/
@@ -550,6 +564,7 @@ git commit -m "feat: reorganizar resources/ en packages/ con workspaces de npm"
 ## Inteligencia de Historias Previas
 
 ### Historia 1.1 (Configuración del Monorepo Raíz)
+
 - **Patrón establecido:** `package.json` raíz con `"workspaces": ["apps/*", "packages/*"]`
 - **Nombre del proyecto:** `"madness-expeditions"` (requerido por npm workspaces)
 - **Carpetas `apps/` y `packages/`** ya creadas con `.gitkeep`
@@ -558,10 +573,12 @@ git commit -m "feat: reorganizar resources/ en packages/ con workspaces de npm"
 - **Puppeteer** ya declarado como devDependency en la raíz: `^24.41.0`
 
 ### Historia 1.2 (Migración web/ → apps/web/)
+
 - **Convención de scope:** Todos los workspaces usan `@madness/` como prefijo de scope npm
 - **Campo name:** `"@madness/web"` establecido el patrón para nuevos workspaces
 
 ### Historia 1.3 (apps/coming-soon/)
+
 - **Convención de package.json mínimo:** `name` + `version` + `private: true` + `description` — sin scripts ni dependencies innecesarias
 - **Atención:** La carpeta `resources/email/images/` puede haber sido copiada (no movida) a `apps/coming-soon/images/` en Historia 1.3. Verificar el estado real antes de mover.
 
@@ -604,21 +621,34 @@ Antigravity / Gemini 3.5 Flash (High)
 ### File List
 
 **Nuevos Archivos:**
+
 - `packages/assets/package.json`
 - `packages/marketing-docs/package.json`
 - `packages/pdf-generator/package.json`
 
 **Archivos Modificados:**
+
 - `packages/pdf-generator/generate-pdf.js`
 - `packages/pdf-generator/generate-presentacion-pdf.js`
 - `_bmad-output/implementation-artifacts/1-4-reorganizacion-resources-en-packages.md`
 
 **Archivos Movidos (preservando historial):**
+
 - De `resources/trips/*` a `packages/assets/images/*`
 - De `resources/company-document/*` a `packages/pdf-generator/*`
 - De `resources/email/*` a `packages/marketing-docs/email/*`
 - De `resources/sevices/*` a `packages/marketing-docs/servicios/*` (corrigiendo typo de carpeta `sevices` a `servicios`)
 
 **Archivos Eliminados:**
+
 - `packages/.gitkeep`
 - Carpeta `resources/` completa (incluyendo `resources/web-en-contruccion/` que estaba vacía)
+
+---
+
+### Review Findings
+
+- [x] [Review][Decision] Estructura de `packages/` diverge del AC original — AC1 y AC2 actualizados para reflejar la estructura real: `packages/documents/`, `packages/marketing/`, `packages/images/`.
+- [x] [Review][Patch] Scripts npm no resuelven en `packages/documents/` [packages/documents/package.json] — corregido: scripts actualizados a `node seis-miles/generate-pdf.js` y `node seis-miles/generate-presentacion-pdf.js`.
+- [x] [Review][Patch] `packages/images/` sin `package.json` [packages/images/] — corregido: creado `packages/images/package.json` con `"name": "@madness/images"`.
+- [x] [Review][Defer] Comentario desactualizado en `generate-pdf.js` [packages/documents/seis-miles/generate-pdf.js:2] — ya no es cierto, preexistente, no bloquea.

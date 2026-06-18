@@ -1,7 +1,12 @@
 {
+  "name": "madness-expeditions",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "npm run dev --prefix web",
-    "build": "npm run build --prefix web"
+    "dev": "npm run dev --workspace=@madness/web",
+    "build": "npm run build --workspace=@madness/web"
   },
   "devDependencies": {
     "puppeteer": "^24.41.0"
