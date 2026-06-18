@@ -1,0 +1,13 @@
+{
+  "name": "@madness/documents",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Presentaciones comerciales, propuestas y generador de documentos de Madness Expeditions",
+  "scripts": {
+    "generate": "node generate-pdf.js",
+    "generate:presentacion": "node generate-presentacion-pdf.js"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.41.0"
+  }
+}
