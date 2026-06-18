@@ -3,10 +3,10 @@
  * Las imágenes se cargan desde GitHub (requiere internet).
  *
  * Uso:
- *   node resources/company-document/generate-pdf.js          → genera los 3 idiomas
- *   node resources/company-document/generate-pdf.js es       → solo español
- *   node resources/company-document/generate-pdf.js en       → solo inglés
- *   node resources/company-document/generate-pdf.js pt       → solo portugués
+ *   node packages/pdf-generator/generate-pdf.js          → genera los 3 idiomas
+ *   node packages/pdf-generator/generate-pdf.js es       → solo español
+ *   node packages/pdf-generator/generate-pdf.js en       → solo inglés
+ *   node packages/pdf-generator/generate-pdf.js pt       → solo portugués
  */
 
 const puppeteer = require("puppeteer");

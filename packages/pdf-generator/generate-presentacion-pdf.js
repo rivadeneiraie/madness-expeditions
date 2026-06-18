@@ -3,10 +3,10 @@
  * Formato 16:9 landscape (297×167 mm).
  *
  * Uso:
- *   node resources/company-document/generate-presentacion-pdf.js          → genera los 3 idiomas
- *   node resources/company-document/generate-presentacion-pdf.js es       → solo español
- *   node resources/company-document/generate-presentacion-pdf.js en       → solo inglés
- *   node resources/company-document/generate-presentacion-pdf.js pt       → solo portugués
+ *   node packages/pdf-generator/generate-presentacion-pdf.js          → genera los 3 idiomas
+ *   node packages/pdf-generator/generate-presentacion-pdf.js es       → solo español
+ *   node packages/pdf-generator/generate-presentacion-pdf.js en       → solo inglés
+ *   node packages/pdf-generator/generate-presentacion-pdf.js pt       → solo portugués
  */
 
 const puppeteer = require("puppeteer");

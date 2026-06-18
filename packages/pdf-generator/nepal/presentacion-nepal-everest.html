@@ -1,0 +1,1434 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trekking al Campo Base del Everest 2027 — The Madness Expeditions</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #2a2a2a;
+    }
+
+    /*
+      Cada .slide = 16:9 landscape para impresión.
+      Ctrl+P → Guardar como PDF → Tamaño personalizado 297×167 mm · Márgenes: Ninguno
+    */
+    .slide {
+      width: 297mm;
+      height: 167mm;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      margin: 16px auto;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.65);
+      background: #0d1b2a;
+    }
+
+    @page { size: 297mm 167mm; margin: 0; }
+
+    @media print {
+      body { background: none; }
+      .slide { margin: 0; box-shadow: none; }
+    }
+
+    /* ══ UTILIDADES COMPARTIDAS ═══════════════════════════════ */
+
+    .bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+
+    .ov-dark {
+      position: absolute; inset: 0;
+      background: rgba(8,20,36,0.55);
+    }
+
+    .ov-bottom {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(8,20,36,0.97) 0%,
+        rgba(8,20,36,0.82) 30%,
+        rgba(8,20,36,0.35) 62%,
+        rgba(8,20,36,0.05) 100%
+      );
+    }
+
+    .ov-left {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(8,20,36,0.96) 0%,
+        rgba(8,20,36,0.80) 42%,
+        rgba(8,20,36,0.20) 72%,
+        rgba(8,20,36,0.00) 100%
+      );
+    }
+
+    .slide-num {
+      position: absolute; bottom: 5mm; right: 7mm;
+      color: rgba(74,159,212,0.30); font-size: 7px;
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .section-label {
+      color: #4a9fd4; font-size: 8px; letter-spacing: 4.5px;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; height: 1px; width: 36px;
+      background: rgba(74,159,212,0.45);
+    }
+
+    /* ══ SLIDE 1 · PORTADA ════════════════════════════════════ */
+
+    #s1 .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 10mm 24mm;
+    }
+
+    #s1 .logo-wrap {
+      margin-bottom: 5mm;
+    }
+    #s1 .logo-wrap img {
+      width: 170px; height: 170px; border-radius: 50%;
+      border: 3px solid #4a9fd4; background: #fff;
+      object-fit: contain;
+    }
+
+    #s1 .badge {
+      display: inline-block;
+      background: #4a9fd4; color: #0d1b2a;
+      font-size: 8px; font-weight: 900; letter-spacing: 4px;
+      text-transform: uppercase; padding: 4px 14px;
+      border-radius: 2px; margin-bottom: 5mm;
+    }
+
+    #s1 h1 {
+      color: #fff; font-size: 52px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -1.5px; line-height: 0.92;
+      margin-bottom: 5mm;
+    }
+    #s1 h1 span { color: #4a9fd4; }
+
+    #s1 .tagline {
+      color: rgba(255,255,255,0.78); font-size: 12px;
+      letter-spacing: 4px; text-transform: uppercase;
+      border-top: 1px solid rgba(74,159,212,0.35);
+      border-bottom: 1px solid rgba(74,159,212,0.35);
+      padding: 7px 24px; margin-bottom: 5mm;
+    }
+
+    #s1 .brand-footer {
+      color: rgba(255,255,255,0.38); font-size: 7.5px;
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+
+    /* ══ SLIDE EMPRESA ════════════════════════════════════════ */
+
+    #s-empresa .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 12mm 14mm;
+      max-width: 60%;
+    }
+
+    #s-empresa .section-label { margin-bottom: 5mm; }
+
+    #s-empresa h2 {
+      color: #fff; font-size: 30px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1px; line-height: 1.1;
+      margin-bottom: 6mm;
+    }
+
+    #s-empresa .empresa-tagline {
+      color: rgba(255,255,255,0.80); font-size: 13px; line-height: 1.90;
+      margin-bottom: 8mm;
+    }
+    #s-empresa .empresa-tagline strong { color: #fff; }
+
+    #s-empresa .svc-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3mm;
+    }
+
+    #s-empresa .svc-item {
+      background: rgba(74,159,212,0.10);
+      border: 1px solid rgba(74,159,212,0.28);
+      border-radius: 4px; padding: 8px 12px;
+      color: rgba(255,255,255,0.82); font-size: 12px; line-height: 1.4;
+      display: flex; align-items: center; gap: 8px;
+    }
+    #s-empresa .svc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #4a9fd4; flex-shrink: 0;
+    }
+
+    /* ══ VOLCÁN / TREK TEMPLATE (slides de día) ═══════════════ */
+
+    .slide-v .v-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 14mm 11mm 14mm;
+    }
+
+    .slide-v .v-label {
+      color: #4a9fd4; font-size: 8px; letter-spacing: 4px;
+      text-transform: uppercase; margin-bottom: 3mm;
+    }
+
+    .slide-v h2 {
+      color: #fff; font-size: 42px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -1px; line-height: 0.95;
+      margin-bottom: 2.5mm;
+    }
+
+    .slide-v .altitude {
+      color: #4a9fd4; font-size: 19px; font-weight: 700;
+      letter-spacing: 0.5px; margin-bottom: 6mm;
+    }
+
+    .slide-v .v-desc {
+      color: rgba(255,255,255,0.90); font-size: 13px; line-height: 1.80;
+      max-width: 60%;
+      background: rgba(8,20,36,0.62);
+      border-left: 2.5px solid #4a9fd4;
+      border-radius: 0 4px 4px 0;
+      padding: 11px 16px;
+    }
+    .slide-v .v-desc strong { color: #fff; }
+
+    /* Variante: slides de ciudades (Katmandu, etc.) — título más pequeño */
+    .slide-v.city h2 { font-size: 32px; }
+    .slide-v.city .altitude {
+      font-size: 12px; color: rgba(255,255,255,0.60);
+    }
+
+    /* ══ SLIDE EBC SERVICIOS ══════════════════════════════════ */
+
+    #s-servicios .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 12mm 14mm;
+      max-width: 62%;
+    }
+
+    #s-servicios .section-label { margin-bottom: 5mm; }
+
+    #s-servicios h2 {
+      color: #fff; font-size: 24px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1px; line-height: 1.15;
+      margin-bottom: 6mm;
+    }
+
+    #s-servicios .svc-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3mm;
+    }
+
+    #s-servicios .svc-item {
+      background: rgba(74,159,212,0.10);
+      border: 1px solid rgba(74,159,212,0.28);
+      border-radius: 4px; padding: 8px 12px;
+      color: rgba(255,255,255,0.82); font-size: 9.5px; line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    #s-servicios .svc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #4a9fd4; flex-shrink: 0; margin-top: 3px;
+    }
+    #s-servicios .svc-item strong { color: #fff; display: block; }
+
+    /* ══ SLIDE CIERRE ═════════════════════════════════════════ */
+
+    #s-cierre .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 10mm 24mm;
+    }
+
+    #s-cierre .logo-wrap { margin-bottom: 5mm; }
+    #s-cierre .logo-wrap img {
+      width: 130px; height: 130px; border-radius: 50%;
+      border: 3px solid #4a9fd4; background: #fff;
+      object-fit: contain;
+    }
+
+    #s-cierre .closing {
+      color: #fff; font-size: 30px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 2px; line-height: 1.1;
+      margin-bottom: 4mm;
+    }
+    #s-cierre .closing span { color: #4a9fd4; }
+
+    #s-cierre .divider {
+      width: 80px; height: 1px;
+      background: rgba(74,159,212,0.4);
+      margin: 0 auto 4mm;
+    }
+
+    #s-cierre .brand-name {
+      color: rgba(255,255,255,0.55); font-size: 8px;
+      letter-spacing: 4px; text-transform: uppercase;
+      margin-bottom: 7mm;
+    }
+
+    #s-cierre .contact {
+      color: rgba(255,255,255,0.82); font-size: 11.5px; line-height: 2.0;
+    }
+    #s-cierre .contact .name {
+      color: #fff; font-size: 14px; font-weight: 700;
+    }
+    #s-cierre .contact .phone {
+      color: #4a9fd4; font-weight: 700;
+    }
+
+    .slide-partners {
+      position: absolute; top: 7mm; right: 9mm;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .slide-partners img {
+      height: 55px; width: auto;
+      object-fit: contain; display: block; opacity: 0.88;
+    }
+    .slide-partners .partner-ansilta img {
+      background: #fff; border-radius: 4px; padding: 4px 10px;
+    }
+
+    #s-cierre .partners {
+      margin-top: 6mm;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    #s-cierre .partners-label {
+      color: rgba(255,255,255,0.42); font-size: 7px;
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+    #s-cierre .partners-logos {
+      display: flex; align-items: center; gap: 14px;
+    }
+    #s-cierre .partners-logos img {
+      height: 80px; width: auto;
+      object-fit: contain; display: block;
+    }
+    #s-cierre .partner-ansilta img {
+      background: #fff; border-radius: 6px; padding: 6px 14px;
+    }
+
+    /* ══ SLIDE GALERÍA (grid de fotos por día) ═══════════════ */
+
+    .slide-gallery {
+      background: #0d1b2a;
+    }
+
+    .slide-gallery .gal-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      padding: 8mm 10mm 8mm 10mm;
+      gap: 5mm;
+    }
+
+    .slide-gallery .gal-header {
+      display: flex; align-items: center; gap: 10mm;
+      flex-shrink: 0;
+    }
+
+    .slide-gallery .gal-label {
+      color: #4a9fd4; font-size: 8px; letter-spacing: 4.5px;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .slide-gallery .gal-label::after {
+      content: ''; height: 1px; width: 36px;
+      background: rgba(74,159,212,0.45);
+    }
+
+    .slide-gallery .gal-title {
+      color: rgba(255,255,255,0.35); font-size: 9px;
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .photo-grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 5px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .photo-grid-1x3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 5px;
+      flex: 1;
+      min-height: 0;
+    }
+    .photo-grid-1x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 5px;
+      flex: 1;
+      min-height: 0;
+    }
+    .photo-grid-1x2 .p-card {
+      position: relative; overflow: hidden; border-radius: 3px;
+    }
+    .photo-grid-1x2 .p-card img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+    }
+    .photo-grid-1x2 .p-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(8,20,36,0.90) 0%, rgba(8,20,36,0.0) 100%);
+      padding: 22px 10px 8px;
+    }
+    .photo-grid-1x2 .p-name {
+      color: rgba(255,255,255,0.90); font-size: 9px; font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    }
+    .photo-grid-1x3 .p-card {
+      position: relative; overflow: hidden; border-radius: 3px;
+    }
+    .photo-grid-1x3 .p-card img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+    }
+    .photo-grid-1x3 .p-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(8,20,36,0.90) 0%, rgba(8,20,36,0.0) 100%);
+      padding: 22px 10px 8px;
+    }
+    .photo-grid-1x3 .p-name {
+      color: rgba(255,255,255,0.90); font-size: 9px; font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    }
+
+    .photo-grid-2x2 .p-card {
+      position: relative; overflow: hidden; border-radius: 3px;
+    }
+    .photo-grid-2x2 .p-card img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+    }
+    .photo-grid-2x2 .p-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(8,20,36,0.90) 0%, rgba(8,20,36,0.0) 100%);
+      padding: 18px 8px 7px;
+    }
+    .photo-grid-2x2 .p-name {
+      color: rgba(255,255,255,0.85); font-size: 8px; font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 1 · PORTADA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s1">
+    <img class="bg-img" src="image/introduccion/WhatsApp%20Image%202026-05-13%20at%2019.33.46%20%281%29.jpeg"
+         alt="Everest Base Camp Trek — The Madness Expeditions" style="object-position: center 40%;">
+    <div class="ov-dark"></div>
+    <div class="content">
+      <div class="logo-wrap">
+        <img src="image/introduccion/logo02.png" alt="Logo The Madness Expeditions">
+      </div>
+      <div class="badge">ABRIL 2027</div>
+      <h1>Trekking al <span>Campo Base</span><br>del Everest</h1>
+      <div class="tagline">Un Viaje Al Corazón de los Himalaya &amp; La Cultura Sherpa</div>
+      <div class="brand-footer">Responsabilidad · Seguridad · Servicio · Compromiso</div>
+    </div>
+    <span class="slide-num">1 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 2 · QUIÉNES SOMOS · LA EMPRESA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-empresa">
+    <img class="bg-img" src="image/introduccion/WhatsApp%20Image%202026-05-13%20at%2019.33.46%20%282%29.jpeg"
+         alt="Madness Expeditions" style="object-position: center right;">
+    <div class="ov-left"></div>
+    <div class="content">
+      <div class="section-label">Quiénes somos</div>
+      <h2>Madness<br>Expeditions</h2>
+      <p class="empresa-tagline">
+        Te acompañamos en cada expedición para crear una aventura
+        <strong>única e inolvidable</strong> en cada destino que quieras conquistar.
+        Nos ocupamos de toda la logística previa y durante el viaje, para que
+        vos solo pienses en disfrutar cada paso del camino.
+      </p>
+      <div class="svc-grid">
+        <div class="svc-item"><div class="svc-dot"></div>Guías Locales</div>
+        <div class="svc-item"><div class="svc-dot"></div>Alojamiento en Teahouse (Refugios)</div>
+        <div class="svc-item"><div class="svc-dot"></div>Comidas (Desayunos, Almuerzos y Cenas)</div>
+        <div class="svc-item"><div class="svc-dot"></div>Logística</div>
+        <div class="svc-item"><div class="svc-dot"></div>Visitas Guiadas</div>
+        <div class="svc-item"><div class="svc-dot"></div>Hotel en Katmandú (KTM)</div>
+        <div class="svc-item"><div class="svc-dot"></div>Alojamiento y Servicio en Campo Base</div>
+        <div class="svc-item"><div class="svc-dot"></div>Transfers In / Out</div>
+        <div class="svc-item"><div class="svc-dot"></div>Permisos y Trámites</div>
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">2 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 3 · DÍA 1 · ARGENTINA → KATMANDU
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d1">
+    <img class="bg-img" src="image/Dia01/WhatsApp%20Image%202026-05-13%20at%2020.00.14.jpeg"
+         alt="Día 1 — Argentina a Katmandu">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 1</div>
+      <h2>Argentina → Katmandu</h2>
+      <div class="altitude">Aeropuerto Tribhuvan · KTM</div>
+      <div class="v-desc">
+        Inicio del viaje desde Buenos Aires. <strong>Más de 16.500 km</strong> y cerca de
+        <strong>37 hs. de vuelo</strong> con escalas (según la aerolínea con la que viajemos). Una aventura
+        que comienza desde el primer despegue.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">3 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 4 · DÍA 2 · KATMANDÚ CITY TOUR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d2">
+    <img class="bg-img" src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%281%29.jpeg"
+         alt="Día 2 — Katmandú">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 2</div>
+      <h2>Katmandú</h2>
+      <div class="altitude">Llegada a KTM · City Tour</div>
+      <div class="v-desc">
+        Llegada y primer contacto con Nepal. Visitamos <strong>Thamel</strong>, el Crematorio,
+        el <strong>Templo de los Monos</strong>, el histórico <strong>Durbar Square</strong>
+        con la posibilidad de visitar a <strong>Kumari, la Niña Diosa Viviente</strong>,
+        y la imponente <strong>Estupa de Boudhanath</strong>.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">4 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 2 · KATMANDÚ -->
+  <div class="slide slide-gallery" id="s-gal-d2">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 2 &middot; Katmandú</div>
+        <div class="gal-title">City Tour &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%285%29.jpeg" alt="Katmandú"><div class="p-caption"><div class="p-name">Katmandú</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%282%29.jpeg" alt="Durbar Square"><div class="p-caption"><div class="p-name">Durbar Square</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%283%29.jpeg" alt="Estupa Boudhanath"><div class="p-caption"><div class="p-name">Estupa Boudhanath</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%284%29.jpeg" alt="Templo de los Monos"><div class="p-caption"><div class="p-name">Templo de los Monos</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">5 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 5 · DÍA 3 · COMPRAS Y PREPARACIÓN
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d3">
+    <img class="bg-img" src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.56.jpeg"
+         alt="Día 3 — Compras para el Trekking">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 3</div>
+      <h2>Preparación<br>para el Trek</h2>
+      <div class="altitude">Katmandú · Tiendas de Montaña</div>
+      <div class="v-desc">
+        Día destinado a la preparación final. Recorremos las <strong>tiendas de montaña</strong>
+        de Katmandú para completar el equipo necesario. Ajustamos cada detalle antes de partir
+        hacia las alturas del Himalaya.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">6 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 3 · PREPARACIÓN -->
+  <div class="slide slide-gallery" id="s-gal-d3">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 3 &middot; Katmandú</div>
+        <div class="gal-title">Preparación para el Trek &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.55.jpeg" alt="Tiendas de montaña"><div class="p-caption"><div class="p-name">Tiendas de Montaña</div></div></div>
+        <div class="p-card"><img src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.56%20%281%29.jpeg" alt="Equipamiento"><div class="p-caption"><div class="p-name">Equipamiento</div></div></div>
+        <div class="p-card"><img src="image/Dia03/WhatsApp%20Image%202026-05-13%20at%2020.08.56%20%282%29.jpeg" alt="Katmandú"><div class="p-caption"><div class="p-name">Katmandú</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa02/WhatsApp%20Image%202026-05-13%20at%2020.04.55%20%281%29.jpeg" alt="Stupa Boudhanath"><div class="p-caption"><div class="p-name">Stupa Boudhanath</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">7 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 6 · DÍA 4 · VUELO KTM → LUKLA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d4a">
+    <img class="bg-img" src="image/Dia04-01/WhatsApp%20Image%202026-05-13%20at%2020.14.30%20%281%29.jpeg"
+         alt="Día 4 — Vuelo a Lukla">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 4</div>
+      <h2>Vuelo a Lukla</h2>
+      <div class="altitude">Aeropuerto Tenzing-Hillary · 2.860 msnm</div>
+      <div class="v-desc">
+        Vuelo desde KTM al <strong>Aeropuerto Tenzing-Hillary de Lukla</strong>, uno de los
+        aeropuertos más emocionantes del mundo. En avión: 35-45 min desde otra ciudad
+        (4 hs. por tierra). En helicóptero: 45-60 min directo desde KTM.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">8 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 4 · VUELO LUKLA -->
+  <div class="slide slide-gallery" id="s-gal-d4a">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 4 &middot; Vuelo a Lukla</div>
+        <div class="gal-title">Aeropuerto Tenzing-Hillary &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia04-01/WhatsApp%20Image%202026-05-13%20at%2020.14.30%20%285%29.jpeg" alt="Vuelo a Lukla"><div class="p-caption"><div class="p-name">Vuelo a Lukla</div></div></div>
+        <div class="p-card"><img src="image/Dia04-01/WhatsApp%20Image%202026-05-13%20at%2020.14.30%20%282%29.jpeg" alt="Aeropuerto Tenzing-Hillary"><div class="p-caption"><div class="p-name">Aeropuerto Tenzing-Hillary</div></div></div>
+        <div class="p-card"><img src="image/Dia04-01/WhatsApp%20Image%202026-05-13%20at%2020.14.30%20%283%29.jpeg" alt="Lukla"><div class="p-caption"><div class="p-name">Lukla</div></div></div>
+        <div class="p-card"><img src="image/Dia04-01/WhatsApp%20Image%202026-05-13%20at%2020.14.30%20%284%29.jpeg" alt="Himalaya desde el aire"><div class="p-caption"><div class="p-name">Himalaya desde el Aire</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">9 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 7 · DÍA 4 · LUKLA → PHAKDING · INICIO DEL TREK
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d4b">
+    <img class="bg-img" src="image/D%C3%ADa04-02/WhatsApp%20Image%202026-05-13%20at%2020.18.13%20%281%29.jpeg"
+         alt="Día 4 — Lukla a Phakding">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 4 · Inicio del Trekking</div>
+      <h2>Lukla → Phakding</h2>
+      <div class="altitude">2.840 msnm → 2.610 msnm · 3-4 hs.</div>
+      <div class="v-desc">
+        ¡Arranca el Trek! Descenso desde Lukla hasta el pintoresco pueblo de
+        <strong>Phakding</strong>, a orillas del río Dudh Koshi. Primera jornada de caminata
+        para entrar en ritmo y conocer el paisaje sherpa.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">10 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 4b · LUKLA → PHAKDING -->
+  <div class="slide slide-gallery" id="s-gal-d4b">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 4 &middot; Inicio del Trekking</div>
+        <div class="gal-title">Lukla → Phakding &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/D%C3%ADa04-02/WhatsApp%20Image%202026-05-13%20at%2020.18.13%20%285%29.jpeg" alt="Inicio Trek"><div class="p-caption"><div class="p-name">Inicio del Trek</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa04-02/WhatsApp%20Image%202026-05-13%20at%2020.18.13%20%282%29.jpeg" alt="Sendero Himalaya"><div class="p-caption"><div class="p-name">Sendero Himalaya</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa04-02/WhatsApp%20Image%202026-05-13%20at%2020.18.13%20%283%29.jpeg" alt="Phakding"><div class="p-caption"><div class="p-name">Phakding</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa04-02/WhatsApp%20Image%202026-05-13%20at%2020.18.13%20%284%29.jpeg" alt="Río Dudh Koshi"><div class="p-caption"><div class="p-name">Río Dudh Koshi</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">11 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 8 · DÍA 5 · PHAKDING → NAMCHE BAZAAR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d5">
+    <img class="bg-img" src="image/Dia05/WhatsApp%20Image%202026-05-13%20at%2020.23.00%20%2810%29.jpeg"
+         alt="Día 5 — Phakding a Namche Bazaar">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 5</div>
+      <h2>Phakding →<br>Namche Bazaar</h2>
+      <div class="altitude">2.610 msnm → 3.440 msnm · 7-8 hs.</div>
+      <div class="v-desc">
+        ¡Subida intensa! Cruzamos los <strong>puentes colgantes más altos y largos</strong>
+        del Himalaya y entramos triunfantes a <strong>Namche Bazaar</strong>, la capital
+        de los Sherpas. Un día que no se olvida.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">12 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 5 · PHAKDING → NAMCHE -->
+  <div class="slide slide-gallery" id="s-gal-d5">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 5 &middot; Phakding → Namche Bazaar</div>
+        <div class="gal-title">Puentes Colgantes &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia05/WhatsApp%20Image%202026-05-13%20at%2020.23.00%20%281%29.jpeg" alt="Puente colgante"><div class="p-caption"><div class="p-name">Puentes Colgantes</div></div></div>
+        <div class="p-card"><img src="image/Dia05/WhatsApp%20Image%202026-05-13%20at%2020.23.00%20%282%29.jpeg" alt="Camino a Namche"><div class="p-caption"><div class="p-name">Camino a Namche</div></div></div>
+        <div class="p-card"><img src="image/Dia05/WhatsApp%20Image%202026-05-13%20at%2020.23.00%20%283%29.jpeg" alt="Namche Bazaar"><div class="p-caption"><div class="p-name">Namche Bazaar</div></div></div>
+        <div class="p-card"><img src="image/Dia05/WhatsApp%20Image%202026-05-13%20at%2020.23.00%20%284%29.jpeg" alt="Himalaya"><div class="p-caption"><div class="p-name">Himalaya</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">13 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 9 · DÍA 6 · DESCANSO NAMCHE BAZAAR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d6">
+    <img class="bg-img" src="image/dia06/WhatsApp%20Image%202026-05-13%20at%2020.26.02%20%281%29.jpeg"
+         alt="Día 6 — Namche Bazaar">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 6</div>
+      <h2>Namche Bazaar</h2>
+      <div class="altitude">3.440 msnm · Día de Aclimatación</div>
+      <div class="v-desc">
+        Jornada de descanso y aclimatación en la vibrante ciudad sherpa. Visitamos el
+        <strong>Museo Sherpa</strong>, exploramos el mercado y preparamos el cuerpo para
+        las alturas que vienen. Aquí la montaña empieza a sentirse.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">14 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 6 · NAMCHE BAZAAR -->
+  <div class="slide slide-gallery" id="s-gal-d6">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 6 &middot; Namche Bazaar</div>
+        <div class="gal-title">Aclimatación &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/dia06/WhatsApp%20Image%202026-05-13%20at%2020.26.06.jpeg" alt="Namche Bazaar"><div class="p-caption"><div class="p-name">Namche Bazaar</div></div></div>
+        <div class="p-card"><img src="image/dia06/WhatsApp%20Image%202026-05-13%20at%2020.26.02%20%282%29.jpeg" alt="Mercado Sherpa"><div class="p-caption"><div class="p-name">Mercado Sherpa</div></div></div>
+        <div class="p-card"><img src="image/dia06/WhatsApp%20Image%202026-05-13%20at%2020.26.04.jpeg" alt="Museo Sherpa"><div class="p-caption"><div class="p-name">Museo Sherpa</div></div></div>
+        <div class="p-card"><img src="image/dia06/WhatsApp%20Image%202026-05-13%20at%2020.26.05.jpeg" alt="Namche"><div class="p-caption"><div class="p-name">La Ciudad Sherpa</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">15 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 10 · DÍA 7 · NAMCHE → SANASA · EVEREST VIEW
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d7">
+    <img class="bg-img" src="image/D%C3%ADa07/WhatsApp%20Image%202026-05-13%20at%2020.30.39%20%281%29.jpeg"
+         alt="Día 7 — Namche a Sanasa">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 7</div>
+      <h2>Namche →<br>Sanasa</h2>
+      <div class="altitude">3.440 msnm → 3.860 msnm · Everest View</div>
+      <div class="v-desc">
+        Pasamos por la <strong>Hillary School</strong> y llegamos a Sanasa. Desde el
+        <strong>Hotel Everest View</strong> tenemos la primera <strong>vista panorámica del Everest</strong>
+        y el viejo aeropuerto. Un momento de emoción pura frente al techo del mundo.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">16 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 7 · NAMCHE → SANASA -->
+  <div class="slide slide-gallery" id="s-gal-d7">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 7 &middot; Namche → Sanasa</div>
+        <div class="gal-title">Hotel Everest View &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/D%C3%ADa07/WhatsApp%20Image%202026-05-13%20at%2020.30.39%20%285%29.jpeg" alt="Everest View"><div class="p-caption"><div class="p-name">Primera Vista del Everest</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa07/WhatsApp%20Image%202026-05-13%20at%2020.30.39%20%282%29.jpeg" alt="Hillary School"><div class="p-caption"><div class="p-name">Hillary School</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa07/WhatsApp%20Image%202026-05-13%20at%2020.30.39%20%283%29.jpeg" alt="Sanasa"><div class="p-caption"><div class="p-name">Sanasa</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa07/WhatsApp%20Image%202026-05-13%20at%2020.30.39%20%284%29.jpeg" alt="Panorama Himalaya"><div class="p-caption"><div class="p-name">Panorama Himalaya</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">17 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 11 · DÍA 8 · SANASA → PANGBOCHE · MONASTERIO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d8">
+    <img class="bg-img" src="image/D%C3%ADa08/WhatsApp%20Image%202026-05-13%20at%2020.34.46%20%281%29.jpeg"
+         alt="Día 8 — Sanasa a Pangboche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 8</div>
+      <h2>Sanasa →<br>Pangboche</h2>
+      <div class="altitude">3.860 msnm → 3.960 msnm · 7-8 hs.</div>
+      <div class="v-desc">
+        Gran bajada y luego gran subida en <strong>ZIG-ZAG</strong>.
+        Visitamos el impresionante <strong>Monasterio de Tengboche</strong> y recibimos las
+        primeras bendiciones del viaje. Un tramo espiritual e intenso.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">18 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 8 · SANASA → PANGBOCHE -->
+  <div class="slide slide-gallery" id="s-gal-d8">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 8 &middot; Sanasa → Pangboche</div>
+        <div class="gal-title">Monasterio de Tengboche &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/D%C3%ADa08/WhatsApp%20Image%202026-05-13%20at%2020.34.46%20%285%29.jpeg" alt="Monasterio Tengboche"><div class="p-caption"><div class="p-name">Monasterio de Tengboche</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa08/WhatsApp%20Image%202026-05-13%20at%2020.34.46%20%282%29.jpeg" alt="Pangboche"><div class="p-caption"><div class="p-name">Pangboche</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa08/WhatsApp%20Image%202026-05-13%20at%2020.34.46%20%283%29.jpeg" alt="ZIG-ZAG"><div class="p-caption"><div class="p-name">Ascenso ZIG-ZAG</div></div></div>
+        <div class="p-card"><img src="image/D%C3%ADa08/WhatsApp%20Image%202026-05-13%20at%2020.34.46%20%284%29.jpeg" alt="Bendiciones"><div class="p-caption"><div class="p-name">Bendiciones del Viaje</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">19 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 12 · DÍA 9 · PANGBOCHE → PHERICHE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d9">
+    <img class="bg-img" src="image/Dia09/WhatsApp%20Image%202026-05-14%20at%2017.39.36%20%2810%29.jpeg"
+         alt="Día 9 — Pangboche a Pheriche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 9</div>
+      <h2>Pangboche →<br>Pheriche</h2>
+      <div class="altitude">3.960 msnm → 4.270 msnm · 6-8 hs.</div>
+      <div class="v-desc">
+        Superamos los <strong>+4.000 metros</strong>. Los pueblitos y puestos del camino
+        quedan atrás. Entramos en un verdadero <strong>Trekking de Altura</strong>: el paisaje
+        cambia, el aire se afina y cada paso se siente diferente.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">20 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 9 · PANGBOCHE → PHERICHE -->
+  <div class="slide slide-gallery" id="s-gal-d9">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 9 &middot; Pangboche → Pheriche</div>
+        <div class="gal-title">Trekking de Altura &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia09/WhatsApp%20Image%202026-05-14%20at%2017.39.36%20%281%29.jpeg" alt="Pangboche"><div class="p-caption"><div class="p-name">Pangboche</div></div></div>
+        <div class="p-card"><img src="image/Dia09/WhatsApp%20Image%202026-05-14%20at%2017.39.36%20%282%29.jpeg" alt="Alta Montaña"><div class="p-caption"><div class="p-name">Alta Montaña</div></div></div>
+        <div class="p-card"><img src="image/Dia09/WhatsApp%20Image%202026-05-14%20at%2017.39.36%20%283%29.jpeg" alt="Pheriche"><div class="p-caption"><div class="p-name">Camino a Pheriche</div></div></div>
+        <div class="p-card"><img src="image/Dia09/WhatsApp%20Image%202026-05-14%20at%2017.39.36%20%284%29.jpeg" alt="+4000 metros"><div class="p-caption"><div class="p-name">+4.000 msnm</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">21 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 13 · DÍA 10 · ACLIMATACIÓN EN PHERICHE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d10">
+    <img class="bg-img" src="image/Dia10/WhatsApp%20Image%202026-05-14%20at%2017.46.34%20%281%29.jpeg"
+         alt="Día 10 — Pheriche aclimatación">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 10</div>
+      <h2>Pheriche</h2>
+      <div class="altitude">4.270 msnm · Día de Aclimatación</div>
+      <div class="v-desc">
+        Descanso y aclimatación. Caminata por las zonas altas para <strong>ganar altura
+        y volver</strong>, técnica clave para la adaptación. Vistas impresionantes del
+        <strong>Ama Dablam</strong> y otros ochomiles de la región.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">22 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 10 · PHERICHE ACLIMATACIÓN -->
+  <div class="slide slide-gallery" id="s-gal-d10">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 10 &middot; Pheriche</div>
+        <div class="gal-title">Aclimatación &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia10/WhatsApp%20Image%202026-05-14%20at%2017.46.34.jpeg" alt="Pheriche"><div class="p-caption"><div class="p-name">Pheriche</div></div></div>
+        <div class="p-card"><img src="image/Dia10/WhatsApp%20Image%202026-05-14%20at%2017.46.34%20%282%29.jpeg" alt="Ama Dablam"><div class="p-caption"><div class="p-name">Ama Dablam</div></div></div>
+        <div class="p-card"><img src="image/Dia10/WhatsApp%20Image%202026-05-14%20at%2017.46.35%20%281%29.jpeg" alt="Ochomiles"><div class="p-caption"><div class="p-name">Ochomiles del Himalaya</div></div></div>
+        <div class="p-card"><img src="image/Dia10/WhatsApp%20Image%202026-05-14%20at%2017.46.35%20%282%29.jpeg" alt="Aclimatación"><div class="p-caption"><div class="p-name">Aclimatación</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">23 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 14 · DÍA 11 · PHERICHE → LOBUCHE · THE MEMORIAL
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d11">
+    <img class="bg-img" src="image/Dia11/WhatsApp%20Image%202026-05-14%20at%2017.55.44%20%2810%29.jpeg"
+         alt="Día 11 — Pheriche a Lobuche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 11</div>
+      <h2>Pheriche →<br>Lobuche</h2>
+      <div class="altitude">4.270 msnm → 4.940 msnm · 6-7 hs.</div>
+      <div class="v-desc">
+        Alta montaña en estado puro. Pasamos por <strong>"The Memorial"</strong>, el lugar
+        donde descansan restos de algunos escaladores del Everest. Subida en ZIG-ZAG con
+        escalones y tramo recto hasta el campo base de Lobuche. <strong>¡Casi 5.000 metros!</strong>
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">24 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 11 · PHERICHE → LOBUCHE -->
+  <div class="slide slide-gallery" id="s-gal-d11">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 11 &middot; Pheriche → Lobuche</div>
+        <div class="gal-title">The Memorial &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia11/WhatsApp%20Image%202026-05-14%20at%2017.55.44%20%281%29.jpeg" alt="The Memorial"><div class="p-caption"><div class="p-name">The Memorial</div></div></div>
+        <div class="p-card"><img src="image/Dia11/WhatsApp%20Image%202026-05-14%20at%2017.55.44%20%282%29.jpeg" alt="Lobuche"><div class="p-caption"><div class="p-name">Camino a Lobuche</div></div></div>
+        <div class="p-card"><img src="image/Dia11/WhatsApp%20Image%202026-05-14%20at%2017.55.44%20%283%29.jpeg" alt="Alta Montaña"><div class="p-caption"><div class="p-name">Alta Montaña</div></div></div>
+        <div class="p-card"><img src="image/Dia11/WhatsApp%20Image%202026-05-14%20at%2017.55.44%20%284%29.jpeg" alt="5000 msnm"><div class="p-caption"><div class="p-name">5.000 msnm</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">25 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 15 · DÍA 12 · LOBUCHE → CAMPO BASE EVEREST
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d12">
+    <img class="bg-img" src="image/Dia12/WhatsApp%20Image%202026-05-14%20at%2018.06.13%20%2810%29.jpeg"
+         alt="Día 12 — Lobuche al Campo Base Everest">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 12 · El Gran Día</div>
+      <h2>¡Campo Base<br>Everest!</h2>
+      <div class="altitude">4.940 → 5.400 msnm · Gorak Shep · 7-8 hs.</div>
+      <div class="v-desc">
+        El día más esperado. Caminamos entre <strong>bloques de roca y glaciar</strong>,
+        pasamos el último poblado Gorak Shep (5.160 msnm) — donde se puede ascender al
+        <strong>Cerro Mirador Kala Patthar (5.644 msnm)</strong> para vistas panorámicas del Everest —
+        y llegamos al <strong>Campo Base del Everest a 5.400 msnm</strong>. ¡A disfrutar!
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">26 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 12 · CAMPO BASE EVEREST -->
+  <div class="slide slide-gallery" id="s-gal-d12">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 12 &middot; El Gran Día</div>
+        <div class="gal-title">Campo Base Everest &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia12/WhatsApp%20Image%202026-05-14%20at%2018.06.13%20%281%29.jpeg" alt="Campo Base Everest"><div class="p-caption"><div class="p-name">Campo Base Everest</div></div></div>
+        <div class="p-card"><img src="image/Dia12/WhatsApp%20Image%202026-05-14%20at%2018.06.13%20%282%29.jpeg" alt="Glaciar Khumbu"><div class="p-caption"><div class="p-name">Glaciar Khumbu</div></div></div>
+        <div class="p-card"><img src="image/Dia12/WhatsApp%20Image%202026-05-14%20at%2018.06.13%20%283%29.jpeg" alt="Gorak Shep"><div class="p-caption"><div class="p-name">Gorak Shep</div></div></div>
+        <div class="p-card"><img src="image/Dia12/WhatsApp%20Image%202026-05-14%20at%2018.06.13%20%284%29.jpeg" alt="5400 msnm"><div class="p-caption"><div class="p-name">5.400 msnm</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">27 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 16 · DÍA 13 · DÍA ENTERO EN EL CAMPO BASE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d13a">
+    <img class="bg-img" src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%2810%29.jpeg"
+         alt="Día 13 — Campo Base Everest">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 13</div>
+      <h2>Campo Base<br>Everest</h2>
+      <div class="altitude">5.400 msnm · Día completo en el EBC</div>
+      <div class="v-desc">
+        Un día entero para vivir el Campo Base. Recorremos el campamento, conocemos
+        el entorno y, si las <strong>condiciones lo permiten, caminamos por el glaciar</strong>.
+        Momento único: estar donde los mejores montañistas del mundo parten hacia la cima.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">28 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 13a · CAMPO BASE DIA COMPLETO -->
+  <div class="slide slide-gallery" id="s-gal-d13a">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 13 &middot; Campo Base Everest</div>
+        <div class="gal-title">Día Completo en el EBC &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%281%29.jpeg" alt="EBC"><div class="p-caption"><div class="p-name">Campo Base Everest</div></div></div>
+        <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%282%29.jpeg" alt="Glaciar"><div class="p-caption"><div class="p-name">Caminata por el Glaciar</div></div></div>
+        <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%283%29.jpeg" alt="Campamento"><div class="p-caption"><div class="p-name">Campamento</div></div></div>
+        <div class="p-card"><img src="image/Dia13-01/WhatsApp%20Image%202026-05-14%20at%2018.11.38%20%285%29.jpeg" alt="En el Campo Base"><div class="p-caption"><div class="p-name">En el Campo Base</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">29 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 17 · DÍA 13b · SERVICIOS EN EL CAMPO BASE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-servicios">
+    <img class="bg-img" src="image/Dia13-02/WhatsApp%20Image%202026-05-14%20at%2018.18.21.jpeg"
+         alt="Servicios en el Campo Base Everest" style="object-position: center right;">
+    <div class="ov-left"></div>
+    <div class="content">
+      <div class="section-label">Campo Base Everest · 5.400 msnm</div>
+      <h2>Servicios en<br>el Campamento</h2>
+      <div class="svc-grid">
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Tiendas de campaña</strong>Carpas de a dos · Carpa comedor · Zona común</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Cocina y comidas</strong>3 comidas calientes diarias incluidas</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Equipo de apoyo</strong>Guías certificados · Sherpas · Porteadores</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Seguridad</strong>Primeros auxilios · Oxígeno de emergencia</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Comunicaciones</strong>Radio y contacto permanente con el equipo</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Comodidades</strong>Duchas · Electricidad · Servicio Full</div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-dot"></div>
+          <div><strong>Equipo colectivo</strong>Todo el material de campamento incluido</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">30 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 17b · GALERÍA SERVICIOS CAMPO BASE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-gallery" id="s-gal-servicios">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Campo Base Everest &middot; 5.400 msnm</div>
+        <div class="gal-title">Servicios en el Campamento &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-1x2">
+        <div class="p-card"><img src="image/servicios/WhatsApp%20Image%202026-05-31%20at%2020.05.47.jpeg" alt="Cocina del Campamento"><div class="p-caption"><div class="p-name">Cocina del Campamento</div></div></div>
+        <div class="p-card"><img src="image/servicios/WhatsApp%20Image%202026-05-31%20at%2020.05.46.jpeg" alt="Comidas" style="object-position: center 30%;"><div class="p-caption"><div class="p-name">Comidas en el Campo Base</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">31 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 17c · GALERÍA SERVICIOS CAMPO BASE (2)
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-gallery" id="s-gal-servicios-2">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Campo Base Everest &middot; 5.400 msnm</div>
+        <div class="gal-title">Servicios en el Campamento &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-1x2">
+        <div class="p-card"><img src="image/servicios/WhatsApp%20Image%202026-05-31%20at%2019.58.51%20%281%29.jpeg" alt="Campo Base"><div class="p-caption"><div class="p-name"></div></div></div>
+        <div class="p-card"><img src="image/servicios/WhatsApp%20Image%202026-05-31%20at%2020.07.09.jpeg" alt="Torta EBC Trek" style="object-position: center 30%;"><div class="p-caption"><div class="p-name">Torta del Campo Base</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">32 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 18 · DÍA 14 · EBC → DINGBOCHE · REGRESO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d14">
+    <img class="bg-img" src="image/Dia14/WhatsApp%20Image%202026-05-18%20at%2019.15.58%20%281%29.jpeg"
+         alt="Día 14 — EBC a Dingboche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 14 · Inicio del Regreso</div>
+      <h2>EBC →<br>Dingboche</h2>
+      <div class="altitude">5.400 msnm → 4.410 msnm · 6-7 hs.</div>
+      <div class="v-desc">
+        Inicia el descenso. Con el corazón lleno de la experiencia vivida en el Campo Base,
+        comenzamos el camino de regreso. El paisaje del <strong>Khumbu</strong> se despide
+        desde lo alto con toda su majestuosidad.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">33 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 14 · EBC → DINGBOCHE -->
+  <div class="slide slide-gallery" id="s-gal-d14">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 14 &middot; EBC → Dingboche</div>
+        <div class="gal-title">Inicio del Regreso &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia14/WhatsApp%20Image%202026-05-18%20at%2019.15.58.jpeg" alt="Descenso"><div class="p-caption"><div class="p-name">Inicio del Descenso</div></div></div>
+        <div class="p-card"><img src="image/Dia14/WhatsApp%20Image%202026-05-18%20at%2019.15.58%20%282%29.jpeg" alt="Khumbu"><div class="p-caption"><div class="p-name">Valle del Khumbu</div></div></div>
+        <div class="p-card"><img src="image/Dia14/WhatsApp%20Image%202026-05-18%20at%2019.15.59%20%281%29.jpeg" alt="Dingboche"><div class="p-caption"><div class="p-name">Dingboche</div></div></div>
+        <div class="p-card"><img src="image/Dia14/WhatsApp%20Image%202026-05-18%20at%2019.15.59%20%282%29.jpeg" alt="Himalaya"><div class="p-caption"><div class="p-name">Himalaya</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">34 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 19 · DÍA 15 · DINGBOCHE → TENGBOCHE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d15">
+    <img class="bg-img" src="image/Dia15/WhatsApp%20Image%202026-05-18%20at%2019.18.23.jpeg"
+         alt="Día 15 — Dingboche a Tengboche">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 15</div>
+      <h2>Dingboche →<br>Tengboche</h2>
+      <div class="altitude">4.410 msnm → 3.860 msnm · 7-8 hs.</div>
+      <div class="v-desc">
+        Jornada de travesía bajando hacia la zona del monasterio. Dormimos en la
+        <strong>zona de Tengboche</strong>, junto al gran templo budista que visitamos
+        en el ascenso. Una noche especial entre la espiritualidad y el Himalaya.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">35 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 15 · DINGBOCHE → TENGBOCHE -->
+  <div class="slide slide-gallery" id="s-gal-d15">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 15 &middot; Dingboche → Tengboche</div>
+        <div class="gal-title">Zona del Monasterio &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia15/WhatsApp%20Image%202026-05-18%20at%2019.21.46.jpeg" alt="Regreso"><div class="p-caption"><div class="p-name">Camino de Regreso</div></div></div>
+        <div class="p-card"><img src="image/Dia15/WhatsApp%20Image%202026-05-18%20at%2019.18.24.jpeg" alt="Tengboche"><div class="p-caption"><div class="p-name">Tengboche</div></div></div>
+        <div class="p-card"><img src="image/Dia15/WhatsApp%20Image%202026-05-18%20at%2019.18.25%20%281%29.jpeg" alt="Monasterio"><div class="p-caption"><div class="p-name">Monasterio</div></div></div>
+        <div class="p-card"><img src="image/Dia15/WhatsApp%20Image%202026-05-18%20at%2019.20.35.jpeg" alt="Himalaya"><div class="p-caption"><div class="p-name">Himalaya</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">36 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 20 · DÍA 16 · PANGBOCHE → NAMCHE BAZAAR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d16">
+    <img class="bg-img" src="image/Dia16/WhatsApp%20Image%202026-05-18%20at%2019.27.59%20%281%29.jpeg"
+         alt="Día 16 — Pangboche a Namche Bazaar">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 16</div>
+      <h2>Pangboche →<br>Namche Bazaar</h2>
+      <div class="altitude">→ 3.440 msnm · 7-8 hs.</div>
+      <div class="v-desc">
+        Bajada larga hasta el río y luego <strong>subida por un hermoso bosque</strong>.
+        Continuamos por la ladera de la montaña hasta llegar nuevamente a
+        <strong>Namche Bazaar</strong>, donde celebraremos el reencuentro con la "ciudad".
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">37 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 16 · PANGBOCHE → NAMCHE -->
+  <div class="slide slide-gallery" id="s-gal-d16">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 16 &middot; Pangboche → Namche Bazaar</div>
+        <div class="gal-title">Vuelta a Namche &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia16/WhatsApp%20Image%202026-05-18%20at%2019.28.00%20%283%29.jpeg" alt="Bajada"><div class="p-caption"><div class="p-name">Bajada</div></div></div>
+        <div class="p-card"><img src="image/Dia16/WhatsApp%20Image%202026-05-18%20at%2019.27.59%20%282%29.jpeg" alt="Bosque"><div class="p-caption"><div class="p-name">Bosque</div></div></div>
+        <div class="p-card"><img src="image/Dia16/WhatsApp%20Image%202026-05-18%20at%2019.28.00%20%281%29.jpeg" alt="Namche"><div class="p-caption"><div class="p-name">Namche Bazaar</div></div></div>
+        <div class="p-card"><img src="image/Dia16/WhatsApp%20Image%202026-05-18%20at%2019.28.00%20%282%29.jpeg" alt="Himalaya"><div class="p-caption"><div class="p-name">Himalaya</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">38 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 21 · DÍA 17 · ÚLTIMO DÍA DE TREKKING
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v" id="s-d17">
+    <img class="bg-img" src="image/Dia17/WhatsApp%20Image%202026-05-18%20at%2019.33.05%20%281%29.jpeg"
+         alt="Día 17 — Último día de trekking">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 17 · ¡Último Día de Trek!</div>
+      <h2>Namche →<br>Lukla</h2>
+      <div class="altitude">3.440 msnm → 2.840 msnm · 8-9 hs.</div>
+      <div class="v-desc">
+        El tramo más largo... y el más emotivo. Desde el inicio se <strong>pierde altura
+        rápidamente</strong> y el paisaje verde vuelve a aparecer. La entrada a
+        <strong>Lukla es cuesta arriba</strong>, ¡el Himalaya no se despide fácil! A disfrutar.
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">39 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 17 · NAMCHE → LUKLA -->
+  <div class="slide slide-gallery" id="s-gal-d17">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 17 &middot; Último Día de Trek</div>
+        <div class="gal-title">Namche → Lukla &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia17/WhatsApp%20Image%202026-05-18%20at%2019.33.05%20%285%29.jpeg" alt="Sendero"><div class="p-caption"><div class="p-name">Sendero de Despedida</div></div></div>
+        <div class="p-card"><img src="image/Dia17/WhatsApp%20Image%202026-05-18%20at%2019.33.05%20%282%29.jpeg" alt="Paisaje Verde"><div class="p-caption"><div class="p-name">Paisaje Verde</div></div></div>
+        <div class="p-card"><img src="image/Dia17/WhatsApp%20Image%202026-05-18%20at%2019.33.05%20%283%29.jpeg" alt="Lukla"><div class="p-caption"><div class="p-name">Lukla</div></div></div>
+        <div class="p-card"><img src="image/Dia17/WhatsApp%20Image%202026-05-18%20at%2019.33.05%20%284%29.jpeg" alt="Himalaya Final"><div class="p-caption"><div class="p-name">Despedida del Himalaya</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">40 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 22 · DÍA 18 · VUELO LUKLA → KATMANDU
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d18">
+    <img class="bg-img" src="image/Dia18/WhatsApp%20Image%202026-05-18%20at%2019.36.09%20%2810%29.jpeg"
+         alt="Día 18 — Vuelo Lukla a Katmandu">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 18</div>
+      <h2>Lukla → Katmandu</h2>
+      <div class="altitude">Vuelo de regreso · Cena de Despedida</div>
+      <div class="v-desc">
+        Vuelo muy temprano de regreso a Katmandú (en avión o helicóptero). De vuelta al hotel,
+        tiempo libre para recuerdos y regalos. Por la noche,
+        <strong>gran cena de despedida</strong> con todo el grupo. ¡Lo logramos!
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">41 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 18 · LUKLA → KATMANDU -->
+  <div class="slide slide-gallery" id="s-gal-d18">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 18 &middot; Lukla → Katmandú</div>
+        <div class="gal-title">Regreso &amp; Cena de Despedida &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia18/WhatsApp%20Image%202026-05-18%20at%2019.36.09%20%281%29.jpeg" alt="Vuelo"><div class="p-caption"><div class="p-name">Vuelo de Regreso</div></div></div>
+        <div class="p-card"><img src="image/Dia18/WhatsApp%20Image%202026-05-18%20at%2019.36.09%20%282%29.jpeg" alt="Katmandú"><div class="p-caption"><div class="p-name">Katmandú</div></div></div>
+        <div class="p-card"><img src="image/Dia18/WhatsApp%20Image%202026-05-18%20at%2019.36.09%20%283%29.jpeg" alt="Cena Despedida"><div class="p-caption"><div class="p-name">Cena de Despedida</div></div></div>
+        <div class="p-card"><img src="image/Dia18/WhatsApp%20Image%202026-05-18%20at%2019.36.09%20%284%29.jpeg" alt="Grupo"><div class="p-caption"><div class="p-name">El Grupo</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">42 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 23 · DÍA 19 · REGRESO A ARGENTINA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-v city" id="s-d19">
+    <img class="bg-img" src="image/Dia19/WhatsApp%20Image%202026-05-18%20at%2019.40.20%20%281%29.jpeg"
+         alt="Día 19 — Regreso a Argentina">
+    <div class="ov-bottom"></div>
+    <div class="v-content">
+      <div class="v-label">Día 19</div>
+      <h2>Regreso a<br>Argentina</h2>
+      <div class="altitude">Katmandú → Buenos Aires · NAMASTE 🙏</div>
+      <div class="v-desc">
+        Últimas horas en Katmandú. Partimos de regreso a casa con el corazón repleto
+        de montañas, espiritual y culturalmente transformados. <strong>¡Nos vemos,
+        Te esperamos!</strong>
+      </div>
+    </div>
+    <div class="slide-partners">
+      <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+      <img src="../peru/images/pax_logo.jpeg" alt="Pax">
+    </div>
+    <span class="slide-num">43 / 45</span>
+  </div>
+
+  <!-- GALERÍA DÍA 19 · REGRESO A ARGENTINA -->
+  <div class="slide slide-gallery" id="s-gal-d19">
+    <div class="gal-content">
+      <div class="gal-header">
+        <div class="gal-label">Día 19 &middot; Regreso a Argentina</div>
+        <div class="gal-title">Katmandú &mdash; Imágenes</div>
+      </div>
+      <div class="photo-grid-2x2">
+        <div class="p-card"><img src="image/Dia19/WhatsApp%20Image%202026-05-18%20at%2019.40.19.jpeg" alt="Katmandú"><div class="p-caption"><div class="p-name">Katmandú</div></div></div>
+        <div class="p-card"><img src="image/Dia19/WhatsApp%20Image%202026-05-18%20at%2019.40.19%20%282%29.jpeg" alt="Últimas Horas"><div class="p-caption"><div class="p-name">Últimas Horas</div></div></div>
+        <div class="p-card"><img src="image/Dia19/WhatsApp%20Image%202026-05-18%20at%2019.40.20.jpeg" alt="Despedida"><div class="p-caption"><div class="p-name">Despedida</div></div></div>
+        <div class="p-card"><img src="image/Dia19/WhatsApp%20Image%202026-05-18%20at%2019.40.20%20%282%29.jpeg" alt="Namaste"><div class="p-caption"><div class="p-name">Namaste 🙏</div></div></div>
+      </div>
+    </div>
+    <span class="slide-num">44 / 45</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SLIDE 24 · CIERRE · CONTACTO
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="s-cierre">
+    <img class="bg-img" src="image/introduccion/WhatsApp%20Image%202026-05-13%20at%2019.33.46%20%283%29.jpeg"
+         alt="Cierre — The Madness Expeditions" style="object-position: center 60%;">
+    <div class="ov-dark"></div>
+    <div class="content">
+      <div class="logo-wrap">
+        <img src="../../marketing-docs/email/documents/032026/images/logo-removebg-preview.png" alt="Logo The Madness Expeditions">
+      </div>
+      <div class="closing">¡Te Esperamos en<br><span>Los Himalaya!</span></div>
+      <div class="divider"></div>
+      <div class="brand-name">The Madness Expeditions · Argentina</div>
+      <div class="contact">
+        <div class="name">Madness Expeditions</div>
+        <span class="phone">+54 9 11 3269-3505</span> (WhatsApp)<br>
+        pabloflater@hotmail.com · themadnessexpeditions@gmail.com
+      </div>
+      <div class="partners">
+        <div class="partners-label">Trabajamos con</div>
+        <div class="partners-logos">
+          <div class="partner-pax"><img src="../peru/images/pax_logo.jpeg" alt="PAX Assistance"></div>
+          <div class="partner-ansilta"><img src="../peru/images/ansilta_logo.jpg" alt="Ansilta"></div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">45 / 45</span>
+  </div>
+
+
+</body>
+</html>
